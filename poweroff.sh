@@ -1,0 +1,20 @@
+#!/usr/bin
+ssh root@node101 poweroff
+ssh root@node102 poweroff
+ssh root@node103 poweroff
+ssh root@node104 poweroff
+ssh root@node105 poweroff
+ssh root@node106 poweroff
+ssh root@node107 poweroff
+ssh root@node108 poweroff
+ssh root@node109 poweroff
+ssh root@node110 poweroff
+ssh root@node111 poweroff
+ssh root@node112 poweroff
+ssh root@node113 poweroff
+ssh root@node114 poweroff
+ssh root@node115 poweroff
+ssh root@node116 poweroff
+ssh root@node117 poweroff
+ssh root@node118 poweroff
+ssh root@node119 poweroff
