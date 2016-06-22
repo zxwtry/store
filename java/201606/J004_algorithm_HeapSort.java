@@ -1,8 +1,12 @@
 public class J004_algorithm_HeapSort{
     // 构建大堆
     public static void main(String[] args) {
-        int[] arr1 = {1, 9, 2, 8, 3, 7, 4, 6, 5, 5, 1, 2, 3,};
-        int[] arr2 = {1, 9, 2, 8};
+        int[] arr1 = null;
+        int[] arr2 = null;
+        arr1 = new int[]{1, 9, 2, 8, 3, 7, 4, 6, 5, 5, 1, 2, 3,};
+        arr2 = new int[]{1, 9, 2, 8};
+        arr1 = new int[]{1, 9, 2, 8, 3, 7, 4, 6, 5, 3, 4};
+        arr2 = new int[]{1, 9, 2, 8};
         solve(arr1, arr2);
         for (int i = 0; i < arr2.length; i ++) {
             System.out.printf("%d ", arr2[i]);        
