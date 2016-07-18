@@ -7,3 +7,4 @@ D006    201606      是一个使用SpringMVC和JMS的例子<br/>
 D007    201607      rocketmq的简单测试用例<br/>
 D008    201607      tair的简单测试用例<br/>
 D009    201607      all的简单测试用例<br/>
+D010	201607      添加JVM_VIEW<br/>
