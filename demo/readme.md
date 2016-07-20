@@ -8,3 +8,4 @@ D007    201607      rocketmq的简单测试用例<br/>
 D008    201607      tair的简单测试用例<br/>
 D009    201607      all的简单测试用例<br/>
 D010	201607      添加JVM_VIEW<br/>
+D011	201607		JDK中ClassLoader的默认设计模式<br/>
