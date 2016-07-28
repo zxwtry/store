@@ -2,6 +2,7 @@
 #encoding=utf-8
 
 from flask import Flask, request
+from werkzeug import secure_filename
 
 app=Flask(__name__)
 
@@ -9,7 +10,7 @@ app=Flask(__name__)
 def upfile():
 	if request.method=='POST':
 		f=request.files['files']
-		f.save("/home/zxwtry/tmp.txt")
+		f.save("/home/zxwtry/"+secure_filename(f.filename))
 	return "success"
 
 if __name__=='__main__':
