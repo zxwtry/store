@@ -2,7 +2,6 @@
 #encoding=utf-8
 
 import MySQLdb as sql
-import sys
 
 def insert(title, text):
 	try:
@@ -25,10 +24,14 @@ def insert(title, text):
 	except sql.Error, e:
 		print "MySQL error %d: %s" %(e.args[0], e.args[1])
 
-if __name__ == '__main__':
+def drop_create_database():
+	try:
+		conn=sql.connect(host='localhost', user='root', passwd='12356', port=3306, charset='utf8')
+		cur=conn.cursor()
+		con.execute('drop database flask if exists database flask')
+	except sql.Error, e:
+		print "MySQL error %d: %s" %
 
-	#reload(sys)
-	#sys.setdefaultencoding("utf-8")
-	#title=raw_input("输入title:")
-	#text=raw_input("输入text:")
-	insert("朱新伟啊啊", "马上吃饭")
+if __name__ == '__main__':
+	#insert("朱新伟啊啊", "马上吃饭")
+	drop
