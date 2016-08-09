@@ -6,6 +6,7 @@ P005    201607      numpy单元练习<br/>
 P006    201607      随机数发生器<br/>
 P007    201607      浅拷贝和深拷贝<br/>
 P008    201607      Python的文件操作<br/>
-P009	201607		正则表达式<br/>
-P010	201607		lambda<br/>
-P011	201607		most function<br/>
+P009	201607      正则表达式<br/>
+P010	201607      lambda<br/>
+P011	201607      most function<br/>
+P012	201607      study huawei<br/>
