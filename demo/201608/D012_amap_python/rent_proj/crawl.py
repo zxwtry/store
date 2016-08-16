@@ -17,7 +17,11 @@ while True:
 	print "正在找: ",url.format(page=page)
 	response=requests.get(url.format(page=page))
 	html=BeautifulSoup(response.text)
+	fileHandle=open("html.txt", 'w')
+	fileHandle.write(str(html))
+	fileHandle.close()
 	house_list=html.select(".list<li")
+	print house_list
 	if not house_list:
 		break
 	for house in house_list:
