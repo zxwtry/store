@@ -5,7 +5,7 @@ import matplotlib.pyplot as pl
 import numpy as np
  
 if __name__ == '__main__':    
-    file = open("/home/zxwtry/data/上河GIC_武汉地磁台06121413_09271631_E_y_East.csv", 'r')
+    file = open("/home/zxwtry/data/09281421.csv", 'r')
     line = file.readline()
     list_str = line.split(",")
     print len(list_str)
