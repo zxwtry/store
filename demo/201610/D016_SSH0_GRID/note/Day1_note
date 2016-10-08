@@ -71,3 +71,40 @@ note06: DDL，DML，DCL
             grant   给权限
             revoke  收回权限
 
+note07: 持久层设计
+    1， 建立JavaBean对象(GridText.java)
+        属于持久层对象(PO对象)
+        属性ID、名称、日期、备注
+    2， 创建映射文件GridText.hbm.xml
+        建立PO对象与数据库表grid_text的关联关系
+    3， 创建Hibernate.cfg.xml文件，配置连接数据库的信息
+
+note08: PO VO TO BO DAO POJO
+    O/R Mapping:
+        Object Relational Mapping 对象关系映射
+        (将对象与关系数据库绑定，用对象来表示关系数据)
+    VO: 值对象(Value Object)。
+        VO由new关键字创建，由GC回收的
+        VO是业务对象，存活在业务层，作用：数据存放
+        VO时时刻刻与业务相关
+    PO: 持久对象(Persistent Object)。
+        向数据库添加新数据时创建，删除数据库中数据时删除。
+        并且，只存活在一个数据库连接中，断开连接即删除。
+        PO有状态，每个属性代表其当前状态。是物理数据的对象表示。
+        PO使程序与物理数据解耦，简化对象数据与物理数据之间的转换。
+        PO的属性跟数据库表的字段一一对应。
+        PO对象需要实现序列化接口。
+    TO: 数据传输对象(Transfer Object)
+        在应用不同tie(关系)之间传输的对象。
+    BO: 业务对象(Business Object) 
+    POJO:简单无规则Java对象(Plain Ordinary Java Object)
+        (简单Java Bean，只有属性字段和setter、getter方法)
+    EJB:JavaEE服务器端组件模型
+    DAO:数据访问对象(Data Access Object)
+    (struts里的ActionForm就是个VO)
+    (hibernate里的实体bean就是个PO,也是POJO)
+    (hibernate里的Criteria相当于一个QO---查询对象)
+    QO和DTO TO有相似之处。
+
+note08: 
+        
