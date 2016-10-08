@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.zxw.grid.domain.GridText" table="grid_text">
+		<id name="textID" type="string">
+			<column name="text_id" sql-type="varchar(50)" not-null="true"/>
+			<generator class="uuid"/>
+		</id>
+		<property name="textName" type="string">
+			<column name="text_name" sql-type="varchar(50)"/>
+		</property>
+		<property name="textDate" type="date">
+			<column name="text_date" sql-type="datetime"/>
+		</property>
+		<!-- 
+		这个是老师的版本
+		<property name="textDate" type="date">
+			<column name="text_date" length=50/>
+		</property>
+		 -->
+		<property name="textRemark" type="string">
+			<column name="text_remark" sql-type="varchar(500)"/>
+		</property>
+	</class>
+</hibernate-mapping>    
