@@ -1,0 +1,73 @@
+note01: 数据字典
+    用户需要输入数据如地点，方法是给用户选项。
+    对于服务器，这些选项是可以后台更改的。
+    服务器看到的选项是有：选项名字和选项ID的。
+    <select>
+        <option>北京</option>
+        <option>上海</option>
+        <option>广州</option>
+        <option>深圳</option>
+    </select>
+
+note02: 版本
+    hibernate:  3.5.6
+    spring:     2.5.5
+    struts2
+
+note03: 分层
+    表现层  控制层  业务层  DAO层  持久层  DB数据库
+                                    Bean    MYSQL
+
+note04: 建表语句
+    建立grid_day1数据库
+    create database if not exists grid_day1 default charset utf8 collate utf8_general_ci;
+    (其中ci的意思是：case insensitive，意思：大小写不敏感)
+    (还有一个是cs，意思是：case sensitive，意思：大小写敏感)
+    (可以通过show collation like 'utf8%'查看utf8的比对规则)
+    建立grid_text的测试表
+    create table if not exists grid_text(
+        text_id varchar(50) not null,
+        text_name varchar(50),
+        text_date datetime,
+        text_remark varchar(500)
+    ) default charset=utf8;
+
+note05: 删除表
+    实际应用：
+        delete from table;  //删除所有数据
+        truncate table;     //将auto_increatement调制从0开始，实际就是从1开始
+    区分：不带where子句的delete语句，drop，truncate
+        1， 速度
+            drop > truncate > delete
+        2， 慎重使用drop和truncate，而delete一般可恢复
+        3， drop删除表结构中的约束(constrain)，触发器(trigger)，索引(index)
+                不删除表结构中的存储过程，但是变为invalid状态
+            truncate和delete只删除数据，不删除表结构
+        4， delete是DML(数据操纵语言)，这个操作会放到rollback segement中
+                只有事务提交之后才生效。
+                如果有相应的trigger，执行的时候将会被触发
+            truncate和drop是DDL(数据定义语言)，
+                操作立即生效，原数据不放到rollback segment中，不能回滚
+                操作不触发trigger
+        5， 空间释放
+            drop：      表空间立即释放
+            truncate:   truncate reuse stroage之后释放
+            delete:     表空间不释放
+
+note06: DDL，DML，DCL
+    DDL:    数据定义语言
+            create
+            drop
+            alter
+            truncate
+    DML：   数据操纵语言
+            (操作的单位是纪录，可以rollback)
+            insert
+            delete
+            update
+    DCL：   数据控制语言
+            (控制数据库对象的权限，目的是使数据更加安全)
+            (操作的对象是用户)
+            grant   给权限
+            revoke  收回权限
+
