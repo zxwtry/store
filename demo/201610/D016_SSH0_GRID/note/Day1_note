@@ -106,5 +106,37 @@ note08: PO VO TO BO DAO POJO
     (hibernate里的Criteria相当于一个QO---查询对象)
     QO和DTO TO有相似之处。
 
-note08: 
-        
+note09: DAO设计
+    interface ICommonDao<T> {
+        save(T t);
+        update(T t);
+    }
+    interface IGridTextDao extends ICommonDao<GridText> {
+        find();
+    }
+    class CommonDaoImpl<T> implements ICommonDao<T> {
+        save(T t){实现}
+        update(T t){实现}
+    }
+    class GridTextDaoImpl implements IGridTextDao extends CommonDaoImpli<GridText> {
+        find(){实现}
+    }
+    
+note11: 业务层service
+    interface IGridTextService {
+        saveGridText();
+    }
+    class GridTextService implements IGridTextService {
+        saveGridText(){实现}
+    }
+
+note12: 控制层使用Struts
+    class GridTextAction {
+        (在这里得到request和response)
+        (不过一般都通过CommonAction来获得request和response)
+    }
+    class GridTextForm {
+        (对应页面的属性值，JavaBean的对象)
+    }
+    还有需要配置struts.xml文件
+
