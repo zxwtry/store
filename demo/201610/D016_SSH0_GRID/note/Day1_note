@@ -140,3 +140,54 @@ note12: 控制层使用Struts
     }
     还有需要配置struts.xml文件
 
+note13: 表现层
+    html文件(css, js)
+    
+note14: 第一天总结：
+    1,  建立Web工程
+        *如果有需要，将build/classes改成WebContent/WEB-INF/classes
+        *导入相应的包
+            db:连接数据库的驱动包
+            hibernate:使用hibernate的jar包
+            jstl:java的标准标签库
+            junit:单元测试
+            spring:
+            struts2:
+        *项目体系分层
+            grid.container:自定义spring容器，用于在控制层调用操作业务层
+            grid.dao:项目的dao层，负责连接数据库的操作
+            grid.domain:封装书体对象(PO对象)，对应连接数据库表的映射文件
+            grid.service:项目service层，负责操作各个功能模块的业务逻辑
+            grid.util:封装系统使用到的公用类的方法和属性
+            grid.web.action:系统控制层，负责页面和项目后台的跳转
+            grid.web.form:封装值对象(VO对象)，对应页面传递的表单值的属性
+            junit:单元测试
+        *配置文件
+         (放置到src目录下)
+        beans.xml:spring的配置文件
+        hibernate.cfg.xml:hibernate的配置文件
+        struts.xml:struts2的配置文件
+    2,  建立持久层
+        *在grid.domain中创建持久层的对象GridText.java
+        *对应JavaBean的PO对象，创建表的映射文件GridText.hbm.xml文件
+        *创建连接数据库的hibernate配置文件，hibernate.cfg.xml文件放置到src下
+    3,  DAO层的搭建
+        *在grid.dao包下，创建ICommonDao接口
+        *在grid.dao.impl包下，创建CommonDaoImpl实现类
+        *在grid.dao包下，创建IGridTextDao接口
+        *在grid.dao.impl包下，创建GridTextDaoImpl实现类
+        *创建spring的配置文件beans.xml文件
+    4,  Service业务层
+        *在grid.service包中，创建IGridTextService接口
+        *在grid.service.impl包中，创建GridTextServiceImpl实现类
+         类级别的事务，@Transactional(readOnly=true)
+    5,  Action控制层
+        *导入css/js等等
+        *在grid.web.form中，创建GridTextForm类，注意String
+        *在grid.web.action中，创建BaseAction类
+        *在grid.web.action中，创建GridTextAction类，继承BaseAction类
+        *自定义spring容器
+            在grid.web.container中，建立ServiceProviderCore类
+            在grid.web.container中，建立ServiceProvider类
+        *建立struts的配置文件，放置在src下
+        *在web.xml中添加struts的过滤器
