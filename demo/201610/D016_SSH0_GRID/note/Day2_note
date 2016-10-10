@@ -1,0 +1,31 @@
+note01: 项目底层搭建(查询)---前端界面
+    HTML界面中有
+        名称：<input type="text" name="textName">       比如：张
+        备注：<input type="text" name="textRemark">     比如：吃
+        查询(按钮)
+        返回一个列表：
+            名称    日期    备注...
+        1
+        2
+        3
+    select语句一般放置在DAO层
+note02: 项目底层搭建(查询)---Action层
+    Action层：从VO对象获取名称和备注
+                |
+                |   [VO对象(存值)]
+                |
+    Service层： 1,  获取VO对象查询参数
+                2,  组织HQL语句的where条件(带参数)
+                3,  组织HQL语句的order by排序
+                |
+    [where条件] | [order by排序]
+                |
+    DAO层： 1,  组织HQL语句
+                select o.text_name, o.text_remark from grid_text o
+            2,  将HQL语句添加where条件和order by条件
+            3,  查询列表集合
+
+    select o.text_name, o.text_remark from grid_text o  放置到DAO层
+    where o.text_name like '%张%'                       放置到Service层 
+    and o.text_remark like '%李%'                       放置到Service层
+    order by o.text_date desc, o.tex_name asc;          放置到Service层
