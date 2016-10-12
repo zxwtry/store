@@ -229,3 +229,78 @@ jar包：
 note06: 项目进展1---配置前端控制器 
     在web.xml中配置前端控制器。
     需要配置<servlet>和<servlet-mapping>
+        <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- contextConfigLocation配置springmvc加载 配置文件
+            处理器映射器、处理器适配器等等
+            
+            如果不配置contextConfigLocation的话，默认加载的是
+            /WEB-INF/servlet名称-servlet.xml(springmvc-servlet.xml)
+        -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>claddpath:springmvc.xml</param-value>
+        </init-param>
+      </servlet>
+      <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <!-- 
+            第一种：*.action，访问.action结尾由DispatcherServlet进行解析
+            第二种：/，所有访问的地址都由DispatcherServlet进行解析
+                   对于静态文件的解析需要配置不让DispatcherServlet进行解析
+                  使用第二种能够实现RESTful风格的url
+            第三种：/*，这样配置不对
+                　当最终需要转发到一个html页面时候，仍然会由DispatcherServlet解析html
+                   不能根据html页面找到handler，会报错
+         -->
+        <url-pattern>*.action</url-pattern>
+      </servlet-mapping>
+
+
+note07: 项目进展2---配置处理器适配器
+    (在框架流程图中，处理器映射器在前面，但是处理器适配是最接近业务处理的)
+    (所以，在实际中经常会选择先去配置处理器适配器)
+    在classpath下的springmvc.xml中配置处理器映射
+        <!-- 处理器适配器 -->
+        <!-- 所有的处理器适配器都实现HandlerAdapter接口 -->
+        <!-- HandlerAdapter接口中的supports(Object handler)方法 -->
+        <!-- 处理器适配器对其的实现是：
+            public boolean supports(Object handler) {
+                return (handler instanceof Controller);
+            }
+            public interface Controller {
+                ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception;
+            }
+         -->
+        <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    
+note08: 项目进展3---编写Handler
+    需要实现Controller接口
+    (实现了Controller接口才能由上面配置的处理器适配器来执行)
+        //返回ModelAndView
+        ModelAndView modelAndView = new ModelAndView();
+        
+        //相当于request.setAttribute(attributeValue)
+        //在html页面中可以通过itemsList取数据
+        modelAndView.addObject("itemsList", itemsList);
+        
+        //指定视图
+        modelAndView.setViewName("/WEB-INF/html/items/itemsList.jsp");
+    就是需要处理业务逻辑，返回一个ModelAndView
+
+
+note09: 项目进展4---视图编写
+    为了方便，在这里使用
+    <c:forEach items="${itemsList}" var="item">
+    <tr>
+        <td>${item.name}</td>
+        <td>${tiem.price}</td>
+        <td><fmt:formatDate value="${item.createtime}" parrtern="yyyy-MM-dd HH:mm:ss"/></td>
+        <td>${item.detail}</td>
+    </tr>
+    </c:forEach>
+    来进行itemsList显示
+
+
