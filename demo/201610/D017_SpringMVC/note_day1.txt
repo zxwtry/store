@@ -106,3 +106,82 @@ excel                                    |
 第10步：前端控制器将view交给视图(View)生成html(完成填充数据)
 第11步：视图将html返回给前端控制器
 第12步：前端控制器响应用户请求(将html返回给用户)
+
+组件的作用：
+1， 前端控制器(DispatcherServlet)
+    作用：  a,  接收请求，响应请求；
+            b,  相当于MVC中的C
+            c,  SpringMVC的中心
+            d,  降低组件之间的耦合
+            e,  不需要程序员开发
+2,  处理器映射器(HandlerMapping)
+    作用:   a,  从前端控制器得到用户请求的信息(url)，返回处理器执行链
+            b,  实现方式：配置文件、实现接口、注解
+            c,  不需要程序员开发
+3， 处理器适配器(HandlerAdapter)
+    作用:   a,  从前端控制器接收执行信息，将执行信息交给处理器执行
+            b,  这是适配器模式的应用
+            c,  就是让处理器依照处理器适配器要求的规则去执行
+            d,  不需要程序员开发
+4,  处理器(Handler)
+    作用:   a,  真正执行用户请求的地方
+            b,  相当于MVC中的M
+            c,  SpringMVC的执行模块，DAO Service...
+            d,  需要程序员开发
+5,  视图解析器(View Resolver)
+    作用:   a,  根据逻辑视图名解析成物理视图名即具体的页面地址
+            b,  根据ModelAndView信息生成View视图对象
+            c,  SpingMVC提供View视图类型：jstlView、freemarkerView
+                pdfView等等。
+            d,  不需要程序员开发
+6,  视图(View)
+    作用:   a,  对View渲染将处理结果通过页面展示给用户
+            b,  一般情况需要使用页面标签或者页面模版技术
+            c,  需要程序员开发
+
+note04: 建表语句：
+create database springmvc_1012 default  charset=utf8;
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL COMMENT '商品名称',
+  `price` float(10,1) NOT NULL COMMENT '商品定价',
+  `detail` text COMMENT '商品描述',
+  `pic` varchar(64) DEFAULT NULL COMMENT '商品图片',
+  `createtime` datetime NOT NULL COMMENT '生产日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL COMMENT '用户名称',
+  `birthday` date DEFAULT NULL COMMENT '生日',
+  `sex` char(1) DEFAULT NULL COMMENT '性别',
+  `address` varchar(256) DEFAULT NULL COMMENT '地址',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '下单用户id',
+  `number` varchar(32) NOT NULL COMMENT '订单号',
+  `createtime` datetime NOT NULL COMMENT '创建订单时间',
+  `note` varchar(100) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`),
+  KEY `FK_orders_1` (`user_id`),
+  CONSTRAINT `FK_orders_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `orderdetail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orders_id` int(11) NOT NULL COMMENT '订单id',
+  `items_id` int(11) NOT NULL COMMENT '商品id',
+  `items_num` int(11) DEFAULT NULL COMMENT '商品购买数量',
+  PRIMARY KEY (`id`),
+  KEY `FK_orderdetail_1` (`orders_id`),
+  KEY `FK_orderdetail_2` (`items_id`),
+  CONSTRAINT `FK_orderdetail_1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_orderdetail_2` FOREIGN KEY (`items_id`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
