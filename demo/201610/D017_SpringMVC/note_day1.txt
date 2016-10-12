@@ -18,7 +18,6 @@ note01: 什么是SpringMVC
 note02: 什么是MVC && MVC在B/S系统下的应用
     MVC是一个设计模式
 
-
     用户   (request请求)--->   C控制器  --(请求模型进行处理)
         <--response响应  struts2的filter  |
                           接受用户请求    |
@@ -42,6 +41,11 @@ note02: 什么是MVC && MVC在B/S系统下的应用
               V视图
 
     (b/s系统下，模型无法将数据填充到视图)
+第1步：用户发出请求，请求传送到控制层
+第2步：控制层把请求委托给模型层，模型层通过Service DAO等等得到结果
+第3步：模型层将结果返回给控制层
+第4步：控制层将结果填充到视图层，形成视图
+第5步：控制层响应用户请求，将视图响应给用户。
 
 note03: SpringMVC框架
    
@@ -91,7 +95,14 @@ excel                                    |
                                                        去执行Handler 
 
 第01步：发起请求到前端控制器(DispatherServlet)
-第02步：前端空之前
-
-        
-        
+第02步：前端控制器去处理器映射器(HandlerMapping)请求对应处理器
+第03步：处理器映射器将处理器执行链(HandlerExecutionChain)返回给前端控制器
+第04步：前端控制器找到处理器适配器(HandlerAdapter)，执行业务
+第05步：处理器适配器将业务交给处理器(Handler)(controller)去执行
+第06步：处理器将ModelAndView返回给处理器适配器
+第07步：处理器适配器将ModelAndView返回给前端控制器
+第08步：前端控制器将ModelAndView交给视图解析器(ViewResolver)
+第09步：视图解析器将解析好的view返回给前端控制器
+第10步：前端控制器将view交给视图(View)生成html(完成填充数据)
+第11步：视图将html返回给前端控制器
+第12步：前端控制器响应用户请求(将html返回给用户)
