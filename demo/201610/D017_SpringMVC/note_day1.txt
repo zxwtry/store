@@ -226,4 +226,6 @@ jar包：
         spring-web-3.2.0.RELEASE.jar
         spring-webmvc-3.2.0.RELEASE.jar
 
-    
+note06: 项目进展1---配置前端控制器 
+    在web.xml中配置前端控制器。
+    需要配置<servlet>和<servlet-mapping>
