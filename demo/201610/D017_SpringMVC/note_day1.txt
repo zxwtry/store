@@ -184,4 +184,46 @@ CREATE TABLE `orderdetail` (
   CONSTRAINT `FK_orderdetail_2` FOREIGN KEY (`items_id`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+第一步：建立users(用户表)和items(商品信息表)
+            这两张表都没有外键，只是简单的表
+第二步：建立orders(订单表)：
+            外键users_id：指向users
+第三步：建立orderdetail(订单明细表)
+            外键orders_id：指向items
+            外键items_id：指向orders
+过程是：小明建了两张orders，
+        第一张orders对应2张orderdetail，
+            两张orderdetail分别对应11本笔记本和12支笔
+        第二张orders对应三张orderdetail，
+            三张orderdetail分别对应3斤桃子、5斤苹果和6瓶水
+        items表中，必需包含笔记本，笔，桃子，苹果，水
 
+note05: 项目准备工作
+在创建Dynamic Web Project的过程中，如果希望项目和MyEclipse能够互导
+    将default output folder设置成：WebRoot\WEB-INF\classes
+    将COntent directory设置成：WebRoot
+版本选择：
+    java:       jdk7
+    eclipse:    indigo
+    springmvc:  spring3.2
+    mysql:      mysql5.7
+jar包：
+    有非常多jar包，但是最重要的是spring-webmvc包
+    如果单单是SpringMVC的话，只需要：
+        commons-logging-1.1.1.jar
+        jstl-1.2.jar
+        spring-aop-3.2.0.RELEASE.jar
+        spring-aspects-3.2.0.RELEASE.jar
+        spring-beans-3.2.0.RELEASE.jar
+        spring-context-3.2.0.RELEASE.jar
+        spring-context-support-3.2.0.RELEASE.jar
+        spring-core-3.2.0.RELEASE.jar
+        spring-expression-3.2.0.RELEASE.jar
+        spring-jdbc-3.2.0.RELEASE.jar
+        spring-orm-3.2.0.RELEASE.jar
+        spring-test-3.2.0.RELEASE.jar
+        spring-tx-3.2.0.RELEASE.jar
+        spring-web-3.2.0.RELEASE.jar
+        spring-webmvc-3.2.0.RELEASE.jar
+
+    
