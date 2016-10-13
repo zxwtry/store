@@ -303,4 +303,32 @@ note09: 项目进展4---视图编写
     </c:forEach>
     来进行itemsList显示
 
+note10: 项目进展5---配置处理器映射器和Handler
+    在项目进展3中已经将Handler写好了，肯定要将Handler配置到springmvc.xml中
+    当然，根据架构流程，首先要配置的是处理器映射器，具体配置如下：
+    <!-- 处理器映射器 
+      将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url)
+-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    处理器映射器的bean是不需要自己编写的。
+    
+    接下来就是配置Handler，Handler是自己编写的，需要提供具体的访问url
+    <!-- 配置Handler -->
+    <bean name="/queryItems.action" class="edu.zxw.goods.controller.ItemsController1"/>
+
+note11: 项目进展6---配置视图解析器
+    需要配置解析html，这里是jsp的视图解析器
+    <!-- 视图解析器 
+       解析jsp视图，默认使用jstl标签，classpath下要有jstl的包
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+
+note12: 项目进展7---到现在，可以进行调试了
+    纪录一个非常无语的事情：
+        写Java代码的时候，为了Eclipse不报错，我常常先写一个return null;
+        在写这份代码的时候，写自己的Handler即Controller的时候，
+        写到最后忘了改写成return modelAndView，写的还是return null;
+    自己调试的时候，总是以为访问不到页面，乱折腾一大堆。。。诶。。。
+    这个习惯得改。。。
+
 
