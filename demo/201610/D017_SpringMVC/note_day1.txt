@@ -331,4 +331,33 @@ note12: 项目进展7---到现在，可以进行调试了
     自己调试的时候，总是以为访问不到页面，乱折腾一大堆。。。诶。。。
     这个习惯得改。。。
 
+note13: 非注解的处理器映射器和适配器
+    处理器映射器：
+    org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping
+    在这样的情况下，处理器的配置如下：
+    <bean name="/queryItems.action" class="edu.zxw.goods.controller.ItemsController1"/>
 
+    有一种类似的配置方式如下：
+    处理器映射器的配置是：
+    <!-- 还是处理器映射器 但是不使用 BeanNameUrlHandler
+         使用的是org.springframework.web.servlet.handler.SimpleUrlHandlerMapping
+         即SimpleUrlHandlerMapping 简称SUHM
+     -->
+        <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+            <property name="mappings">
+                <props>
+                    <!-- key是 url value是Handler的ID -->
+                    <prop key="queryItemsSUHM1.action">SUHMItemsController1</prop>
+                    <prop key="queryItemsSUHM2.action">SUHMItemsController1</prop>
+                </props>
+            </property>
+        </bean>
+    在SUHM的方式下，处理器的配置如下：
+    <!-- 还是配置Handler SUHM -->
+        <bean id="SUHMItemsController1" class="edu.zxw.goods.controller.ItemsController1"/>
+    注意：这两种方式，只要在URL上不冲突，那么就是可以的。 
+    当出现冲突的时候，SpringMVC会如何处理呢？
+    经测试得出目前的结论是：
+        SpringMVC的HandlerMapping处理策略是：
+        从上往下找HandlerMapping，如果找到对应的.action(举个例子啦啦啦)
+        那么就使用这个找到的Handler
