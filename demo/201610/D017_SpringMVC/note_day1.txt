@@ -331,7 +331,8 @@ note12: 项目进展7---到现在，可以进行调试了
     自己调试的时候，总是以为访问不到页面，乱折腾一大堆。。。诶。。。
     这个习惯得改。。。
 
-note13: 非注解的处理器映射器和适配器
+note13: 非注解的处理器映射器
+    (所有的映射器都实现HandlerMapping接口)
     处理器映射器：
     org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping
     在这样的情况下，处理器的配置如下：
@@ -361,3 +362,28 @@ note13: 非注解的处理器映射器和适配器
         SpringMVC的HandlerMapping处理策略是：
         从上往下找HandlerMapping，如果找到对应的.action(举个例子啦啦啦)
         那么就使用这个找到的Handler
+    (代码在code里面的/config/springmvc2_diff.xml)
+
+note14: 非注解的处理器适配器
+    处理器适配器：
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    这样配置的要求：编写的Handler实现Controller接口
+    
+    有一种类似的配置方式如下：(相比如上，有特有功能)
+    使用的处理器适配器是：
+    org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter
+    这样配置的要求：编写的Handler实现HttpRequestHandler接口
+    两句：
+        request.setAttribute("itemsList",itemsList);
+        request.getRequestDispatcher("对应的页面").forward(request, response);
+    更换的Controller，必须要在xml中更改Handler的配置文件
+    (同时，Handler的配置文件的更改，必须要和Handler映射器的配置协同)
+    这种处理器适配的实现方式，可以实现返回JSON数据
+    response.setCharacterEncoding("utf-8");
+    response.setContentType("application/json;charset=utf-8");
+    response.getWriter().write("JSON串");
+
+note15: 
+    
+    
+    
