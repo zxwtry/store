@@ -436,4 +436,35 @@ note17: 开发注解Handler
 note18: 为了保证项目更改之后，不会因为tomcat缓存和浏览器缓存出现任何不妥
     最好每次改动之后，stop server -> remove project -> run as server
 
+note19: 配置视图解析器，多个页面
+    在springmvc.xml文件配置如下：
+        <!-- ViewResolver -->
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+        </bean>
+        InternalResourceViewResolver：支持JSP视图解析
+        viewClass：JstlView表示JSP模板页面需要使用JSTL标签库，所以classpath中必须包含jstl的相关jar 包；
+        prefix 和suffix：查找视图页面的前缀和后缀，最终视图的址为：
+        前缀+逻辑视图名+后缀，逻辑视图名需要在controller中返回ModelAndView指定，比如逻辑视图名为hello，则最终返回的jsp视图地址 “WEB-INF/jsp/hello.jsp”
 
+note19: 整合DAO---配置文件
+    sqlMapConfig.xml
+    <configuration>
+        <!-- 全局setting配置，根据需要添加 -->
+        
+        <!-- 配置别名 -->
+        <typeAliases>
+            <!-- 批量扫描别名的方式 -->
+            <typeAlias type="edu.zxw.goods.pojo"/>
+        </typeAliases>
+    
+        <!-- 配置mapper -->
+        <!-- 由于使用Spring和MyBatis的整合包进行mapper扫描 -->
+        <!-- 必须遵循mapper.xml和mapper.java文件同名且在一个目录 -->
+        <!-- 
+            故而不使用如下
+            <mappers></mappers>
+         -->
+    </configuration>
