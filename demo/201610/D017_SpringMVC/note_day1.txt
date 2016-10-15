@@ -332,6 +332,7 @@ note12: 项目进展7---到现在，可以进行调试了
     这个习惯得改。。。
 
 note13: 非注解的处理器映射器
+    (多个处理器映射器，能够共存)
     (所有的映射器都实现HandlerMapping接口)
     处理器映射器：
     org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping
@@ -365,6 +366,7 @@ note13: 非注解的处理器映射器
     (代码在code里面的/config/springmvc2_diff.xml)
 
 note14: 非注解的处理器适配器
+    (多个处理器适配器，能够共存)
     处理器适配器：
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
     这样配置的要求：编写的Handler实现Controller接口
@@ -383,7 +385,55 @@ note14: 非注解的处理器适配器
     response.setContentType("application/json;charset=utf-8");
     response.getWriter().write("JSON串");
 
-note15: 
+note15: 有一个彩蛋：如果配置处理器适配器，SpringMVC还是能够运行起来。
+    原因是：这个文件：
+        org.springframework.web.servlet.DispatcherServlet.properties
+    前端控制器从上边文件中加载处理器映射器、处理器适配器、视图解析器等组件
+    如果不在spring.xml中配置，使用默认加载
     
+    同时有一个炸弹：使用注解方式的也能适用吗？不能！！！
+    在spring3.1之前，使用的是DispatcherServlet.proerties的默认版本即
+        org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping
+        org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter
+    在spring3.1之后，使用的是新版本(源代码中写着：since 3.1)
+        org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping
+        org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter
+        源代码中写着：since 3.1
+
+note16: 配置注解的映射器和适配器
+    <!-- 处理器映射器 -->
+    <!-- 使用注解方式的处理器映射器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+
+    <!-- 处理器适配器 -->
+    <!-- 使用注解方式的处理器适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>
+
+    <!-- 使用mvc:annotation-driven可以代替上边两个，即：注解映射器和注解适配器 -->
+    <!-- mvc:annotation-driven默认加载很多的参数绑定方法，比如JSON转换解析器就默认加载了 -->
+    <!-- 如果使用mvc:annotation-driven，可以不配置上面两个了；实际开发中，只使用这种方式 -->
+    <!-- 现在为了学习，先将mvc:annotation-driven注释掉 -->
+    <mvc:annotation-driven></mvc:annotation-driven>
     
-    
+note17: 开发注解Handler
+   使用注解的映射器和注解的适配器（两者必须配对使用）
+    处理器配置：
+    <!-- 配置Handler -->
+    <!-- <bean class="edu.zxw.goods.controller.ItemsController4_annotation"/> -->
+    <!-- 使用组件扫描 -->
+    <!-- 可以扫描controller， service -->
+    <context:component-scan base-package="edu.zxw.goods.controller"></context:component-scan>
+    处理器编写：
+    //使用@Controller标识它是一个控制器
+    @Controller
+    public class ItemsController4_annotation {
+    //商品查询列表
+    //一个url对应一个方法
+    //也可以写成@RequestMapping("/queryItems.action")
+    @RequestMapping("/queryItems")
+    public ModelAndView queryItems() throws Exception {
+
+note18: 为了保证项目更改之后，不会因为tomcat缓存和浏览器缓存出现任何不妥
+    最好每次改动之后，stop server -> remove project -> run as server
+
+
