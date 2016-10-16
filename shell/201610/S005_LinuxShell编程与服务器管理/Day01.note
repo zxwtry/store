@@ -57,4 +57,48 @@ note07: 第一个有用的Bash Shell
     接着，在vi中填入：
     0 6 * * * /root/clearlog.sh
     那么每天凌晨6时，就会执行clearlog.sh，自动清理log文件。
+
+note08: 在Linux平台部署Bash Linux的环境
+    查看SHELL的支持：echo $SHELL
+    一般会有 /bin/Bash或者在Ubuntu中/bin/bash
+    ls -la /bin/sh
+    一般可以看到 /bin/sh是一个link，链接到 /bin/sh --> Bash
+    在Ubuntu 14.04中是 /bin/sh --> dash
+    只要在.sh文件中指定 #!/bin/bash就行了。
+
+note09: 自行编译最新版本的Bash
+    1,  下载Bash的最新版本：http://ftp.gnu.org/gnu/bash/
+    2,  下载到的是一个bash-x.x.x.tar.gz文件
+    3,  解压 tar -zxvf bash-x.x.x.tar.gz
+    4,  进入目录，执行设定。
+        ./configure 会将bash安装到/usr/local目录下
+        也可以使用 --prefix知道要安装的路径
+        ./configure --prefix=/home/zxwtry
+    5,  编译
+        make
+    6,  测试
+        make tests
+        先执行看看：
+        ./bash
+        echo $BASH_VERSION
+        接着，离开新编译的bash (即执行exit)，回到原来的环境
+    7,  安装(注意root和user用户)
+        (user可以之前4使用--prefix进行安装，user安装之后，只能是user使用)
+        make install
+        或者使用
+        su -c "make install"
+        (make install默认会把bash的执行文件安装在/usr/local/bin中)
+        (如果之前4进行了--prefix指定的话，就在自定义的目录) 
+
+note10: 切换使用新版本的Bash Shell
+    对应的命令是：chsh命令(即change Shell的简称)
+    chsh会检查/etc/Shells这个文件，只有列在该文件中的Shell程序
+    ，才算是合法的Shell，才能供使用者选用。
+    编辑/etc/Shells文件，在最后添加/usr/local/bin/bash
+    或者 echo '/usr/local/bin/bahs' >> /etc/Shells (注意：>会删除文件之前的东西)
+    或者 su -c "echo '/usr/local/bin/bash' >> /etc/Shells"
+    使用者自行切换： chsh --> 输入密码 --> 输入 /usr/local/bin/bash 
+    root帮忙切换： chsh zxwtry  --> 输入 /usr/local/bin/bash
+    
+        
     
