@@ -1,2 +1,36 @@
-note01:
-    
+note01: Linux/BSD系统分成3个重要部分；
+    *核心(kernel)
+    *Shell
+    *工具程序
+    相对应的关系是：
+        核心非常复杂，非常难用
+        Shell为核心提供良好的接口
+
+note02: Shell根据表现形式：
+    *Text base
+    *Graphic base
+
+note03: Linux/BSD的Shell种类非常多，
+    可以让人自由地更换(使用chsh指令)
+    目前常用的Shell有：
+    sh / bash / ksh93 / pdksh / csh / tcsh
+    sh : Bourne Shell         BSD/Public Domain
+    Bash : Bourne Again Shell    GPL
+    Bash兼容sh
+    在Linux套件中，常用的是Bash
+
+note04: Bash有两种工作模式：
+    互动模式和非互动模式
+    互动模式：
+        interactive mode
+        键盘输入命令，必须等待Shell执行完，
+        才能执行下一条命令。
+    非互动模式：
+        Shell Script mode
+        non-interactive mode
+        设计Shell Script，把要执行的命令写在
+        文件中，交由Bash去读取和执行。
+        效率高，也称为自动化模式。
+
+
+        
