@@ -100,5 +100,43 @@ note10: 切换使用新版本的Bash Shell
     使用者自行切换： chsh --> 输入密码 --> 输入 /usr/local/bin/bash 
     root帮忙切换： chsh zxwtry  --> 输入 /usr/local/bin/bash
     
-        
+note11: 登录主机：分为本机登录(local login)和远程登录(remote login)        
+    区分：使用网络登录的就是远程登录
+
+note12: 本机登录的接口：文本接口和图形接口
+    在Linux/BSD系统，默认会开启7个终端界面即：tty1 ~ tty7
+    其中，文本接口的主机登录，占用tty1 ~ tty6
+          图形接口的主机登录，占用tty7
+    如果需要在各终端之间切换，可按Ctrl+Alt+F1 ~~~ Ctrl+Alt+F7
+    
+note13: 远程登录：ssh和telnet等程序来登录，其中openssh是有加密编码
+    ssh -l zxwtry 192.168.1.2
+    ssh zxwtry@192.168.1.2
+    ssh 192.168.1.2 (等同于 ssh -l root 192.168.1.2)
+
+note14: 注销主机、结束终端程序
+    exit 或者 Ctrl + D (先ctrl 后 d)
+
+note15: 不同文件形态的代码，表现如下：
+    -   一般文件
+    d   目录文件
+    l   符号链接文件
+    b   磁盘设备文件
+    c   字符设备文件
+    s   Socket文件
+    p   连接文件
+    其中：一般文件-：纯文本文件，二进制文件，可执行文件等等
+          目录d：包含文件的活页夹
+          设备文件；字符文件b、磁盘文件c
+          内部进程通信文件：Socket文件s、连接文件p(Pipe/FIFO)
+          连接文件也是一种内部进程通信的机制：
+            一个进程把数据写入Pipe中
+            另一个进程则由Pipe读取数据
+            数据采FIFO的次序，成为管道
+          特殊文件：符号链接文件。
+            符号链接文件称为soft link或symbolic link
+          有的文件以.开头，表示是隐藏文件，隐藏文件可以是如上任何一种文件。
+
+
+
     
