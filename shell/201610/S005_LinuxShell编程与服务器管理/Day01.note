@@ -32,5 +32,29 @@ note04: Bash有两种工作模式：
         文件中，交由Bash去读取和执行。
         效率高，也称为自动化模式。
 
+note05: Bash Shell的特性：
+    *兼容 Bourne Shell (sh)
+    *支持许多选项及变量，可自定义Shell的使用环境
+    *支持历史命令(history)
+    *命令列修订的能力，可重新取用或修改之前执行过的命令
+    *具有job control的能力，可控制前台及后台程序
+    *具有程序设计的能力
+    *具有：普遍且免费，小(文件小)，快(免编译即可执行)，
+           准(正确性高)，稳定(可重复试验)，可组合使用。。。
 
-        
+note06: 编写第一个Bash
+    #!/bin/bash
+    echo "你好 Bash Shell;" 
+    保存为hello.sh
+    添加执行权限: chmod +x hello.sh
+    ./hello.sh回车之后，就能看到结果
+
+note07: 第一个有用的Bash Shell
+    cp /dev/null /var/log/apache2/access.log
+    利用特殊文件/dev/null(只写文件)，清空apache2的日志文件(文件大小变成0，但文件仍然存在)
+    然后 chomod +x /root/cleanlog.sh
+    crontab -u root -e
+    接着，在vi中填入：
+    0 6 * * * /root/clearlog.sh
+    那么每天凌晨6时，就会执行clearlog.sh，自动清理log文件。
+    
