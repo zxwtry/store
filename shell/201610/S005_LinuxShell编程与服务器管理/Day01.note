@@ -137,6 +137,69 @@ note15: 不同文件形态的代码，表现如下：
             符号链接文件称为soft link或symbolic link
           有的文件以.开头，表示是隐藏文件，隐藏文件可以是如上任何一种文件。
 
+note16: file的用法
+    file /tc/resolv.conf
+        执行的结果是：/etc/resolv.conf:ASCII text
+        这表示，resolv.conf是一个纯文件文件，属于一般文件
+    file /usr/bin
+        执行的结果是：/usr/bin:directory
+        这表示，/usr/bin是一个目录
+    file /usr/bin/ssh
+        执行的结果是：/usr/bin/ssh: ELF 64-bit LSB  shared object, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.24, BuildID[sha1]=2f6aacfa7c26a98a02ce2a846cb03f753be0271d, stripped
+        这表示，/usr/bin/ssh是一个二进制文件，具有可执行的特点
+    file hello.sh
+        执行的结果是：code001_print_hello_Bash.sh: Bourne-Again shell script, UTF-8 Unicode text executable
+        这表示，hello.sh是一个Bash Script文件，具有可执行的特点
+    file /dev/tty
+        执行的结果是：/dev/tty1: character special
+        这表示：/dev/tty1 是一个字符设备文件
+    file /dev/sda
+        执行的结果是：/dev/sda: block special
+        这表示：/dev/sda是一个磁盘设备文件
+    file /dev/initctl
+        执行的结果是：/dev/initctl: fifo(named pipe)
+        这表示，/dev/initctl是一个连接文件
+    file /var/run/mysqld/mysqld.sock
+        执行的结果是：/var/run/mysqld/mysqld.sock: socket
+        这表示，/var/run/mysqld/mysqld.sock是一个socket文件
+    file /bin/sh
+        执行的结果是：/bin/sh:symbolic link to "bash"
+        这表示，/bin/sh是一个链接到/bin/bash的符号链接文件
+    
+note17: 文件权限
+    UNIX-like系统，将文件模式，分成3种身份、4种权限
+    3种身份是：
+        u:  自己(user)，即文件的拥有者
+        g:  和自己同一组的人(group)
+        o:  其他人(other)
+        而a代表所有人   
+    每种身份皆有4种可能的权限：
+        r:  读取权限
+        w:  写入权限
+        x:  执行权限
+        s:  特殊权限  set user id(s)、set group id(s)及sticky bits(t)，简称sst
+    UNIX-like系统用10个字符来表示文件模式，如下所示：   
+    文件形态 文件拥有者权限 隶属组权限 其他身份的权限
+       -        rwx             rwx     rwx
+    r --- 4     w --- 2     x --- 1
+    如果某一个文件执行时，执行者可以暂时变成"文件拥有者"的身份，则称为具有特殊权限
+        set user id，其权限组rwx则改用rws来表示。这种文件，会在原权限值(假定0755)
+        之前加上4000，记为4755
+        /usr/bin/chsh文件拥有者的权限记为rws，这表示使用者执行chsh时，可暂时用root
+        身份来变更login Shell的种类
+    如果一个文件执行时，执行者可以暂时变成"用户组"的身份，则称为拥有特殊权限
+        set group id，其权限组r-x改用r-s表示，这种文件会在原文件的权限值 (假定0755)
+        之前加上2000，记为2755
+    如果某一个目录，其中的文件只有文件拥有者才能删除，则称该目录具有特殊权限
+        seticky bit，其权限组记为rwt。这种文件会在原权限值(假定0755)之前加上1000
+        记为1755
+        某个文件drwxrwxrwt(1777)，表示该文件可被其他用户新建文件，读取文件，执行文件
+        但是只有文件的建立者才能删除自己建立的文件。
+    需要特别小心目录的权限组，以rwx来说，其中x对目录而言不是执行的意义，而是
+        可以进入该目录的权限。例如，/var/www的目录属性如下：
+        drwx------ 8 www-data www-data 4096 2016-10-16 22:23 /var/www
+        这表示，只有执行身份同于www-data的账号，才能进入/var/www这个目录
 
 
+        
     
