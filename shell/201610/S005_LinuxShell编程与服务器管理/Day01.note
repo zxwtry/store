@@ -380,7 +380,35 @@ note32: 执行Bash Scipt的方式：
         source /root/temp/test.sh
         注意.和/之间至少要有一个空格
 
-note33: 
+note33: Bash Script排错的方法
+    先检查语法的正确性，然后追踪Script执行的过程，进行排错。
+    检查语法的指令如下：(假设将sleep 5 写成 slep 5)
+        bash -v code003_shell_structure.sh 天竺
+            slep 5
+            code003_shell_structure.sh: line 18: slep: command not found 
+        只需要修改slep就行了。
+    追踪Script的执行：
+		bash -x code003_shell_structure.sh 天竺
+		+ name=天竺
+		+ address=东土大唐
+		++ date +%F
+		+ today=2016-10-17
+		+ '[' 1 '!=' 1 ']'
+		+ show_name 2016-10-17 东土大唐 天竺
+		+ echo 今天是2016-10-17，贫道来自东土大唐，去往天竺拜佛求经
+		今天是2016-10-17，贫道来自东土大唐，去往天竺拜佛求经
+		+ sleep 5
+		+ echo
+		
+		+ echo 'Bye-Bye :-)'
+		Bye-Bye :-)
 
+note34: 强制变量一定要经过声明才能使用
+    bash有一内置命令shopt，可用来设定bash的功能选项。
+        其中有一个选项和程序排错有关，如果启用此选项，可避免错打变量名称
+        造成程序执行错误的情况。用法如下：
+            shopt -s -o nounset
 
-    
+note35: 在特定位置摆放echo指令，可以进行排错。
+
+note36: 
