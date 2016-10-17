@@ -462,5 +462,31 @@ note37: 父Shell和子Shell
         . /root/code004_sub_shell.sh
         souce /root/code004_sub_shell.sh
         这样就会切换到/root/temp。
-        (这种执行Script的方式，会影响父Shell的环境，通常在做系统调校时，才会如痴运用)
-    
+        (这种执行Script的方式，会影响父Shell的环境，通常在做系统调校时，才会如此运用)
+
+note38: 子Shell再开启子Shell
+    如何知道目前是在哪一层的Shell呢？
+        echo $SHLVL
+        也可以使用ps axf，观察内存中各进程之间的层级关系
+    echo $SHLVL使用如下：
+		root@zxwtry:~# echo $SHLVL
+		1
+		root@zxwtry:~# bash
+		root@zxwtry:~# echo $SHLVL
+		2
+		root@zxwtry:~# bash
+		root@zxwtry:~# echo $SHLVL
+		3
+    ps axf如下：
+          1044 ?        Ss     0:00  \_ sshd: root@pts/1    
+		  1184 pts/1    Ss+    0:00  |   \_ -bash
+		  1128 ?        Ss     0:00  \_ sshd: root@pts/2    
+		  1245 pts/2    Ss+    0:00  |   \_ -bash
+		  1136 ?        Ss     0:00  \_ sshd: root@pts/5    
+		  1304 pts/5    Ss+    0:00  |   \_ -bash
+		  1197 ?        Ss     0:00  \_ sshd: root@pts/6    
+		  1364 pts/6    Ss     0:00      \_ -bash
+		  2746 pts/6    S      0:00          \_ bash
+		  2756 pts/6    S      0:00              \_ bash
+		  2766 pts/6    R+     0:00                  \_ ps axf
+				
