@@ -449,4 +449,18 @@ note36: Bash Script执行的原理：login Shell
 			landscape:x:103:109::/var/lib/landscape:/bin/false
 			sshd:x:104:65534::/var/run/sshd:/usr/sbin/nologin
 			zxwtry:x:1000:1000:zxwtry,,,:/home/zxwtry:/bin/bash
+        普通用户可以使用chsh更换login  Shell
+
+note37: 父Shell和子Shell
+    当我们执行某一个Shell Script时，父Shell会根据Script程序的第一行#!之后所指定的Shell程序开启
+    (此操作称为fork)一个子程序Shell的环境，然后，在子Shell中执行此Shell Script。
+    一旦子Shell中的Script执行完毕，此子Shell随机结束，仍然回到父亲Shell之中，不会影响父Shell原本的环境
+    子Shell和父Shell一样，会开启3个文件：标准输入，标准输出，标准错误。
+        同时，子Shell会继承父Shell的若干变量值的内容，这些变量称为环境变量。 
+    执行code004_sub_shell.sh完成之后，不会切换到/root/temp
+    如果要切换到/root/temp，可以执行
+        . /root/code004_sub_shell.sh
+        souce /root/code004_sub_shell.sh
+        这样就会切换到/root/temp。
+        (这种执行Script的方式，会影响父Shell的环境，通常在做系统调校时，才会如痴运用)
     
