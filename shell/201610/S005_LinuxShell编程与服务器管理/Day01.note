@@ -342,5 +342,45 @@ note30: 前台工作、后台工作
     当my-work.sh执行结束，系统会显示：
         [1]+ Done    ./my-work.sh
 
-note
+note31: Shell程序的组成
+    程序是:code003_shell_structure.sh，运行过程如下：
+        ./code003_shell_structure.sh 天竺
+        今天是2016-10-17，贫道来自东土大唐，去往天竺拜佛求经
+        
+        Bye-Bye :-)
+    程序结构讲解：
+        show_name是一个函数定义如下
+            function show_name() {
+                echo "今天是$1，贫道来自$2，去往$3拜佛求经"
+            }
+        三个变量，如下：
+			name="$1"
+			address="东土大唐"
+			today=`date +%F`
+        if条件判断语句：
+			if [ $# != 1 ]; then
+			    echo "Usage: . /$0 {使用者名称}"
+			    exit
+			fi
+        调用show_name函数：
+            show_name "$today" "$address" "$name"
+        进程睡眠5秒：
+            sleep 5
+        最后执行一些输出
 
+note32: 执行Bash Scipt的方式：
+    方法一：./test.sh
+    方法二：bash test.sh
+            sh test.sh
+    (以上两种方法，Script在执行时，现行的Shell也叫父Shell，
+     会开启一个子Shell环境，此Script即是在这个子Shell中执行。
+     Script执行完毕之后，此子Shell环境随机关闭，回到现行的Shell中)
+    方法三：也可以让Script在现行的Shell中执行，方法如下：
+        . /root/temp/test.sh
+        source /root/temp/test.sh
+        注意.和/之间至少要有一个空格
+
+note33: 
+
+
+    
