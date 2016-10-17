@@ -274,4 +274,37 @@ note24: 括号扩展{}
     echo {1,2,3}* {1,2,3}   输出的是：
         1* 2* 3* 1 2 3
     
-note25: 
+note25: 系统默认开启的文件
+    每一个Shell Script执行时(称为"进程"或"处理程序")，
+        系统默认会开启3个标准文件，分别是：
+        标准输入(stdin)，标准输出(stdout)，标准错误(stderr)
+        键盘             屏幕              屏幕
+    系统开启这3个标准文件时，是以文件代码做连接。
+        标准输入的文件代码为0
+        标准输出的文件代码为1
+        标准错误的文件代码为2
+        称这3个文件为标准I/O(Input和Output)
+
+note26: 标准输入/输出转向
+    把标准输入/输出重新指定到别的文件，称为"转向"
+    转向输出：echo zxwtry@zxwtry > a.txt
+    转向附加：echo zxwtry@zxwtry >> a.txt
+    转向输入：使用统计行数的形式来作demo
+        输入wc -l回车
+        接着输入line1
+                line2
+                line3
+        再按Ctrl+D结束输入
+            wc -l会马上计算行数
+        wc -l < input.txt会直接输出input.txt的行数
+
+note27: 转向输入转向输出的合用
+    用法：命令或Script < 输入文件 > 输出文件
+    用例：sort < unsort.txt < sorted.txt
+    利用转向输出做建立编辑
+        cat > out.sh
+        #!/bin/bash
+        echo "你好世界"
+        按ctrl+D退出编辑，即有一个out.sh文件
+
+note28: 管道
