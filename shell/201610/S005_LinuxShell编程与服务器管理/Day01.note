@@ -200,6 +200,78 @@ note17: 文件权限
         drwx------ 8 www-data www-data 4096 2016-10-16 22:23 /var/www
         这表示，只有执行身份同于www-data的账号，才能进入/var/www这个目录
 
+note18: 设定权限
+    chmod 755 hello.sh 
+    chmod +x hello.sh 等同于给3种身份加上可执行权限等同于 chmod a+x hello.sh
+    如果只是给文件拥有者自己加上执行权限，应执行
+        chmod u+x hello.sh
+    只是给组身份加上执行权限，应执行
+        chmod g+x hello.sh
+    只是给其他人身份加上执行权限，应执行
+        chmod o+x hello.sh
+    如果将+x更改成-x，则是去掉执行权限的意思。
+    比如，去掉"其他人身份"执行权限
+        chmod o-x hello.sh
 
-        
+note19: 通配符
+    两个常用通配符：*和?，其中*代表任意的字符串，可以是空字符串
+                              ?代表一个字符，但不可以为空
+
+note20: 转义字符
+    在/root下执行 echo 9 * 9 = 81   的结果是 9 github install temp 9 = 81
+    在/root下执行 echo 9 '*' 9 = 81 的结果是 9 * 9 = 81
+    在/root下执行 echo '9 * 9 = 81' 的结果是 9 * 9 = 81
+    在/root下执行 echo 9 \* 9 = 81  的结果是 9 * 9 = 81
     
+    执行 echo this is zxwtry's book     的结果是 bash认为输入没有完成 >
+    执行 echo this is zxwtry\'s book    的结果是 this is zxwtry's book 
+    执行 echo this is zxwtry'\''s book  的结果是 bash认为输入没有完成 > 
+    执行 echo this is zxwtry'\'s book   的结果是 this is zxwtry\s book 
+    执行 echo this is zxwtry's book'    的结果是 this is zxwtrys book
+    执行 echo "this is zxwtry's book"   的结果是 this is zxwtry's book
+    执行 echo 'this is zxwtry"s book'   的结果是 this is zxwtry"s book
+
+note21: 常见的转义字符：
+    ' --- \'    " --- \"    * --- \*    ? --- \?    \ --- \\
+    ~ --- \~    ` --- \`    ! --- \!    # --- \#    $ --- \$
+    & --- \&    ( --- \(    ) --- \)    | --- \|    [ --- \[
+    ] --- \]    { --- \{    } --- \}    ; --- \;    < --- \<
+    > --- \>    / --- \/
+
+note22: 续行符号：\  将上下输入的两行，视为一行
+    echo "line 1 \
+          line 1 too"
+        输出的结果是：line 1 line 1 too
+    经常使用的情形如下：
+    ./configure \
+        --with-apache=../apache_$ApacheVersion \
+        --with-mysql=$MYSQLHOME &&
+
+note23: 字符集合
+    [] : 所在范围内的某一个字符，其长度为1
+        [abc], [a-z], [A-Z], [a-zA-Z]
+    由于-已经用于表示集合范围，如果需要在集合中添加-
+        那么必须将-放置在集合的开头或者结尾
+        [a-z_-]:代表小写字母、下划线、以及-字符
+    !放置在集合前面表示非的意思
+        [!abc]:只要不是a不是b不是c就行
+        [!a-z]:只要不是小写字母就行
+        [\!abc]:只要是a b c或者!就行
+        [abc!]:只要是a b c或者!就行
+    注意[abc.*]:指的是a b c . *中的其中一个
+
+note24: 括号扩展{}
+    {g,gc,s}ftp表示的是gftp, gcftp, sftp
+    aabb{,.bak}表示的是aabb或者aabb.bak
+    mkdir -p /root/temp/{dir1,dir2,dir3}/{a,b,c}:
+        在dir1,dir2,dir3目录下，都建立a,b,c3个子目录
+    echo {1,2,3}\*{1,2,3}   输出的是：
+        1*1 1*2 1*3 2*1 2*2 2*3 3*1 3*2 3*3
+    echo {1,2,3}*{1,2,3}    输出的是：
+        1*1 1*2 1*3 2*1 2*2 2*3 3*1 3*2 3*3
+    echo {1,2,3} * {1,2,3}  输出的是：
+        1 2 3 github install temp 1 2 3
+    echo {1,2,3}* {1,2,3}   输出的是：
+        1* 2* 3* 1 2 3
+    
+note25: 
