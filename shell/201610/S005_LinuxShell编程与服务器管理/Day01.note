@@ -688,3 +688,23 @@ note51: printf的有意思用法：
 			/home/zxwtry/bash_env.sh
 			zxwtry@zxwtry:~$ printf "%s\n" "$BASH_ENV"
 			/home/zxwtry/bash_env.sh 
+    printf -v myvar "ABC 123" 执行如下：
+			zxwtry@zxwtry:~$ printf -v myvar "ABC 123"
+			zxwtry@zxwtry:~$ echo $myvar
+			ABC 123
+    printf "%b" "ABC\n1\t23" 这里%b是使字符串中的转义字符生效
+			zxwtry@zxwtry:~$ printf "%b" "ABC\n1\t23\n"
+			ABC
+			1   23
+    几个没有见过的转义字符：
+        \v  垂直TAB
+        \b  退一位
+        \f  跳页
+        \0  后接8进制数字，显示对应ASCII字符
+            zxwtry@zxwtry:~$ printf "%b\n" "C:\0134Program Files"
+            C:\Program Files
+            (\0134即十进制92，即\这个字符)
+    可以和管道一起使用
+            zxwtry@zxwtry:~$ printf "%s\n" "ABCDEF" | tr '[A-Z]' '[a-z]'
+            abcdef
+
