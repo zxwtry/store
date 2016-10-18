@@ -581,5 +581,32 @@ note46: Bash Shell的启动配置文件---总结
     * 执行Script(使用#!/bin/sh)
         不调用任何启动文件，没有其他检查环境变量的操作
 
+note47: Bash Shell Script包含的指令有"内置的"和"命令行程序"两种
+    内置的：Bash程序本身就有提供这个功能
+    命令行程序：Bash外部的车管内需，独立存在于文件系统中的执行文件
+                有时称为"工具"程序，简称外部程序
+    判断某一个指令是不是内置命令，可以用"type命令"看出来，例如：
+        type echo 执行结果是：
+            echo is a shell builtin
+            (表明，echo是一个内置命令，bulitin---内含)
+        type mkdir 执行结果是：
+            mkdir is /bin/mkdir
+            (表明，mkdir是一个命令行程序，文件路径在/bin/mkdir)
+
+note48: 内置命令
+    Bash Shell的内置命令，由于不需要去搜寻路径($PATH)中查找，
+        直接就能执行，因此，速度很快。
+    常见的内置命令有：
+        alias   bg      bind    break   bulitin case    cd
+        command compgen complete        continue        decalare
+        dirs    disown  echo    enable  eval    exec    exit
+        export  fc      fq      for     getopts bash    help
+        history if      jobs    kill    let     local   logout
+        popd    printf  pushd   pwd     read    readonly
+        return  set     shift   shopt   source  suspend test
+        time    trap    type    typeset ulimit  umask   unalias
+        unset   until   wait    while
+
+
 note46: 
     
