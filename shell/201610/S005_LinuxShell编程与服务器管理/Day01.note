@@ -520,4 +520,37 @@ note41: Bash Shell的启动配置文件---登录(login)，注销(logout)
          (优先级：.bash_profile > .bash_login > .profile)
     注销时候，
     bash检查主目录中是否有.bash_logout。如果有，执行它。
+
+note42: Bash Shell的启动配置文件---执行新Shell
+    执行新Shell(非login Shell)，可分成两种情况：
+    * 执行交互式的Shell：例如，直接执行bash，产生一个子Shell。
+    　此时，bash会读取并执行/etc/bash.bashrc，以及主目录中的.bashrc
+    * 执行Shell Script(即非交互式的Shell)：例如，执行Script文件test.sh，
+    　它会检查BASH_ENV变量的内容，若该变量有定义，则综合性该变量所定义
+      的启动活动文件的内容。
+    假定BASH_ENV的内容执行bash_env.sh，如下所示：
+    　export BASH_ENV="/home/zxwtry/bash_env.sh"
+    bash_env.sh文件内容如下：
+        #!/bin/bash
+        echo "Hi! BASH_ENV is running."
+    tesh.sh文件内容如下：
+        #!/bin/bash
+        echo "running test.sh"
+    运行过程如下：
+        export BASH_ENV="/home/zxwtry/bash_env.sh"
+		./test.sh 
+		Hi! BASH_ENV is running.
+		running test.sh
+    
+note43: Bash Shell的启动配置文件---以sh文件名调用bash
+    若以sh文件名调用bash，则仿照旧版的sh执行
+    (会尽量兼容于POSIX的标准功能)
+    (bash特有的功能将会丧失)
+    * login Shell调用/bin/sh：账号登录时使用/bin/sh
+      (在/etc/passwd中该账号行的第7字段是/bin/sh)
+      (bash会读取并执行/etc/profile和主目录的.profile)
+    * 执行交互式Shell：例如，执行/bin/sh，产生一个子Shell
+      (bash会检查ENV变量的内容，如果有定义，执行对应文件)
+    * 执行Shell Script：若Shell Script第一行#!之后，
+      调用的Shell程序是/bin/sh，则bash不会执行任何启动配置文件。
     
