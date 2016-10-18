@@ -777,4 +777,21 @@ note52: 有意思的内置命令：
                                             (表明show_name是一个Shell函数)
             type tr: tr is /usr/bin/tr，表明tr是一个独立的执行文件
                                             (文件在/usr/bin/tr)
-    
+   set  设定Bash Shell的属性
+        (不加属性，显示所有的Shell变量和函数的内容) 
+        set -o : 列出所有属性的开关状态
+        开启某一个Bash Shell的属性：
+            set -o emacs
+        关闭某一个Bash Shell的属性：
+            set +o emacs
+            执行如下：
+				root@zxwtry:document# set -o | grep emacs
+				emacs           on
+				root@zxwtry:document# set +o emacs
+				root@zxwtry:document# set -o | grep emacs
+				emacs           off
+				root@zxwtry:document# set -o emacs
+				root@zxwtry:document# set -o | grep emacs
+				emacs           on
+	    保护已经存在的文件，避免转向输出时，被覆盖掉文件的内容
+            			
