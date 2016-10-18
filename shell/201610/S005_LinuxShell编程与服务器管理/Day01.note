@@ -793,5 +793,29 @@ note52: 有意思的内置命令：
 				root@zxwtry:document# set -o emacs
 				root@zxwtry:document# set -o | grep emacs
 				emacs           on
-	    保护已经存在的文件，避免转向输出时，被覆盖掉文件的内容
             			
+    set -C 或者 set -o noclobber
+	    保护已经存在的文件，避免转向输出时，被覆盖掉文件的内容
+        执行如下：
+            zxwtry@zxw:temp$ set -C
+            zxwtry@zxw:temp$ vim a.txt
+            zxwtry@zxw:temp$ echo "aa" > a.txt 
+            -bash: a.txt: cannot overwrite existing file
+        
+    set -u
+        如果变量i不存在，则显示错误信息
+        执行如下：
+	        zxwtry@zxw:temp$ export zxw="zxwtry"
+			zxwtry@zxw:temp$ echo $zxwtry
+			
+			zxwtry@zxw:temp$ set -u
+			zxwtry@zxw:temp$ echo $zxwtry
+			-bash: zxwtry: unbound variable
+			zxwtry@zxw:temp$ echo $zxw
+			zxwtry
+
+    set -v
+        会让Bash在执行Script时，将其所读入的每一进程代码显示出来。
+        (通常用于排错)
+
+    
