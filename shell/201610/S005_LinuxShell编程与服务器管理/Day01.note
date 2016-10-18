@@ -490,3 +490,34 @@ note38: 子Shell再开启子Shell
 		  2756 pts/6    S      0:00              \_ bash
 		  2766 pts/6    R+     0:00                  \_ ps axf
 				
+note39: POSIX
+    POSIX: Portable Operating System Interface
+    POSIX: 可移植操作系统接口
+    POSIX: 期望获得源代码级别的软件可移植性。
+           (为一个POSIX兼容的操作系统编写的程序，应该可以
+            在任何其它的POSIX操作系统上编译执行)
+
+note40: Bash Shell的启动配置文件
+    Bash有5种运行模式：
+        1,  互动模式
+            (Bash的输入、输出都和终端连接)
+            (Bash由键盘读取用户输入的指令来执行)
+            (须等一个指令执行完了之后，才能执行下一条指令)
+            (命令行互动)
+        2,  非互动模式
+            (执行一个Scrpt程序)
+        3,  以sh名称调用
+        4,  POSIX模式
+        5,  限制功能模式
+    在不同的运行模式中，Bash调用不同的启动配置文件。
+    Bash的启动配置文件，主要与Shell的环境设定有关。
+
+note41: Bash Shell的启动配置文件---登录(login)，注销(logout)
+    登录时候，
+    首先，login Shell先执行 /etc/profile
+    接着，检查用户的主目录中，是否有 .bash_profile
+          .bash_login  .profile三个文件之一
+         (优先级：.bash_profile > .bash_login > .profile)
+    注销时候，
+    bash检查主目录中是否有.bash_logout。如果有，执行它。
+    
