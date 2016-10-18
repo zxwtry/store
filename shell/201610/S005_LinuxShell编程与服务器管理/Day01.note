@@ -754,4 +754,27 @@ note52: 有意思的内置命令：
         (有了umask机制，新建文件和目录，会相对安全一点)
         (称umask为文件的安全滤网)
 
-note53: 
+    history 显示过去曾经执行过的Shell指令
+    先看执行过程：
+			root@zxwtry:document# echo $HISTFILE
+			/root/.bash_history
+			root@zxwtry:document# echo $HISTFILESIZE
+			2000
+			root@zxwtry:document# echo $HISTSIZE
+			1000 
+        上面：HISTFILE      是保存执行过的指令
+              HISTFILESIZE  历史指令的最大长度
+              HISTSIZE      互动的Shell中，可记住的历史指令数目
+                            (一旦Shell结束，会存入HISTFILE)
+
+    fc   列出主机登录之后、最近执行过的指令
+    type 判断bash对某一指令如何编译
+         type可能会显示一下几种情况：
+            type fg: fg is a Shell builtin，表明fg是一个内置命令
+            type if: if is a Shell keyword，表明if是bash保留的关键字
+            type ll: ll is aliased to `ls -alF'
+            type show_name: show_name is a function
+                                            (表明show_name是一个Shell函数)
+            type tr: tr is /usr/bin/tr，表明tr是一个独立的执行文件
+                                            (文件在/usr/bin/tr)
+    
