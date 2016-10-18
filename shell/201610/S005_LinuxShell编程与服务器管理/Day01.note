@@ -653,5 +653,38 @@ note50: printf的用法
 		zxwtry@zxwtry:~$ printf "%X\n" -1993
 		FFFFFFFFFFFFF837
 	%%  显示%这个符号	
-		
-		    
+
+note51: printf的有意思用法：
+    printf "%5s\n" 执行如下：
+		zxwtry@zxwtry:~$ printf "%5s\n" YES
+		  YES
+		zxwtry@zxwtry:~$ printf "%5s\n" YESYES
+		YESYES
+		zxwtry@zxwtry:~$ printf "%5s\n" YESYESYES
+		YESYESYES 
+		zxwtry@zxwtry:~$ printf "%-5s\n" YESYESYES
+		YESYESYES
+		zxwtry@zxwtry:~$ printf "%-5s\n" YESYES
+		YESYES
+		zxwtry@zxwtry:~$ printf "%-5s\n" YES
+		YES  
+	    (上面这个YES后面有两个空格)	
+    printf "%5.1f\n" 30 
+        (5表示包括小数点总共几位)
+        (1表示小数占几位)
+        执行结果：
+			zxwtry@zxwtry:~$ printf "%5.1f\n" 99
+			 99.0
+			zxwtry@zxwtry:~$ printf "%5.1f\n" 99.99
+			100.0
+			zxwtry@zxwtry:~$ printf "%5.1f\n" 9.99
+			 10.0
+			zxwtry@zxwtry:~$ printf "%5.1f\n" 9.9
+			  9.9
+    printf "%s\n" $STR 执行如下：
+			zxwtry@zxwtry:~$ echo $BASH_ENV
+			/home/zxwtry/bash_env.sh
+			zxwtry@zxwtry:~$ printf "%s\n" $BASH_ENV
+			/home/zxwtry/bash_env.sh
+			zxwtry@zxwtry:~$ printf "%s\n" "$BASH_ENV"
+			/home/zxwtry/bash_env.sh 
