@@ -553,4 +553,33 @@ note43: Bash Shell的启动配置文件---以sh文件名调用bash
       (bash会检查ENV变量的内容，如果有定义，执行对应文件)
     * 执行Shell Script：若Shell Script第一行#!之后，
       调用的Shell程序是/bin/sh，则bash不会执行任何启动配置文件。
+
+note44: Bash Shell的启动配置文件---以BASH--POSIX的方式执行
+    此称为POSIX模式，bash使用与POSIX标准兼容的功能。
+    (bash会检查ENV变量的那日容，如果有定义，执行对应文件)
+
+note45: Bash Shell的启动配置文件---以Bash -r或者以rbash的名称调用
+    rbash其实只是一个指向bash的soft link。
+    执行Bash -r或者rbash，称为受限模式。
+    (bash的功能受到许多限制，不能使用cd指令，不能设定或取消环境变量等等)
+    (只让登录者拥有少数可用的功能，是一种安全性的考虑)
+    (bash会读取、执行主目录里的.bashrc配置文件)
+    (尽量少用，不要仅以bash -r作为建立安全Shell环境的唯一凭据)
+
+note46: Bash Shell的启动配置文件---总结
+    * 登录
+        bash先执行/etc/profile，再调用~/.bash_profile
+    * 注销
+        bash调用~/.bash_logout
+    * 执行新Shell
+        在图形接口，执行终端程序或手动执行/bin/bash ||
+        在编辑程序中调用Shell(如Emacs的Shell mode)
+        会先调/etc/bash.bashrc，再调用~/.bashrc
+    * 执行Script(使用#!/bin/bash)
+        不调用.bash_profile、.bashrc，但会检查BASH_ENV的内容，
+        如果非空，则执行它指定的文件。
+    * 执行Script(使用#!/bin/sh)
+        不调用任何启动文件，没有其他检查环境变量的操作
+
+note46: 
     
