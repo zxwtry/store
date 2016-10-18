@@ -708,3 +708,50 @@ note51: printf的有意思用法：
             zxwtry@zxwtry:~$ printf "%s\n" "ABCDEF" | tr '[A-Z]' '[a-z]'
             abcdef
 
+note52: 有意思的内置命令：
+    :(冒号)
+        什么都不做，传回真值(即传回0)
+        : > test.txt
+        这里会建立一个空文件test.txt
+    .(半角句号)
+        在现行的Shell环境中执行Shell程序
+        . myfun.sh
+        (.和后续的Shell程序之间，至少要用一个空格)
+    Source
+        在现行的Shell环境中执行Shell程序
+        source myfun.sh
+    alias
+        显示、设定程序别名(alias)
+        执行如下：
+                zxwtry@zxwtry:~$ alias
+				alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+				alias egrep='egrep --color=auto'
+				alias fgrep='fgrep --color=auto'
+				alias grep='grep --color=auto'
+				alias l='ls -CF'
+				alias la='ls -A'
+				alias ll='ls -alF'
+				alias ls='ls --color=auto'
+				zxwtry@zxwtry:~$ alias zxw="study"
+				zxwtry@zxwtry:~$ alias
+				alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+				alias egrep='egrep --color=auto'
+				alias fgrep='fgrep --color=auto'
+				alias grep='grep --color=auto'
+				alias l='ls -CF'
+				alias la='ls -A'
+				alias ll='ls -alF'
+				alias ls='ls --color=auto'
+				alias zxw='study'
+    unalias 取消程序别名
+    unmask  显示或设定：文件、目录建立时，文件权限的屏蔽值
+        umask   执行会显示0022
+        通常Linux/BSD等系统建立新文件时，默认的权限值是0666;
+                               新目录时，默认的权限值是0777;
+        使用umask 022
+        表示新文件建立时，权限是0666-0022=0644
+            新目录建立时，权限是0777-0022=0755
+        (有了umask机制，新建文件和目录，会相对安全一点)
+        (称umask为文件的安全滤网)
+
+note53: 
