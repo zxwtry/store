@@ -608,5 +608,50 @@ note48: 内置命令
         unset   until   wait    while
 
 
-note46: 
-    
+note49: 有意思的命令
+    echo -n 不想让它自动换行
+        执行结果：
+            zxwtry@zxwtry:~$ echo -n "aabb"
+            aabbzxwtry@zxwtry:~$
+    echo -e 可以让字符串中的特殊字符起作用
+        执行结果：
+            zxwtry@zxwtry:~$ echo -e "aa\nbb"
+			aa
+			bb
+			zxwtry@zxwtry:~$
+
+note50: printf的用法
+    %q  将特殊字符用\转义
+        执行结果：
+        zxwtry@zxwtry:~$ printf "%q" []{}/
+        \[\]\{\}/zxwtry@zxwtry:~$
+    %e  科学记数法
+        执行结果：
+        zxwtry@zxwtry:~$ printf "%e\n" 10000
+        1.000000e+04
+    %g  由Bash选择使用%f或者%e
+        执行结果：
+        zxwtry@zxwtry:~$ printf "%g\n" 10000
+		10000
+		zxwtry@zxwtry:~$ printf "%g\n" 10000.00
+		10000
+		zxwtry@zxwtry:~$ printf "%g\n" 10000.12
+		10000.1
+		zxwtry@zxwtry:~$ printf "%g\n" 10000.1233
+		10000.1
+    %i  等同于%d
+    %o  显示八进制数
+    %x  显示十六进制数，a-f表示
+    %X  显示十六进制数，A-F表示
+        执行结果：
+		zxwtry@zxwtry:~$ printf "%x\n" 1993
+		7c9
+		zxwtry@zxwtry:~$ printf "%x\n" -1993
+		fffffffffffff837
+		zxwtry@zxwtry:~$ printf "%X\n" 1993
+		7C9
+		zxwtry@zxwtry:~$ printf "%X\n" -1993
+		FFFFFFFFFFFFF837
+	%%  显示%这个符号	
+		
+		    
