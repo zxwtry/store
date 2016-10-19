@@ -818,4 +818,27 @@ note52: 有意思的内置命令：
         会让Bash在执行Script时，将其所读入的每一进程代码显示出来。
         (通常用于排错)
 
-    
+note53: shopt设定shopt的行为模式
+    shopt 或 shopt -p   显示目前各选项的开关状态
+    shopt -s 选项       启用选项
+    shopt -u 选项       关闭选项
+    shopt -o 选项       使用和set -o相同的选项来设置
+    shopt -q 选项       不显示开关状态，以回传状态来判断选项是开或关
+                        (0：启用    非0：关闭)
+    shopt -s checkwinsize
+            打开checkwinsize选项，使bash在每一个指令执行后，检查窗口大小，
+            必要时更新行和列
+    shopt -s exglob progcomp
+            打开extglob选项，比较样式时，可使用比较能力较佳的语法。
+            打开progcomp选项，启用可程序化的补齐功能。
+
+note54: time    用法：time Script或指令
+    在Script或指令执行结束后，显示real、user、cpu 3种耗用时间的统计
+    time ps auxw的时间统计，运行结果如下：
+        real    0m0.077s
+        user    0m0.020s
+        sys     0m0.020s
+        这里时间的格式是：分秒.千分之一秒
+        时间格式可由bash的内置变量TIMEFORMAT来设定。
+
+
