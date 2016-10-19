@@ -937,6 +937,23 @@ note58: 命令行程序：单独存在的文件，执行前，Shell会先在程�
         dirname tr          uniq    mail    which   locate
     
 note59: 常用命令行程序的用法：which
-    
+   (由搜寻路径(PATH)中，找出某一命令行程序的文件位置) 
+    which 命令
+        which会由PATH的内容中，找出第一个符合的程序路径
+    which -a 命令
+        which会由PATH的内容中，找出所有符合的程序路径
 note59: 常用命令行程序的用法：locate
+    (由文件名数据库中，找出包含有关键词的文件路径)
+    locate lsof
+    运行如下：
+		root@zxwtry:temp# locate lsof
+		/usr/bin/lsof
+		/usr/share/bash-completion/completions/lsof
+		/usr/share/doc/lsof
+		/usr/share/doc/lsof/00FAQ.gz
+		/usr/share/man/man8/lsof.8.gz
+		/var/lib/dpkg/info/lsof.list
+		/var/lib/dpkg/info/lsof.md5sums
 note59: 常用命令行程序的用法：date
+    (显示、设定系统的日期和时间)
+    
