@@ -841,4 +841,38 @@ note54: time    用法：time Script或指令
         这里时间的格式是：分秒.千分之一秒
         时间格式可由bash的内置变量TIMEFORMAT来设定。
 
-
+note55: read    由标准输入读取一行数据
+    用变量保存，对应文件：
+        #!/bin/bash
+        echo "请输入你的名字"
+        read name
+        echo "你的名字是：" $name
+    用变量保存，运行过程：
+        ./code005_read.sh 
+        请输入你的名字
+        zxwtry
+        你的名字是： zxwtry
+    用默认的变量名，对应文件：
+        #!/bin/bash
+		echo "请输入你的名字"
+		read name
+		echo "你的名字是：" $name
+		echo "请输入你的爱好"
+		read
+		echo "你的爱好是：" $REPLY
+    用默认的变量名，对应文件：
+		./code005_read.sh 
+		请输入你的名字
+		zxwtry
+		你的名字是： zxwtry
+		请输入你的爱好
+		吃
+		你的爱好是： 吃
+	read -p的用法：
+        read -p "请输入你的名字"	        
+        echo "你的名字是："$REPLY
+    read -p经常如下：
+        read -p "请按ENTER键继续..."
+    
+		    
+		
