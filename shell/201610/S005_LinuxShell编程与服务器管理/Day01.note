@@ -925,3 +925,18 @@ note57: eval    读取参数，结合成一个新指令，在进行变量替换�
     eval "$HIS < $USER.log"
     (执行时，不同的使用者会产生不同的日志文件，并以用户的账户$USER当作日志文件的主文件名)
 
+note58: 命令行程序：单独存在的文件，执行前，Shell会先在程序的搜寻路径$PATH中去寻找
+    常见的命令行程序有：
+        cp      data        who     w       ls      cat     wc
+        last    mv          mkdir   rmdir   mv      ps      top
+        df      du          dd      ln      sort    sed     awk
+        ifconfig            dmesg   diff    hostname        dnsdomainname
+        chmod               chown   chgrp   cut     grep    find
+        kill    more        less    mount   nice    ping    sleep
+        su      tar         gzip    xargs   touch   uname   basename
+        dirname tr          uniq    mail    which   locate
+    
+note59: 常用命令行程序的用法：which
+    
+note59: 常用命令行程序的用法：locate
+note59: 常用命令行程序的用法：date
