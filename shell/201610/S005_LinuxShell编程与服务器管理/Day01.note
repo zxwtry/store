@@ -873,6 +873,39 @@ note55: read    由标准输入读取一行数据
         echo "你的名字是："$REPLY
     read -p经常如下：
         read -p "请按ENTER键继续..."
-    
-		    
-		
+    read 也可以一次读取一行数据放入数组中，用法如下：
+        read -a arr < <(echo 123 45 97 101 88) 
+        -a的意思是指定 arr为一个数组变量
+    从数组中取出数的方法是：
+        echo ${arr[2]}
+        运行过程如下：
+            root@zxwtry:~# read -a arr < <(echo 123 45 97 101 88)
+            root@zxwtry:~# echo ${arr[0]}
+            123
+            root@zxwtry:~# echo ${arr[1]}
+            45
+            (其中，<(echo 123 45 97 101 88)是一种进程替换的用法)
+    read也可以读取文件的资料行，用法如下：
+        read LINE < dataf1
+        这样会把dataf1的第一行放入变量LINE中。
+        如果数据行的各字段之间是用空格符隔开，可用如下方法分别读取各个字段的值。
+        read f1 f2 f3 f4 < dataf1
+        如果数据行的各字段之间是用：分隔，如/etc/passwd，可用如下方法，分别读取
+        各个字段的值：
+        IFS=':'
+        read f1 f2 f3 f4 f5 f6 f7 < /etc/passwd
+        IFS是字段分隔字符变量。
+    read在读取数据时，默认会去掉转义字符的意义(即滤掉\)，例如\n会剩下n
+        但若要允许输入数据保留\，可使用-r选项
+        read -r TEST
+        echo $TEST
+        运行过程如下：
+			root@zxwtry:temp# cat a
+			\r\n\t
+			root@zxwtry:temp# read -r TEST < a
+			root@zxwtry:temp# echo $TEST
+			\r\n\t
+			root@zxwtry:temp# read TEST < a
+			root@zxwtry:temp# echo $TEST
+			rnt
+
