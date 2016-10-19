@@ -909,3 +909,19 @@ note55: read    由标准输入读取一行数据
 			root@zxwtry:temp# echo $TEST
 			rnt
 
+note56: exec    执行指定的程序，取代原来的Shell；或使转向操作生效
+    exec 程序/命令
+        执行结果：执行"程序/命令"，取代目前的Shell。目前的Shell环境随机结束。
+    exec 转向操作
+        执行结果：使转向操作生效
+    exec < datafile
+        执行转向操作，凡是由标准输入读取数据的，皆改向datafile读取
+
+note57: eval    读取参数，结合成一个新指令，在进行变量替换后，予以执行。
+    listlog="ls -la /var/log/*.log"
+    eval $listlog
+    (eval $listlog是读取变量内容并执行它。这是一种间接执行指令的技巧)
+    HIS="history"
+    eval "$HIS < $USER.log"
+    (执行时，不同的使用者会产生不同的日志文件，并以用户的账户$USER当作日志文件的主文件名)
+
