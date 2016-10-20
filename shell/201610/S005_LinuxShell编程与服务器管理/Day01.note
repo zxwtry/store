@@ -1031,4 +1031,50 @@ note64: tail输出文件的后面一部分
     tail -100 /var/log/syslog
     tail -c n 文件：输出文件的后nbytes的内容。
 
+note65: wc计算文件内含的总字数或行数
+    wc -l dataf1
+        显示dataf1的文件内容共有几行
+    wc -c dataf1
+        显示dataf1共有多少字符
+    wc -w dataf1
+        显示dataf1共有多少个单词(word)
+    
+note66: ln链接文件(使同一个文件可以有多个文件名)
+    ln f1 f2
+        执行结果：将f2链接到f1(硬链接)，f2的文件内容、文件大小，都和f1一样
+    ln -s f1 f3
+        执行结果：将f3链接到f1(软链接)，f3是f1的别名，读取f3时，实际访问f1
+    ln -sf f1 f3
+        执行结果：同上，如果f3存在，则先删除f3，在ln -s f1 f3
+
+note67: rmdir 删除空目录
+    
+note68: find  在分层目录中寻找文件
+    find 路径 样式 操作
+    用例1:  find / -name '*.txt'
+        说明：  由根目录开始往下寻找所有扩展名是.txt的文件，找到之后，
+                全部列出这些文件的路径文件名(default操作)
+            find / -name '*.txt' -print
+                就是把找到的文件显示出来
+            find / -name '*.txt' -print > findtxt.log &
+    用例2:  find . -name '*.txt' -exec rm -f {} \;
+        说明：  由现在的目录(.)开始往下寻找扩展名是.txt的文件，找到之后，
+                执行(-exec)删除文件的命令。
+                其中，-f代表强制删除，{}代表找到的文件，
+                ;是执行指令(exec)的终止符号，由于是Bash Shell的特殊符号，需转义
+                这个指令会将当前目录下的，所有.txt文件都删除
+    用例3:  find /etc -cnewer /etc/passwd
+        说明：  由/etc目录，寻找文件状态异动时间比/etc/passwd新的文件
+    用例4:  find /root -type d -print
+        说明：  使用find的选项-type d，指定要由/root目录中寻找文件形态是"目录"的文件
+        b : 区块设备文件
+        c : 字符设备文件
+        d : 目录
+        p : 具名管道
+        f : 一般文件
+        l : 符号链接文件
+        s : socket文件
+        (和ll看到的有不同)
+    用例5:  find . -print
+        在现行目录下，找到什么就印出什么。
         
