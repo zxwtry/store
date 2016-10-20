@@ -1077,4 +1077,48 @@ note68: find  在分层目录中寻找文件
         (和ll看到的有不同)
     用例5:  find . -print
         在现行目录下，找到什么就印出什么。
-        
+
+note69: tar 用途：将文件或目录包成一个文件(也可以反向解开)，并保留目录结构和文件的权限属性。
+    用法1：打包
+        tar cvzf etc.tgz /etc
+        c : 建立tar文件
+        v : 详细显示过程
+        z : 呼叫gzip压缩tar文件
+        f : 指定文件名
+        也可以写成 etc.tar.gz
+    用法2: 检查
+        tar tvzf etc.tgz
+        t : 列出打包内容
+    用法3: 解包
+        tar xvzf etc.tgz
+        x : 解包
+        z : 呼叫gzip解压
+    用法4:  指定解包位置
+        tar xvzf etc.tgz -C test2
+        -C : 宝石切换到某一目录。
+        (这道指令把etc.tgz放入test2目录中解包)
+    用法5:  另一种打包方法
+        tar cvf - test2 | gzip -9 > save.tgz
+        这个方法适用于不支持选项z的tar版本。
+        先用cvf把test2目录打包，-代表把打包结果往标准输出丢，
+        经由管道交给gzip进行压缩，最后转向存文件成save.tgz。
+        起皱功能，-9表示gzip采用最高的压缩比
+    用法6:  另一种解包方法
+        gzip -9dc save.tgz | tar xvf -
+        这个方法适用于不支持选项z的tar版本。
+        先用gzip -9dc把save.tgz解压，其中-d表解压之意，
+        -c则表示解压至标准输出，接着通过管道，交给tar解包
+        其中-表由标准输入读取数据
+    用法7:  备份目录A到目录B
+        #!/bin/bash
+		A="/root/temp/test1"
+		B="/root/temp/test2"
+		cd $A
+		tar cvf - . | tar xvf - -C $B
+		
+		#先切花难道test1
+		#tar cvf - . 打包test2的内容，其中-代表把打包结果往标准输出中丢
+		#接着通过管道，由tar xvf -解包，-C把解包内容放入test2目录。
+		#达成备份test1的目的
+		#必须保证有test1和test2
+
