@@ -1122,3 +1122,25 @@ note69: tar 用途：将文件或目录包成一个文件(也可以反向解开)
 		#达成备份test1的目的
 		#必须保证有test1和test2
 
+note70: basename 取得路径名称中最后的文件名部分
+    basename /usr/local/bin/sftp
+        显示sftp
+    利用如下脚本得到相同结果
+    #!/bin/bash
+    #仿真basename命令
+    bn=${1##*/}
+    echo $bn
+
+    执行过程：./bashname.sh /usr/local/bin/sftp
+
+note71: dirname 取得路径名称中目录部分
+    dirname /usr/local/bin/sftp
+        显示/usr/local/bin
+    利用如下脚本得到相同结果
+    #!/bin/bash
+    #仿真dirname命令
+    bn=${1%/*}
+    echo $bn
+
+    执行过程：./bashname.sh /usr/local/bin/sftp
+
