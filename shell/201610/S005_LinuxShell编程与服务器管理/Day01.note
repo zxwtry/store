@@ -990,5 +990,45 @@ note59: 常用命令行程序的用法：date
     date -R 执行的结果是：产生和RFC-2822兼容的时间字符串
         Thu, 20 Oct 2016 20:33:41 +0800
 
-        
+note60: who: 显示现在谁在登录主机
+        root@zxwtry:~# who
+		root     pts/0        2016-10-20 20:01 (192.168.220.1)
+		root     pts/1        2016-10-20 20:01 (192.168.220.1)
+		root     pts/3        2016-10-20 20:02 (192.168.220.1)
+		root     pts/4        2016-10-20 20:02 (192.168.220.1)        
+		
+note61: whoami: 显示自己的登录账号
 
+note62: 组合变量和文件内容
+        FROM='zxwtry@qq.com'
+        echo $FROM | cat - email.lst | sort
+        执行过程如下：
+            root@zxwtry:temp# cat email.lst 
+			zxwfighting@qq.com
+			zxweatting@qq.com
+			zxwsleeping@qq.com
+			root@zxwtry:temp# FROM="zxwtry@qq.com"
+			root@zxwtry:temp# echo $FROM | cat - email.lst | sort
+			zxweatting@qq.com
+			zxwfighting@qq.com
+			zxwsleeping@qq.com
+			zxwtry@qq.com
+        (-代表标准输入)
+
+note63: head输出文件的前面一部分
+    head -n 文件：输出文件的前n行，如果不指定-n，默认输出前10行。
+        使用：head -100 /var/log/syslog
+    head -c n 文件：输出文件的前nbytes的内容。
+        若使用的是-c -n，则表示出了前n bytes不输出，其他全部显示出来。
+    head -c 10 /var/log/syslog
+        输出syslog前10bytes
+    FSIZE=5000
+    head -c $FSIZE < /dev/zero > sysfile
+        利用/dev/zero建立一个文件sysfile，文件大小是5000bytes
+
+note64: tail输出文件的后面一部分
+    tail -n 文件：输出文件的后n行，如果不指定-n，默认输出后10行。
+    tail -100 /var/log/syslog
+    tail -c n 文件：输出文件的后nbytes的内容。
+
+        
