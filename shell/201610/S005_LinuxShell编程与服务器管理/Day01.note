@@ -1234,3 +1234,31 @@ note76: tr  转换或删除字符
         执行结果：将小写全换成大写字母
     tr -s '''' < dataf1
         执行结果：将多余的空白删除只剩一个(-s是压挤的意思)
+
+note77: grep    显示符合样式的行
+    grep A *
+        执行结果：将含有A这个字符的文件及行显示出来
+    grep -i A *
+        执行结果：将含有A字符或a字符的文件及行显示出来
+        (-i是不分大小写之意)
+    grep -v La data3
+        执行结果：将不含La的行显示出来
+        (-v是不包含的意思)
+    grep -l La *
+        执行结果：只显示哪些文件包含La，不显示出符合的行
+    grep -n La *
+        执行结果：同上，但也显示出行号
+    dmesg | grep eth0
+        执行结果：将包含eth0这个关键字的信息行显示出来
+    grep -q keyword filename
+        执行结果：若filename含有keyword则返回0(真)，否则返回非0
+        (说明，每一个命令或Script，在执行完毕之后，其结果会以一个整数
+         返回，称为离去状态。它的返回值，会放在$?这个变量中，只要echo $?
+         便可得知其执行结果成功与否，0为成功，非0为失败)
+    grep -A 200 -e 'MAIL FROM:.*jack@mail.tnc.edu.cn' /var/log/mail.log
+        执行结果；检查mail.log中，发件人是jack@mail.tnc.edu.cn的email是否正常传送
+        (说明：-c表示后面接的是欲比较的样式)
+        MAIL FROM:.*jack@mail.tnc.edu.tw这个样式比较发件人的来源email，-A 200
+        是说找到该样式后，再显示接下来的200行数据，这样才能仔细观察邮件传送是否正确。
+
+
