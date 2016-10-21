@@ -1261,4 +1261,37 @@ note77: grep    显示符合样式的行
         MAIL FROM:.*jack@mail.tnc.edu.tw这个样式比较发件人的来源email，-A 200
         是说找到该样式后，再显示接下来的200行数据，这样才能仔细观察邮件传送是否正确。
 
+note78: tee 读取标准输入，然后由标准输出显示，并且把这些数据存储在指定的文件。
+    tee 文件
+    用例：tee test.log
+        执行本指令，test.log若已经存在，则会被清空，若不存在，则会建立一个新文件。
+        欲结束输入，ctrl+d组合键。输入的数据存储在test.log
+    用例：tee -a 文件
+        同上，但选项-a指示tee，以文件附加的方式，把输入的数据接在test.log的文件尾，
+        并不会把test.log清空。。
+
+note79: diff    比较两个文件之前的差异
+    执行结果：
+        root@zxwtry:1021# cat > aa
+		你好世界
+		root@zxwtry:1021# cat > bb
+		你好全世界
+		root@zxwtry:1021# diff aa bb
+		1c1
+		< 你好世界
+		---
+		> 你好全世界
+    英文的执行结果：
+        root@zxwtry:1021# cat cc
+		abcde
+		root@zxwtry:1021# cat dd
+		abde
+		fghi
+		root@zxwtry:1021# diff cc dd
+		1c1,2
+		< abcde
+		---
+		> abde
+		> fghi
+
 
