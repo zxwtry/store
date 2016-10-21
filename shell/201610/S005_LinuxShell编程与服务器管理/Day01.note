@@ -1294,4 +1294,32 @@ note79: diff    比较两个文件之前的差异
 		> abde
 		> fghi
 
+node80: comm    以列和列的方式，比较两个已经排序好的文件
+        执行过程如下：
+            root@zxwtry:1021# cat > afile
+			1 2 3
+			6 5 4
+			9 8 7
+			a b c
+			root@zxwtry:1021# cat > bfile
+			2 4 5
+			6 5 4
+			8 0 9
+			x y z
+			root@zxwtry:1021# comm afile bfile 
+			1 2 3
+			    2 4 5
+			        6 5 4
+			    8 0 9
+			9 8 7
+			a b c
+			    x y z
+        (属于afile的行，会摆在第一栏)
+        (属于bfile的行，会摆在第二栏)
+        (两个文件共有的行，会摆在第三栏)
 
+note81: xargs   由标准输入，安排要执行的命令和参数
+    find . -name '*.txt' | xargs -n 2 diff
+    由现在工作目录，寻找扩展名是.txt的文件，然后给xargs处理
+    xargs的-n 2表示执行指令的参数至多有两个，也就是说；找到的.txt
+    文件，以两个一组的方式，丢给diff去比较差异
