@@ -1203,3 +1203,34 @@ note74: cut     对文件的每一行抽出某一部分
     cut -d: -f3,4 /etc/passwd
         执行结果：抽出/etc/passwd各行的第3及第4个字段
 
+note75: paste   对文件以行和行的方式合并
+    paste dataf1 dataf2
+        执行结果：dataf1的每一行和dataf2的每一行合并，默认以TAB分隔
+    paste -d'#' dataf1 dataf2
+        执行结果：dataf1的每一行和dataf2的每一行合并，并以#分隔
+    paste -s dataf2
+        执行结果：dataf4的每一行自己合并在一起(-s表示same file，同一个文件的意思)
+                  默认以TAB分隔
+
+note76: tr  转换或删除字符
+    tr kK < dataf1
+        执行结果：dataf1的k换成K字符
+        执行过程：
+            root@zxwtry:1021# cat dataf1
+			abkcd
+			root@zxwtry:1021# tr k K < dataf1
+			abKcd
+			root@zxwtry:1021# cat dataf1 
+			abkcd
+    tr ',''\n' < ttt
+        执行结果：把ttt文件中的逗号','换成换行符号
+    tr -d k
+        执行结果：k字符全删除
+    tr -d: -f1-6 /etc/passwd | tr:'+'
+        执行结果：把passwd的6个栏改成以+分隔
+    tr '[A-Z]''[a-z]' < dataf1
+        执行结果：将大写全换成小写字母
+    tr '[z-z]''[A-Z]' < dataf1
+        执行结果：将小写全换成大写字母
+    tr -s '''' < dataf1
+        执行结果：将多余的空白删除只剩一个(-s是压挤的意思)
