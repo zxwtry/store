@@ -1177,3 +1177,29 @@ note72: sort    对文件文件的每一行做排序
     sort <data4> sorted
         说明：sort由标准输入取得转向的数据(data4)，经过排序后，把结果转向存入sorted这个文件中。
 
+note73: uniq    对已排序好的文件删除重复行
+    uniq dataf3
+        注意事项：若重复行未连续摆在一起，则不会有任何作用
+    sort dataf3 | uniq
+        执行结果：删除dataf3文件中的重复行
+    sort dataf3 | uniq -d
+        执行结果：挑出重复行
+    sort dataf3 | uniq -c
+        执行结果：计算每一行重复的次数
+
+note74: cut     对文件的每一行抽出某一部分
+    cut -c2 dataf1
+        执行结果：抽出dataf1中每一行的第2个字符
+    cut -c3-10 dataf1
+        执行结果：抽出dataf1中每一行的第3到第10个字符
+    cut -c9- dataf1
+        执行结果：抽出dataf1中每一行第9个以后的字符
+    cut -c1-3,22- dataf1
+        执行结果：抽出dataf1中每一行的第1到第3个字符及第22个以后的字符。
+    cut -d: -f1 /etc/passwd
+        执行结果：抽出 /etc/passwd各行的第一个字段
+    说明：-d:指示cut改用:为分隔符，-f1是第一个字段之意
+    上述指令，可取出主机中所有的账号名称。
+    cut -d: -f3,4 /etc/passwd
+        执行结果：抽出/etc/passwd各行的第3及第4个字段
+
