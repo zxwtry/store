@@ -1144,3 +1144,36 @@ note71: dirname 取得路径名称中目录部分
 
     执行过程：./bashname.sh /usr/local/bin/sftp
 
+note72: sort    对文件文件的每一行做排序
+    sort dataf4
+        执行结果：将datef4作升幂排序(按ASCII的字符排列顺序，做大小比较)
+        root@zxwtry:1021# cat dataf4 
+		aaaa
+		oooo
+		zzzz
+		root@zxwtry:1021# sort dataf4 
+		aaaa
+		oooo
+		zzzz
+    sort -r datef4
+        执行结果：将datef4作降序排序(按ASCII的字符排列顺序，做大小比较)
+        root@zxwtry:1021# sort -r dataf4 
+		zzzz
+		oooo
+		aaaa
+    sort -n dataf4
+        执行结果：将datef4作升幂排序(按字符串的数值大小为比较的标准)
+    sort -k 2 dataf4
+        执行结果：以dataf5中的第2个字段做排序的依据(以字符串的方式比较)
+    如果使用-n选项，则可以使用数值大小来比较：
+        sort -nk 2 dataf4
+        这里n必须写在选项k之前
+    sort -n +2 dataf4
+        执行结果：跳过前两烂，以dataf3中的第三栏做排序，且以字符串的数值大小
+                  为比较的标准
+    sort -nr +2 -t: /etc/passwd
+        说明：-t:是说改用:为分隔符，+2是说跳过前两栏，以/etc/passwd中的第三栏
+              做降序排序，且-n指示sort以字符串的数值大小为比较的标准，-r是降序排列
+    sort <data4> sorted
+        说明：sort由标准输入取得转向的数据(data4)，经过排序后，把结果转向存入sorted这个文件中。
+
