@@ -1350,4 +1350,55 @@ note82: 执行多个命令的方法：
         注意：  在{的右边和}的左边，至少要间隔一个以上的空格符。
                 而且每个命令都要以;这个符号结尾
 
-         
+note83: 纪录命令的执行过程
+    需要把执行命令所产生的信息纪录起来，以作为出错参考，数据保存或者提交作业之用
+    Script这个工具程序(/usr/bin/script)，即可完成
+    用法 script [日志文件]
+        如果不提供日志文件，默认存储在当前目录的typescript文件。
+        script会纪录下所有的输出信息。
+        如果要结束操作，执行exit，便可离开script
+    用例如下：
+			root@zxwtry:1025# script log.txt
+			Script started, file is log.txt
+			root@zxwtry:1025# echo "I am zxwtry"
+			I am zxwtry
+			root@zxwtry:1025# cat > zxwtry.txt
+			AAA
+			BBB
+			root@zxwtry:1025# exitScript done, file is log.txt
+			root@zxwtry:1025# cat log.txt 
+			Script started on Tue 25 Oct 2016 09:03:25 PM CST
+			root@zxwtry:1025# echo "I am zxwtry"
+			I am zxwtry
+			root@zxwtry:1025# cat > zxwtry.txt
+			AAA
+			BBB
+			root@zxwtry:1025# exit
+			Script done on Tue 25 Oct 2016 09:04:15 PM CST 
+
+note84: 在Bash中，只要没有Enter，前面输入错啥东西都没关系，改过来就行。
+    (这是因为Bash使用GNU的Readline函数库)
+    Readline支持Emacs和vi两种模式，推荐使用Emacs模式。
+    1,  检查编辑模式
+        set -o | grep emacs
+        (出现emacs on表示该模式已经开启)
+        (出现emacs off表示该模式已经关闭)
+    2,  开启Emacs模式
+        set -o emacs
+    3,  按键符号说明
+        C-k: 读作Control-K，按键的方式是：先按住Ctrl键不放，然后再按k键
+        M-k: 读作Meta-K，按键的方法是：先按住Esc键，放开之后，再按k键
+    4,  命令行编辑
+        移动光标：
+            C-a:    移动到行首
+            C-e:    移动到行尾
+            C-b:    往回(左)移动一个字符(character)
+            C-f:    往前(右)移动一个字符
+            M-b:    往回(左)移动一个单词(word)
+            M-f:    往前(右)移动一个单词(word)
+            Home键: 移动到行首
+            End键:  移动到行尾
+        (这里的单词，是指由英文字母和数字组成的字符串。例如；在ps auxw | more)
+        (中，共有3个单词，ps auxw和more。因此，如果一开始光标在行尾，则)
+        (3次M-b就可以把光标移动到行首)
+
