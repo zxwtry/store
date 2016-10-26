@@ -1593,3 +1593,40 @@ note93: 变量和引导
     单引号的作用是形成一个所见即所得的字符串。
         不会进行替换变量。
 
+note94: 变量的有效范围
+    变量一旦设定之后，只有在该shell的环境中有效。
+    子Shell中的变量，父Shell中无法获得。
+    父Shell中的变量，子Shell中无法获得。
+    (如何让Script执行的时候的变量保存下来呢？)
+    (使用. test.sh或者source test.sh)
+
+note95: 环境变量
+    变量要如何处理，子Shell中才能获得呢？
+    当子Shell产生时，它会继承父Shell的环境变量等条件。
+    因此，只要使变量称为环境变量，就能为子Shell使用。
+        testVAR="hello world"
+        export testVAR
+        或者写成一行
+        export testVAR="hello world"
+    这样，执行Script在子Shell中就能够使用testVAR这个变量。
+    export的使用方法：
+        1,  export是bash的内置命令
+            用途是把某个变量输出，变成环境变量。
+            后续的各种操作(包括子Shell)皆可以使用该变量的内容。
+        2,  export用法：
+            执行export或者export -p会列出目前所有的环境变量。
+            declare -x LOGNAME="root"
+            declare -x USER="root"
+            LOGNAME指的是登录主机的用户名称。
+            USER指的是目前环境中的使用者名称。
+            使用su zxwtry之后
+            declare -x LOGNAME="zxwtry"
+            declare -x USER="zxwtry"
+            这里和书上写的不一样2333333
+            (使用su - zxwtry执行的结果和su zxwtry在LOGNAME和USER上是相同的)
+        3,  declare -x name="zxwtry"同样可以把某一个变量变成环境变量。
+    取消环境变量：
+        name=
+        或者
+        unset name
+
