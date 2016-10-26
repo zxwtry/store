@@ -1548,4 +1548,22 @@ note89: 设定变量
         对应的好处是，如果在赋值的时候一不小心将Infomix写错
         那么程序不会以Infomix的默认去往下执行，而是直接报错。 
 
+note90: 取得变量：$name和${name}是一样的。
+    1,  如果变量后面直接接有其他英文字母数字或者下划线，必须用${name}
+        如果变量后面接的不是英文字母数字或者下划线，两种都可以用
+    2,  已经取得的变量值，可以再设定给其他变量，例如：
+        I=8
+        J=$I        #$I会替换成8，再把8设定给J
+        echo $J     #输出8
+    3,  如果要显示$这个字符，使用\转义。
+        echo \$J    #输出$J
+
+note91: Shell中的printf，直接看执行过程：
+        root@zxwtry:~# HI="hello world\n"
+        root@zxwtry:~# printf "%s\n" "$HI"
+        hello world\n
+        root@zxwtry:~# printf "%q\n" "$HI"
+        hello\ world\\n        
+        (括号里面的\n没有作用，这和Java中用printf不一样)
+
 
