@@ -1511,5 +1511,41 @@ note87: 命令、选项、参数
         --选项=选项值，例如ls --color=never
         (这些信息，可以通过"man 命令"来查询)
 
-note88: 
-                                
+note88: Shell中的变量是什么
+    1,  变量是可以暂时存储数据的地方，是一个具有名称的内存空间。
+    2,  Bash Shell没有数据形态。
+        在默认的情况下，不会区分这是整数变量、浮点数变量还是字符变量。
+        除非使用内置命令declare特别指定变量的型态。
+    3,  在Bash Shell中只有一种数据型态：以字符组成的字符串。
+    4,  设定变量之后，该变量值只在当前的Shell环境中有效。
+        每一个Shell环境都会维护一份它们自己的变量空间，彼此不互相影响。
+    5,  Shell中变量的命名
+        变量名称，可使用英文字母，数字以及_(下划线)组成，
+                英文大小写是有区别的。
+                但开头第一个字母不可以使用数字；变量名称的长度没有限制。
+
+note89: 设定变量
+    1,  以下三种都是将变量name赋值成zxwtry字符串
+        name=zxwtry
+        name='zxwtry'
+        name="zxwtry"
+        (等号的两边，不可以有空白)  对应错例：name =zxwtry
+        (字符串空间有空格，用引号引起来)
+            对应错例：name=zxwtry fighting
+            对应正例：name="zxwtry fighting"
+    2,  在编写Script时，为了怕打错变量名称，造成排错上的困难。
+        可以规定：变量要先经过设定的程序才能使用。
+        程序如下：
+            #!/bin/bash
+            shopt -s -o nounset
+            echo $Infomix
+        运行结果：
+            root@zxwtry:store#./code008_must_preset.sh 
+            ./code008_must_preset.sh: line 3: Infomix: unbound variable
+        (其中，-s是打开选项的意思，-o是指可用set -o设定的选项)
+        (nounset表示变量一定要先设定过，才能使用)
+        只需要在echo $Infomix之前给Infomix赋值就行。
+        对应的好处是，如果在赋值的时候一不小心将Infomix写错
+        那么程序不会以Infomix的默认去往下执行，而是直接报错。 
+
+
