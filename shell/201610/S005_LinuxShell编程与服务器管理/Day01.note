@@ -1566,4 +1566,30 @@ note91: Shell中的printf，直接看执行过程：
         hello\ world\\n        
         (括号里面的\n没有作用，这和Java中用printf不一样)
 
+note92: 取消与清空变量
+    取消变量：把该变量由变量空间中释放
+        (不过，有一种变量无法删除，只读变量是无法删除的。)
+        unset 变量名称
+            会先尝试取消变量，若失败，再试着取消与变量同名的函数式。
+        unset -v 变量名称
+            -v 表示要取消的是变量
+        unset -f 函数名称
+            -f 表示要取消的是旱地忽
+    清空变量：变量名称=
+    (取消变量和清空变量有差别，在后面会提到)
+
+note93: 变量和引导
+    name="zxwtry"和name='zxwtry'是存在区别的。
+    在双引号中，可进行以下3个操作：
+        1,  替换变量
+        2,  替换命令执行结果
+        3,  替换算术运算结果
+    看运行过程：
+        root@zxwtry:store# name="zxwtry"
+        root@zxwtry:store# echo "I am $name"
+        I am zxwtry
+        root@zxwtry:store# echo 'I am $name'
+        I am $name
+    单引号的作用是形成一个所见即所得的字符串。
+        不会进行替换变量。
 
