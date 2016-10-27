@@ -1709,5 +1709,36 @@ note96: Bash的内置变量
                             test2 
                             test3 
                             test4 
-    22, PL
+    22, PL          --- PL是密码文件/etc/passwd中的一行，现要把该行各字段分析出来，做法如下：                           代码内容如下：
+							#!/bin/bash
+							PL="root:x:0:0:root:/root:/bin/bash"
+							
+							#重新定义IFS，要以':'为分隔字符
+							IFS=':'
+							
+							#j代表第几个栏数
+							j=0
+							
+							#以循环分析各字段
+							for i in $PL
+							do
+							j=$((j+1)) #j增加1
+							echo 第$j个字段是$i
+							done
+                        执行结果是：
+							第1个字段是root
+							第2个字段是x
+							第3个字段是0
+							第4个字段是0
+							第5个字段是root
+							第6个字段是/root
+							第7个字段是/bin/bash
+    23, IGNOREEOF   --- 设定按ctrl-d时，出现几次EOF才能注销系统。主要是为了避免误按ctrl+d而注销系统。
+                        用例:
+                            IGNOREEOF=2
+                        在命令行按ctrl+d两次，出现如下信息：
+                            Use "logout" to leave the shell.
+                            Use "logout" to leave the shell.
+                        第三次按ctrl+d，才能注销系统。
+
                             
