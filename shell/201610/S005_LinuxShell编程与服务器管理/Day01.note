@@ -1688,5 +1688,26 @@ note96: Bash的内置变量
     17, HISTSIZE    --- 设定在一个互动模式的Shell中可记住的历史指令数目。一旦该Shell结束，
                         历史脚本文件仅存入HISTSIZE行数的指令，但如果HISTFILESIZE比HISTSIZE小，
                         则历史脚本文件的行数上限以HISTFILESIZE的数目为主。通常默认500行
-    
+    18, HOME        --- 通常root的家目录是/root，一般用户的家目录是/home/账号。
+    19, HOSTFILE    --- 包含自动补齐主机名的数据文件，须和/etc/hosts的格式相同。
+                        用例：
+                            export HOSTFILE=/etc/testhosts
+                        /etc/testhosts的内容体为：
+                            192.168.1.147   jmach-for-tnc
+                        接着，在命令行键入主机名的一部分jma，再按M-@，就会自动补齐为jmach-for-tnc
+    20, HOSTTYPE    --- 主机形态，如i386
+    21, IFS         --- 定义字段分隔字符。默认值为：空格符、tab字符、换行字符
+                        ifs1.sh
+                            #!/bin/bash
+                            CHK="test1 test2 test3 test4"
+                            for i in $CHK
+                            do
+                            echo $i
+                            done
+                        执行结果：
+                            test1 
+                            test2 
+                            test3 
+                            test4 
+    22, PL
                             
