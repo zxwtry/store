@@ -1630,3 +1630,37 @@ note95: 环境变量
         或者
         unset name
 
+note96: Bash的内置变量
+    1,  BASH        --- Bash的完整路径名
+                    通常是：/bin/bash或/usr/local/bin/bash
+    2,  BASH_ENV    --- 仅在bash非互动模式中适用，在执行Shell Script时，
+                        会先检查$BASH_ENV是否有指定启动文件，如果有则先执行它。
+    3,  BASH_VERSION    Bash的版本
+    4,  CDPATH      --- cd命令的搜寻路径
+                        自定义CDPATH，可缩短键入路径文件名的长度，因此，可在
+                        自己常用的目录之间快速切换。如果有两个以上的路径，
+                        请适用:(冒号)隔开。
+                    用例：
+                        export CDPATH="/root/temp/B/C:/var/log":$HOME
+                        mkdir -p /root/temp/B/C/A
+                        cd A
+                        执行cd A，默认是由工作目录中寻找目录A，若找不到，则由
+                        $CDPATH中寻找。因而，可直接切换到/root/temp/B/C/目录，
+                        就不需要键入cd /root/temp/B/C/A这么长的目录了。
+                    执行过程如下：
+						root@zxwtry:~# export CDPATH='/root/temp/B/C'
+						root@zxwtry:~# mkdir -p /root/temp/B/C/A
+						root@zxwtry:~# cd A
+						/root/temp/B/C/A
+						root@zxwtry:A# pwd
+						/root/temp/B/C/A
+    5,  ENV         --- 以互动模式调用sh或在POSIX模式下，
+                        会先检查$ENV是否有指定启动文件，
+                        若有则先执行它。
+    6,  EUID        --- 有效的使用者id
+    7,  FCEDITOR    --- fc命令默认适用的比较器
+    8,  FIGNORE     --- 在进行文件名补齐时，如若想忽略的扩展名列表。
+                        各文件名之间用:隔开，例如：".o:~:.txt"。
+                        如果有文件的扩展名列在变量值$FIGNORE中，
+                        则文件名补齐时会排除该文件。
+    
