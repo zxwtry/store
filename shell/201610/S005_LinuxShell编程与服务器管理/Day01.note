@@ -1663,4 +1663,30 @@ note96: Bash的内置变量
                         各文件名之间用:隔开，例如：".o:~:.txt"。
                         如果有文件的扩展名列在变量值$FIGNORE中，
                         则文件名补齐时会排除该文件。
+    9,  FUNCNAME    --- 在函数执行期，此变量内容为函数式的名称。
+                        function show_name() {
+                            echo $FUNCNAME
+                        }
+                        (会输出函数式名称show_name)
+    10, GLOBIGNORE  --- 作样式比较时，要想忽略的文件名列表。各文件名之间，用:隔开
+    11, GROUPS      --- 这是一个数组变量，包含用户所属的组群列表。
+    12, HISTCMD     --- 当前指令执行完后，它在历史指令中的排列编号(指定给下一个指令用的历史编号)
+    13, HISTCONTROL --- 控制指令是否存入历史脚本文件中。
+                        HISTCONTROL有3个可能的设定值：
+                            ignorespace:    凡是指令开头有空格符的，不存入历史脚本文件中。
+                            ignoredups:     连续重复的指令，只存一个
+                            ignoreboth:     结合前两者的功能 
+    14, HISTFILE    --- 设定历史脚本文件的路径。通常是在：家目录/.bash_history
+    15, HISTFILESIZE    历史脚本文件存储指令的最大行数。通常默认值是500行。
+    16, HISTIGNORE  --- 不存入历史脚本文件的指令样式，以:隔开。
+                        用例：
+                            export HISTIGNORE=ls:ps:cd:t*:\&
+                            ls、ps、cd  3条命令不存入历史脚本文件。
+                            t*代表凡是t开头的命令，都不存入历史脚本文件。
+                            &代表最后一个历史指令，这表示，如果一直键入重复的指令，只存入一个。
+                            (由于&是后台执行的命令，因此，必须加上\，使其回到原本的单纯字符)
+    17, HISTSIZE    --- 设定在一个互动模式的Shell中可记住的历史指令数目。一旦该Shell结束，
+                        历史脚本文件仅存入HISTSIZE行数的指令，但如果HISTFILESIZE比HISTSIZE小，
+                        则历史脚本文件的行数上限以HISTFILESIZE的数目为主。通常默认500行
     
+                            
