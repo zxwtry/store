@@ -1741,4 +1741,21 @@ note96: Bash的内置变量
                             Use "logout" to leave the shell.
                         第三次按ctrl+d，才能注销系统。
 
-                            
+    24, INPUTRC     --- 设定命令行函数式库readline的启动配置文件，可覆盖~/.inputrc的设定
+    25, LANG        --- 当前语系(locale)的名称
+                        locale是指一组地区性语言的信息，以下直接写locale
+                        运行：
+                            echo $LANG
+                        得到：
+                            en_US.UTF-8
+    26, LC_ALL      --- 目前的locale。可覆盖LANG和LC_*的设定
+                        默认为空 
+    27, LC_COLLATE  --- locale字母排序
+                        默认为空 
+    28, LC_CTYPE    --- locale字母分类
+                        默认为空 
+    29, LINENO      --- script已经执行到的行数
+    30, MACHTYPE    --- 描述主机形态的GNU格式: cpu-公司-系统
+                        如：x86_64-pc-linux-gnu
+    
+    29, LC_MESSAGES --- locale信息显示的转换，如$"..."字符串转换
