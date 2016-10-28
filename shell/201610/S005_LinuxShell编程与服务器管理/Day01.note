@@ -1770,4 +1770,19 @@ note96: Bash的内置变量
     36, OPTIND      --- 使用getopts处理选项时，取得的选项的索引值。
     37, OPTERR      --- 如果把OPTERR设为1，则getopts发生错误时，不管选项行第一个字符是否为:，
                         仍然显示错误信息。
+    38, OSTYPE      --- 执行bash的操作系统种类:
+                        如：
+                            root@zxwtry:~# echo $OSTYPE
+                            linux-gnu
+    39, PATH        --- 命令的搜寻路径，一般用法如下：
+                        export PATH=/root/bin:$PATH
+                        这样可以在PATH增加路径/root/bin
+                        注意：  最好不要把当前目录.加入到PATH中，以免存留漏洞。
+                                因为：如果加入当前目录，很容易误踩别人在当前目录中设下的陷阱程序。
+                                    欲执行当前目录下的程序，较好的习惯是以"./程序"的格式指定要执行的程序。
+    40, PPID        --- 父进程的进程编号
+    41, PROMPT_COMMAND  出现主要提示符号$PS1之前执行的命令。
+    42, PS1         --- 主要提示符号。默认值是：
+                            \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\W\$
+        主要提示符号的代码定义
     29, LC_MESSAGES --- locale信息显示的转换，如$"..."字符串转换
