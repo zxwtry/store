@@ -1757,5 +1757,17 @@ note96: Bash的内置变量
     29, LINENO      --- script已经执行到的行数
     30, MACHTYPE    --- 描述主机形态的GNU格式: cpu-公司-系统
                         如：x86_64-pc-linux-gnu
-    
+    31, MAIL        --- 邮件文件的名称
+    32, MAILCHECK   --- 每隔多久就检查一次邮件，默认60秒
+                        如：
+                            root@zxwtry:~# echo $MAIL
+                            /var/mail/root
+                            root@zxwtry:~# echo $MAILCHECK
+                            60
+    33, MIALPATH    --- 设定检查新邮件的文件名，如果有两个以上，用:分隔。它会覆盖MAIL的变量值
+    34, OLDPWD      --- 前一个工作目录
+    35, OPTARG      --- 使用getopts处理选项时，取得的选项的参数。
+    36, OPTIND      --- 使用getopts处理选项时，取得的选项的索引值。
+    37, OPTERR      --- 如果把OPTERR设为1，则getopts发生错误时，不管选项行第一个字符是否为:，
+                        仍然显示错误信息。
     29, LC_MESSAGES --- locale信息显示的转换，如$"..."字符串转换
