@@ -1829,5 +1829,19 @@ note96: Bash的内置变量
                     用例：
                         RANDOM=$$   #使用bash shell的进程编号当做随机数种子
                         echo $RANDOM
-                        其实，Linux提供
-
+                        其实，Linux提供更具随机运算的机制，它通过虚拟文件/dev/urandom来运行，
+                    用例：
+                        head -1 /dev/urandom | od -N 2 | head -1 | awk '{print $2 * 1}'
+                        指令的意思是：使用head读取urandom输出的一行数据位数据，通过管道交给
+                            od印出2bytes的内容，再通过管道由head取一行数据，最后awk印出第二个
+                            字段(先乘以1)当做随机数。
+                        root@zxwtry:~# head -1 /dev/urandom | od -N 2 | head -1 | awk '{print $2 * 1}'
+                        173620
+    48, REPLY       --- select和read没有设定读取变量时，默认的变量名称为REPLY
+    49, SECONDS     --- 目前的Bash Shell已经执行的时间(秒为单位)
+                        root@zxwtry:~# echo $SECONDS
+                        2897
+    50, SHELL       --- shell的文件路径。默认为"/bin/bash"
+                    如：
+                        root@zxwtry:~# echo $SHELL
+                        /bin/bash
