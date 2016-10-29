@@ -1976,4 +1976,18 @@ note99: 别名
 				root@zxwtry:~# cd zxwroot
 				root@zxwtry:zxwtry# pwd
 				/home/zxwtry
-        
+            为什么会出现，No such file or directory呢？
+                因为在之前学习bash分析指令的方式，bash只会对第一个token
+                进行替换别名，而zxwroot并不是第一个token，因此未被展开，
+                cd 直接切到zxwroot，当前出现找不到zxwroot的错误信息。
+            解决方法：重新定义cd别名，在指令最末，置放一个空格符。
+                当cd zxwroot的时候，两个别名替换成：
+                    cd /home/zxwtry，因此可以顺利进入目录。
+    3,  取消别名
+            取消别名的方法如下：
+                unalias 别名
+            如果取消的别名不存在，bash会提示"-bash: unalias: 别名: not found"。
+            如果要取消所有的别名:
+                unalias -a
+
+
