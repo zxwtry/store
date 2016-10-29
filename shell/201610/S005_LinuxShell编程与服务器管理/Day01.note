@@ -1884,4 +1884,28 @@ note96: Bash的内置变量
                         1,  script执行时，bash的绝对路径，例如:/bin/bash
                         2,  上一个命令执行时，最后一个位置参数，如上一个命令是：test.sh ABC 123 xyz，则$_的值为'xyz'
                         3,  检查邮件时，$_的值为邮件文件名。
-    
+
+note97: 调整变量的属性---只读变量
+    1,  使用readonly命令或declare
+    2,  通常，使用只读属性来定义不变的参数，如PI=3.14
+    3,  readonly设定为只读变量：
+        readonly 变量名称
+        示例：
+            root@zxwtry:~# readonly x=2
+            root@zxwtry:~# echo $x
+            2
+            root@zxwtry:~# x=1
+            -bash: x: readonly variable
+    4,  readonly的其他用法：
+        执行readonly或readonly -p:
+            显示目前具有只读属性的变量列表
+        执行readonly -r 函数名称
+            设定该函数式不可修改
+        执行readonly -a 数组变量
+            设定该数组变量不可修改
+                root@zxwtry:~# s[0]=1
+                root@zxwtry:~# s[1]=1
+                root@zxwtry:~# s[2]=2
+                root@zxwtry:~# readonly -a s
+                root@zxwtry:~# s[0]=1
+                -bash: s: readonly variable
