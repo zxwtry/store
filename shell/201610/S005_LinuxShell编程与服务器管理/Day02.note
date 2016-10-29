@@ -14,4 +14,44 @@ note01: 自定义环境之以一般账户的角色工作时
     一般在.bash_profile设定可以一体使用的命令、搜寻路径及环境变量，而把其他大部分的设定放在.bashrc。因此.bash_profile文件比较小，.bashrc则比较大。
     建议：自定义.bash_profile时，仍然依循上述惯例，让它越简单越好。
           这样不但好维护，而且不易出错。
-    
+    以下是.bash_profile的设定范例
+            #设定umask
+            umask 022
+            #登录后，也执行一个.bashrc
+            if [ -f ~/.bashrc ]; then
+                . ~/.bashrc
+            fi
+            #设定自己专用的程序路径
+            if [ -d ~/bin ]; then
+                PATH=~/bin:$PATH
+            fi
+            #设定CVS环境
+            export CVSROOT=":pserver:zxwtry@192.168.1.2:/home/zxwtry"
+            #设定Java环境
+            export JAVA_HOME=~/jdk/bin
+            export PATH=$PATH:$JAVA_HOME
+        行2，设定新建文件、目录的安全权限，分别是644及755(即用666和777各减去022)
+    以下是.bashrc的设定范例：
+            #判断若不是在互动模式，则不执行.bashrc
+            [ -z "$PS1" ] && return
+            #设定有颜色的提示
+            PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+            #设定方便使用的程序别名
+            alias ll='ls -alF'
+            alias la='ls -A'
+            alias l='ls -CF'
+            #如果系统没有启用bash_completion，可在这里启用
+            if [ -f /usr/share/bash-completion/bash_completion ]; then
+                . /usr/share/bash-completion/bash_completion
+            elif [ -f /etc/bash_completion ]; then
+                . /etc/bash_completion
+            fi
+            #重复的命令、ls、bg、fg、exit、ps等指令，不存入历史日志文件中。
+            export HISTIGNORE="&:ls:ls *:[bf]g:exit:ps *"
+            #设定自己常用的目录，可用cd指令快速切换
+            export CDPATH=.:~:~/docs:~/src:~/tmp:/mnt:/usr/src:/usr/lib:/usr/local
+    以下是.bash_logout的设定范例
+            #注销时，清空tmp目录中的所有内容
+            rm -rf ~/tmp/*
+
+             
