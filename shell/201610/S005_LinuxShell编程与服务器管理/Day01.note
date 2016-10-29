@@ -1920,4 +1920,15 @@ note97: 调整变量的属性---只读变量
 note98: 调整变量的属性
     1,  除了调整只读属性之外，还有其他操作。以下说明：使用declare调整变量属性的方法。
         declare的用法：
-        
+            -p: 显示变量的属性      declare -p x    显示变量x的属性
+            -a: 变量是一个数组      declare -a array    设定变量array是一个数组
+            -f: 搜寻命令时，只找函数    declare -f showit   寻找showit时，只由函数式列表中寻找，
+                                                            不搜寻其他别名或外部命令进程
+            -i: 变量是一个整数      declare -i a    设定变量a是整数形态
+            -F: 显示所有的函数式名称及其属性    declare -F  显示所有的函数式名称及其属性
+            -r: 设定只读变量        declare -r a    设定a是只读变量
+            -t: 设定变量具trace shuxing     declare -t xyz=11   设定变量xyz具trace的属性，利于排错。
+            -x: 设为环境变量        declare -x PATH 设定PATH为环境变量
+
+
+
