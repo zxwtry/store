@@ -1909,3 +1909,15 @@ note97: 调整变量的属性---只读变量
                 root@zxwtry:~# readonly -a s
                 root@zxwtry:~# s[0]=1
                 -bash: s: readonly variable
+    5,  只读变量：使用declare命令
+        使用以下指令，也可以设定只读变量：
+            declare -r 变量名称
+                root@zxwtry:~# p=100
+                root@zxwtry:~# declare -r p
+                root@zxwtry:~# p=120
+                -bash: p: readonly variable
+
+note98: 调整变量的属性
+    1,  除了调整只读属性之外，还有其他操作。以下说明：使用declare调整变量属性的方法。
+        declare的用法：
+        
