@@ -1930,5 +1930,31 @@ note98: 调整变量的属性
             -t: 设定变量具trace shuxing     declare -t xyz=11   设定变量xyz具trace的属性，利于排错。
             -x: 设为环境变量        declare -x PATH 设定PATH为环境变量
 
-
-
+    2,  用例declare -x ZXWTRY=":pserver:zxwtry@sample.edu.cn:/home/zxwtry"
+            设定环境变量ZXWTRY。
+            效果等同于：
+            export ZXWTRY=":pserver:zxwtry@sample.edu.cn:/home/zxwtry"
+    3,  执行过程：
+        root@zxwtry:~# declare -i I=60
+        root@zxwtry:~# echo $I
+        60
+        root@zxwtry:~# I="testit"
+        root@zxwtry:~# echo $I
+        0
+        root@zxwtry:~# declare -p I
+        declare -i I="0"
+        
+note99: 别名
+    1,  建立别名
+        alias或alias -p可显示目前设定的别名，
+			alias egrep='egrep --color=auto'
+			alias fgrep='fgrep --color=auto'
+			alias grep='grep --color=auto'
+			alias l='ls -CF'
+			alias la='ls -A'
+			alias ll='ls -alF'
+			alias ls='ls --color=auto'
+            (上面是ubuntu 14.04默认的别名)
+        alias 别名=指令
+            定义一个新的别名。
+            需注意
