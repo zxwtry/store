@@ -1845,3 +1845,22 @@ note96: Bash的内置变量
                     如：
                         root@zxwtry:~# echo $SHELL
                         /bin/bash
+    51, SHLVL       --- 子shell的层数。
+    52, SHELLOPTS   --- 本变量的内容是经过set -o设定为已经开启的shell选项，以:分隔。
+    53, TIMEFORMAT  --- 设定time统计运行时间的格式。关于time的用法，之前学过
+                        TIMEFORMAT的时间格式代码：
+                        %%      --- 转义%的特殊意义，回到单纯是字符%的用法
+                        %[p][l]R    执行的时间。称为real time。其中，p是指精确的小数字数，至多3位；
+                                    l是长格式:"分秒.p位小数秒"。例如：%3lR，3是指精确到3位小数，即千分之一秒；
+                                    l则显示长时间格式如：'0m0.181'
+                        %[p][l]U    在用户模式下，耗用的CPU秒数，称为user time
+                        %[p][l]S    在系统模式下，耗用的CPU秒数，称为system time
+                        %P          以百分比显示时间，计算方式是：%U加上%S除以%R
+                    TIMEFORMAT的默认格式如下：
+                        $'\nreal\t%3lR\nuser\t%3IU\nsys\t%3lS'
+                    显示例：
+                        real    0m0.181s
+                        user    0m0.008s
+                        sys     0m0.028s
+                        
+                        
