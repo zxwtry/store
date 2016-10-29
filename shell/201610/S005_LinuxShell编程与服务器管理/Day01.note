@@ -1957,4 +1957,23 @@ note99: 别名
             (上面是ubuntu 14.04默认的别名)
         alias 别名=指令
             定义一个新的别名。
-            需注意
+            需注意: 第一，等号的两旁不可以有空白；
+                    第二，如果等号右边的指令中有空白，需用单引号包括该指令
+        别名也可以和原命令相同
+            alias cp=cp
+        建立别名的别名
+            alias grep='grep --color=auto'
+            alias zxwgrep=grep
+
+    2,  替换别名
+            曾经提及，bash分析指令时，会进行替换别名的操作。
+            bash的替换别名有个重点：如果某个别名替换后，最后是空格符，bash会检查下一个字符串是否也是别名，若是，则对它进行替换。
+            查看如下运行过程：
+				root@zxwtry:~# alias zxwroot=/home/zxwtry
+				root@zxwtry:~# cd zxwroot
+				-bash: cd: zxwroot: No such file or directory
+				root@zxwtry:~# alias cd='cd '
+				root@zxwtry:~# cd zxwroot
+				root@zxwtry:zxwtry# pwd
+				/home/zxwtry
+        
