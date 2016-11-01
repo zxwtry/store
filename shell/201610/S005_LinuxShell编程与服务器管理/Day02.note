@@ -54,4 +54,16 @@ note01: 自定义环境之以一般账户的角色工作时
             #注销时，清空tmp目录中的所有内容
             rm -rf ~/tmp/*
 
+note02: 自定义环境---以系统管理员的角色工作时
+    系统管理员维护的环境配置文件，主要有3个：
+        1,  /etc/profile
+        2,  /etc/bash.bashrc
+        3,  /etc/skel 目录下所有文件
+    前两个文件的用途，在Bash Shell的启动配置文件中已经说明。
+    /etc/profile和/etc/bash.bashrc的设定，会影响所有账号的使用环境，因此，要特别小心。
+    在/etc/profile中，通常会做如下设定：umask, PATH, 多国语言环境, 提示符号, 别名等等。
+    bash.bashrc的内容，大多如下：
+        [ -f /etc/profile ] && . /etc/profile
+        这表明，当执行交互式的Shell时会检查/etc/profile是否存在，若存在，就执行它。这样的做法，等于是让管理员只要维护一份全局的/etc/profile配置文件即可。
+    除了这两个文件，/etc/skel这个目录也很重要。它的作用是，当管理员开设新账户时，账号管理程序会把/etc/skel中的所有文件复制一份放到家目录中，作为用户的环境文件。
              
