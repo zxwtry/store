@@ -151,5 +151,42 @@ note04: Here Document --- 用Here Document设定变量
         Line 1 is good They are tencent, alibaba and baidu. WOW, great!
     替换$WOW的变量值之后转向输出，交给cat显示出来，其结果放置在$()中进行替换变量，得到上述结果。
     在标记加上双引号也是可以的，例如上例写成$(cat <<"HERE")，表示这个Here Document拥有和双引号一样的特性，即支持变量替换的功能。
-    
+
+note05: Here Document   --- 控制Here Document的格式
+    Here Document支持两种控制输出格式的做法：
+    1,  关闭变量替换的功能
+        有时候，希望按照原本的样子转向输出，不做任何变量替换。做法如下：
+            cat <<'HERE'
+            Line 1 is good
+            They are tencent, alibaba, and baidu.
+            $WOW
+            HERE
+        行1中，对标记HERE加上单引号，即可关闭变量替换。
+        执行结果：
+            Line 1 is good
+            They are tencent, alibaba, and baidu.
+            $WOW
+        $WOW还是保持原样，不做变量替换。
+    2,  去掉每行之前的TAB字符：
+            cat <<-'HERE'
+                Line 1 is good.
+                They are tencent, alibaba, and baidu.
+                $WOW
+            HERE
+        行2~4每行前面都有一个TAB字符。行1在标记前加上-，表示要抑制各行首TAB的作用，输出结果同前例。
+
+note06: Here Document   --- 利用Here Document做多行批注
+    用例：
+        : <<DO-NOTTHING
+        这是第一行批注
+        这是第二行批注
+        这是第三行批注
+        这是第四行批注
+        DO-NOTTHING
+        :代表"什么都不做"的空命令。这个区域在script中，bash会忽略不执行，因此，达到批注的效果。
+
+note07: Here Document   --- 利用Here Document，打包C(或其他程序语言)的原始码
+    这是Cracker散步安全漏洞时，最喜欢的用法。举例如下：
+    代码在：code013_Here_Document_打包C的原始码.sh    
+        
 
