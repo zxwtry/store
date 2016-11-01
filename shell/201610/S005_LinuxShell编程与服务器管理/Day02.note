@@ -66,4 +66,31 @@ note02: 自定义环境---以系统管理员的角色工作时
         [ -f /etc/profile ] && . /etc/profile
         这表明，当执行交互式的Shell时会检查/etc/profile是否存在，若存在，就执行它。这样的做法，等于是让管理员只要维护一份全局的/etc/profile配置文件即可。
     除了这两个文件，/etc/skel这个目录也很重要。它的作用是，当管理员开设新账户时，账号管理程序会把/etc/skel中的所有文件复制一份放到家目录中，作为用户的环境文件。
-             
+    
+note03: 数组
+    bash数组，其元素的个数没有限制，数组的索引由0开始，但不一定要连续，(可以跳号)。
+    索引号也可以用算术表达式表示，如1+2
+    bash 3.x只支持一维数组(关系型数组在Bash4.0才支持) 
+    用例：
+			root@zxwtry:~# A[0]=1
+			root@zxwtry:~# A[0]='c'
+			root@zxwtry:~# A[0]="good"
+			root@zxwtry:~# echo ${A[1]}
+			
+			root@zxwtry:~# echo ${A[0]}
+			good
+			root@zxwtry:~# A[3]=1
+			root@zxwtry:~# echo ${B[@]}
+			
+			root@zxwtry:~# echo ${A[@]}
+			good 1
+			root@zxwtry:~# echo ${A[*]}
+			good 1
+			root@zxwtry:~# echo ${#A[*]}
+			2
+			root@zxwtry:~# echo ${#A[@]}
+			2
+    ${A[@]} --- 一次取出所有的元素：得到以空白隔开的东东
+    ${A[*]} --- 一次取出所有的元素：得到一整个字符串
+
+
