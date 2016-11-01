@@ -223,4 +223,29 @@ note07: Here Document   --- 利用Here Document，打包C(或其他程序语言)
         接着利用gcc编译hello.c，若编译无误，就执行程序文件hello
     这就是shell script携带攻击程序的原型。
 
+note08: 高级变量
+    高级变量，有3个主题：
+        1,  变量扩展
+        2,  命令替换
+        3,  算术扩展
+    ${变量名称}     ---     变量替换    ---     ${filename}
+    $(命令)         ---     命令替换    ---     $(ls /)
+    $((算术式))     ---     算术扩展    ---     $((9+9))
 
+note09: 变量扩展：测试存在性及空值
+    基本型：${变量名称} 
+    "变量存在"的定义：   如果变量曾设值过，则称该变量存在；反之，不曾设值过，或曾用unset取消变量，
+                        则称变量不存在或未定义
+    变量设值有两种情况： 1,  其值"非空"      name='zxwtry'   name非空
+                        2,  其值为"空"      name=           name为空，以null表示
+    测试变量"存在与否"的基本用法：
+        语法：${待测变量-默认值}
+        判断条件：如果变量存在，传回变量的值；不存在，传回默认值。
+    执行过程如下：
+			root@zxwtry:shell# name="zxwtry"
+			root@zxwtry:shell# echo ${name-"default"}
+			zxwtry
+			root@zxwtry:shell# unset name
+			root@zxwtry:shell# echo ${name-"default"}
+			default
+    在script的运用中，通常将不存在和空值视为同一类的情况。
