@@ -188,5 +188,39 @@ note06: Here Document   --- 利用Here Document做多行批注
 note07: Here Document   --- 利用Here Document，打包C(或其他程序语言)的原始码
     这是Cracker散步安全漏洞时，最喜欢的用法。举例如下：
     代码在：code013_Here_Document_打包C的原始码.sh    
-        
+			#!/bin/bash
+			echo "正在产生 hello.c...."
+			echo
+			cat <<'EOF' > hello.c
+			#include <stdio.h>
+			int main(){
+			    printf("hello world!\n");
+			    return 0;
+			}
+			EOF
+			echo "编译hello.c..."
+			echo
+			#编译hello.c，产生执行文件
+			gcc -o hello hello.c
+			#若编译成功，就执行
+			if [ $? -eq 0 ]; then
+			    echo "执行hello..."
+			    echo
+			    ./hello
+			else
+			    echo 'Compile ERROR: hello.c'
+			fi
+    执行结果如下：
+			root@zxwtry:S005_LinuxShell编程与服务器管理# ./code013_Here_Document_打包C的原始码.sh 
+			正在产生 hello.c....
+			
+			编译hello.c...
+			
+			执行hello...
+			
+			hello world!
+    这个script利用Here Document，夹带了一个hello.c程序的原始码，执行本script时会产生hello.c，
+        接着利用gcc编译hello.c，若编译无误，就执行程序文件hello
+    这就是shell script携带攻击程序的原型。
+
 
