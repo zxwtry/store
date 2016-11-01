@@ -115,5 +115,41 @@ note04: Here Document --- 用Here Document设定变量
         line 3
         HERE
         (经由wc计算结果得到3行)
+    Here Document也支持变量替换。在输入的内容中，如果有变量，bash在转向前会先替换变量值
+        From="From: me@example.edu.cn"    
+        To="To: you@example.edu.cn"
+        Subject="Subject: hello world"
+        Msg="吃饭睡觉"
+        Em="20161101.txt"
+        cat > $Em <<HERE
+        $From
+        $To
+        $Subject
+        
+        $Msg
+        HERE
+    执行结果如下：
+        root@zxwtry:S005_LinuxShell编程与服务器管理# chmod +x code011_Here_Document_变量替换.sh 
+        root@zxwtry:S005_LinuxShell编程与服务器管理# ./code011_Here_Document_变量替换.sh 
+        root@zxwtry:S005_LinuxShell编程与服务器管理# cat 20161101.txt 
+        From: me@example.edu.cn
+        To: you@example.edu.cn
+        Subject: hello world
+        
+        吃饭睡觉
+    Here Document的变量设定
+        WOW="WOW, great!"
+        var=$(cat <<HERE
+        Line 1 is good
+        They are tencent, alibaba and baidu.
+        $WOW
+        HERE)
+        echo $var
+    执行结果如下：
+        root@zxwtry:S005_LinuxShell编程与服务器管理# ./code012_Here_Document_变量设定.sh 
+        ./code012_Here_Document_变量设定.sh: line 12: warning: here-document at line 8 delimited by end-of-file (wanted `HERE')
+        Line 1 is good They are tencent, alibaba and baidu. WOW, great!
+    替换$WOW的变量值之后转向输出，交给cat显示出来，其结果放置在$()中进行替换变量，得到上述结果。
+    在标记加上双引号也是可以的，例如上例写成$(cat <<"HERE")，表示这个Here Document拥有和双引号一样的特性，即支持变量替换的功能。
     
 
