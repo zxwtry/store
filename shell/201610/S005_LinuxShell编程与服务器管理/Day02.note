@@ -233,19 +233,36 @@ note08: 高级变量
     $((算术式))     ---     算术扩展    ---     $((9+9))
 
 note09: 变量扩展：测试存在性及空值
-    基本型：${变量名称} 
-    "变量存在"的定义：   如果变量曾设值过，则称该变量存在；反之，不曾设值过，或曾用unset取消变量，
-                        则称变量不存在或未定义
-    变量设值有两种情况： 1,  其值"非空"      name='zxwtry'   name非空
-                        2,  其值为"空"      name=           name为空，以null表示
-    测试变量"存在与否"的基本用法：
-        语法：${待测变量-默认值}
-        判断条件：如果变量存在，传回变量的值；不存在，传回默认值。
-    执行过程如下：
-			root@zxwtry:shell# name="zxwtry"
-			root@zxwtry:shell# echo ${name-"default"}
-			zxwtry
-			root@zxwtry:shell# unset name
-			root@zxwtry:shell# echo ${name-"default"}
-			default
-    在script的运用中，通常将不存在和空值视为同一类的情况。
+    1,  基本型：${变量名称} 
+	    "变量存在"的定义：   如果变量曾设值过，则称该变量存在；反之，不曾设值过，或曾用unset取消变量，
+	                        则称变量不存在或未定义
+	    变量设值有两种情况： 1,  其值"非空"      name='zxwtry'   name非空
+	                        2,  其值为"空"      name=           name为空，以null表示
+	2,  测试变量"存在与否"的基本用法：
+	        语法：${待测变量-默认值}
+	        判断条件：如果变量存在，传回变量的值；不存在，传回默认值。
+	    执行过程如下：
+				root@zxwtry:shell# name="zxwtry"
+				root@zxwtry:shell# echo ${name-"default"}
+				zxwtry
+				root@zxwtry:shell# unset name
+				root@zxwtry:shell# echo ${name-"default"}
+				default
+	    在script的运用中，通常将不存在和空值视为同一类的情况。
+    3,  测试变量"不存在"或其值为空："传回"一个默认值：
+	    语法：  ${待测变量:-默认值}
+	    判断条件：  如果变量不存在或其值为空，则符合判断，传回默认值作为判断
+	    用例：  myname=
+	            r=${myname:-'zxwtry'}
+	            echo $r
+    4,  -和:-的区别：
+        *   如果变量扩展的条件式中只有-这个符号，则只做变量"存在性"的判断
+        *   如果变量扩展的条件式中有:-这个符号，除了判断变量"存在性"之外，多加一个变量是否存在。
+    5,  拆解条件表达式：
+        上述变量扩展式${变量:-默认值}，可以使用if-then-else的语法来拆解
+        if [ 变量不存在 或 空值 ]; then
+            传回 "默认值"
+        else
+            传回 "变量值"
+        fi
+    
