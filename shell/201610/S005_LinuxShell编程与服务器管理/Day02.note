@@ -394,4 +394,39 @@ note12: 变量扩展：对比样式---由字符串前面对比，删除相符者
                     r=${filename#/*/}
                     echo $r
                     显示结果：sbin/ntpdate
+            用例：
+                    filename="//usr/sbin/ntpdate"
+                    r=${filename#/*/}
+                    echo $r
+                    显示结果：usr/sbin/ntpdate
+
+    语法:   ${变量##样式}
+            释义：由前面(最左边)开始，对比变量值，删除"最长相符合的字符串"
+            用例：
+                    filename="/usr/sbin/ntpdate"
+                    r=${filename##/*/}
+                    echo $r
+                    显示结果：ntpdate
+
+note13: 变量扩展：对比样式---由字符串后面对比，删除相符者
+    语法：  ${变量%样式}
+            释义：由后面(最右边)开始，对比变量值，删除"最短相符合的字符串"
+            用例：
+                    filename="/usr/sbin/ntpdate"
+                    r=${filename%/*/}
+                    echo $r
+                    显示结果：/usr/sbin/ntpdate
+            用例：
+                    filename="/usr/sbin/ntpdate"
+                    r=${filename%/*}
+                    echo $r
+                    显示结果：/usr/sbin
+
+    语法:   ${变量##样式}
+            释义：由后面(最右边)开始，对比变量值，删除"最长相符合的字符串"
+            用例：
+                    example="www.example.edu.cn"
+                    m=${example%%.*}
+                    echo $m
+                    输出结果：www
 
