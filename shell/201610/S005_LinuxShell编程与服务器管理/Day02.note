@@ -328,4 +328,14 @@ note09: 变量扩展：测试存在性及空值
                             $@表示fgrep.sh一次可以搜索多个文件。
                 用法：
                     ./fgrep.sh Mem /proc/meminfo /root/test.txt
-                由于$1=Mem非空，判断成立，因此，${1+"$@"}传回$@，此变量的值等于
+                由于$1=Mem非空，判断成立，因此，${1+"$@"}传回$@，此变量的值等于所有的位置参数组合起来：
+                    "Mem /proc/meminfo /root/test.txt"，因此，最后exec执行的指令是：
+                    grep -F Mem /proc/meminfo /root/test.txt
+                    这表示，grep可由后面的两个文件去寻找关键字Mem
+    12, 整理如下：
+        :       空          测空值
+        -       负向        测不存在
+        =       设值        给空值变量设一个默认值
+        ?       有问题      检查条件是否完备再来执行
+        +       正向        测试存在
+
