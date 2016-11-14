@@ -445,5 +445,21 @@ note14: 变量扩展：对比样式---取代或删除部分字符串
                     r=${act//:/,}
                     echo $r
                     输出：mail,x,8,
-            
 
+note15: 变量扩展：对比样式---把对比符合的字符串删除
+    语法：  ${变量/样式/}
+    释义：  删除第一个符合样式的字符串，只删一个
+            用例：
+                    act="mail:x:8:8:mail:/var/mail:/bin/sh"
+                    r=${act/:/}
+                    echo $r
+                    执行结果：第一个:删除后的样子。
+                    mailx:8:8:mail:/var/mail:/bin/sh
+    语法：  ${变量//样式/}
+    释义：  删除所有符合样式的字符串，全部删除
+            用例：
+                    act="mail:x:8:8:mail:/var/mail:/bin/sh"
+                    r=${act/:/}
+                    echo $r
+                    执行结果：所有:删除后的样子。
+                    mailx88mail/var/mail/bin/sh
