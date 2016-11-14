@@ -463,3 +463,22 @@ note15: 变量扩展：对比样式---把对比符合的字符串删除
                     echo $r
                     执行结果：所有:删除后的样子。
                     mailx88mail/var/mail/bin/sh
+
+note16: 变量扩展：对比样式---要求样式在句首或句尾
+    在对比样式时，若在样式前加上#，如#T，则该样式要出现在变量值的开头才算符合。
+            用例：
+                    str="Yes, This is a Title."
+                    r=${str/#T* /}
+                    echo $r
+                    执行结果：Yes, This is a Title.
+            用例：
+                    str="Yes, This is a Title."
+                    r=${str/T* /}
+                    echo $r
+                    执行结果：Yes, Title.
+            用例：
+                    str="Tony , This is Joy."
+                    r=${str/#T* /}
+                    echo $r
+                    执行结果：Joy.
+
