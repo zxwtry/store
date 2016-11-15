@@ -587,4 +587,15 @@ note20: 算术扩展
             I=$(8+16)
             执行出错，8+16: command not found
 
-    
+note21: 算术运算---之前提到的算术扩展
+    名称            语法            范例
+    算术扩展        $((算术符))     r=$((2+5*8))
+    使用外部命令    expr算术式      r=`expr 4+5`
+    expr            
+    使用$[]         $[算术式]       r=$[4+5]
+    使用内置命令    declare -i 变量=算术式
+    declare         declare -i r=8+16
+    使用内置命令    let 算术式      let r=8+16
+    let
+
+
