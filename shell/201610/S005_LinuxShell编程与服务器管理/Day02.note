@@ -760,4 +760,30 @@ note27: 流程控制---命令的结束状态
     4,  每一个命令执行后，都会传回一个结束状态值。
         成功：返回0
     
-    
+note28: 流程控制---if 
+    1,  if-then-else
+        if 条件测试; then
+            命令区域
+        fi
+            用例：
+                if (( 2 < 10 )); then
+                    echo "真"  
+                fi
+            用例：
+                if (( 2 < 10 )); then echo "真"; fi
+    2,  if-then-else
+        if 条件测试; then
+            命令区域
+        else
+            命令区域2
+        fi
+    3,  if-then-elif-else
+        if 条件测试1; then
+            命令区域1
+        elif 条件测试2; then
+            命令区域2
+        else
+            命令区域3
+        fi
+
+
