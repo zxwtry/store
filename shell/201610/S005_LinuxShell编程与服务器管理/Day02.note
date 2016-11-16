@@ -72,24 +72,24 @@ note03: 数组
     索引号也可以用算术表达式表示，如1+2
     bash 3.x只支持一维数组(关系型数组在Bash4.0才支持) 
     用例：
-			root@zxwtry:~# A[0]=1
-			root@zxwtry:~# A[0]='c'
-			root@zxwtry:~# A[0]="good"
-			root@zxwtry:~# echo ${A[1]}
-			
-			root@zxwtry:~# echo ${A[0]}
-			good
-			root@zxwtry:~# A[3]=1
-			root@zxwtry:~# echo ${B[@]}
-			
-			root@zxwtry:~# echo ${A[@]}
-			good 1
-			root@zxwtry:~# echo ${A[*]}
-			good 1
-			root@zxwtry:~# echo ${#A[*]}
-			2
-			root@zxwtry:~# echo ${#A[@]}
-			2
+            root@zxwtry:~# A[0]=1
+            root@zxwtry:~# A[0]='c'
+            root@zxwtry:~# A[0]="good"
+            root@zxwtry:~# echo ${A[1]}
+            
+            root@zxwtry:~# echo ${A[0]}
+            good
+            root@zxwtry:~# A[3]=1
+            root@zxwtry:~# echo ${B[@]}
+            
+            root@zxwtry:~# echo ${A[@]}
+            good 1
+            root@zxwtry:~# echo ${A[*]}
+            good 1
+            root@zxwtry:~# echo ${#A[*]}
+            2
+            root@zxwtry:~# echo ${#A[@]}
+            2
     ${A[@]} --- 一次取出所有的元素：得到以空白隔开的东东
     ${A[*]} --- 一次取出所有的元素：得到一整个字符串
     ${#A[@]} 或者 ${#A[*]} --- 得到数组的元素
@@ -188,37 +188,37 @@ note06: Here Document   --- 利用Here Document做多行批注
 note07: Here Document   --- 利用Here Document，打包C(或其他程序语言)的原始码
     这是Cracker散步安全漏洞时，最喜欢的用法。举例如下：
     代码在：code013_Here_Document_打包C的原始码.sh    
-			#!/bin/bash
-			echo "正在产生 hello.c...."
-			echo
-			cat <<'EOF' > hello.c
-			#include <stdio.h>
-			int main(){
-			    printf("hello world!\n");
-			    return 0;
-			}
-			EOF
-			echo "编译hello.c..."
-			echo
-			#编译hello.c，产生执行文件
-			gcc -o hello hello.c
-			#若编译成功，就执行
-			if [ $? -eq 0 ]; then
-			    echo "执行hello..."
-			    echo
-			    ./hello
-			else
-			    echo 'Compile ERROR: hello.c'
-			fi
+            #!/bin/bash
+            echo "正在产生 hello.c...."
+            echo
+            cat <<'EOF' > hello.c
+            #include <stdio.h>
+            int main(){
+                printf("hello world!\n");
+                return 0;
+            }
+            EOF
+            echo "编译hello.c..."
+            echo
+            #编译hello.c，产生执行文件
+            gcc -o hello hello.c
+            #若编译成功，就执行
+            if [ $? -eq 0 ]; then
+                echo "执行hello..."
+                echo
+                ./hello
+            else
+                echo 'Compile ERROR: hello.c'
+            fi
     执行结果如下：
-			root@zxwtry:S005_LinuxShell编程与服务器管理# ./code013_Here_Document_打包C的原始码.sh 
-			正在产生 hello.c....
-			
-			编译hello.c...
-			
-			执行hello...
-			
-			hello world!
+            root@zxwtry:S005_LinuxShell编程与服务器管理# ./code013_Here_Document_打包C的原始码.sh 
+            正在产生 hello.c....
+            
+            编译hello.c...
+            
+            执行hello...
+            
+            hello world!
     这个script利用Here Document，夹带了一个hello.c程序的原始码，执行本script时会产生hello.c，
         接着利用gcc编译hello.c，若编译无误，就执行程序文件hello
     这就是shell script携带攻击程序的原型。
@@ -234,27 +234,27 @@ note08: 高级变量
 
 note09: 变量扩展：测试存在性及空值
     1,  基本型：${变量名称} 
-	    "变量存在"的定义：   如果变量曾设值过，则称该变量存在；反之，不曾设值过，或曾用unset取消变量，
-	                        则称变量不存在或未定义
-	    变量设值有两种情况： 1,  其值"非空"      name='zxwtry'   name非空
-	                        2,  其值为"空"      name=           name为空，以null表示
-	2,  测试变量"存在与否"的基本用法：
-	        语法：${待测变量-默认值}
-	        判断条件：如果变量存在，传回变量的值；不存在，传回默认值。
-	    执行过程如下：
-				root@zxwtry:shell# name="zxwtry"
-				root@zxwtry:shell# echo ${name-"default"}
-				zxwtry
-				root@zxwtry:shell# unset name
-				root@zxwtry:shell# echo ${name-"default"}
-				default
-	    在script的运用中，通常将不存在和空值视为同一类的情况。
+        "变量存在"的定义：   如果变量曾设值过，则称该变量存在；反之，不曾设值过，或曾用unset取消变量，
+                            则称变量不存在或未定义
+        变量设值有两种情况： 1,  其值"非空"      name='zxwtry'   name非空
+                            2,  其值为"空"      name=           name为空，以null表示
+    2,  测试变量"存在与否"的基本用法：
+            语法：${待测变量-默认值}
+            判断条件：如果变量存在，传回变量的值；不存在，传回默认值。
+        执行过程如下：
+                root@zxwtry:shell# name="zxwtry"
+                root@zxwtry:shell# echo ${name-"default"}
+                zxwtry
+                root@zxwtry:shell# unset name
+                root@zxwtry:shell# echo ${name-"default"}
+                default
+        在script的运用中，通常将不存在和空值视为同一类的情况。
     3,  测试变量"不存在"或其值为空："传回"一个默认值：
-	    语法：  ${待测变量:-默认值}
-	    判断条件：  如果变量不存在或其值为空，则符合判断，传回默认值作为判断
-	    用例：  myname=
-	            r=${myname:-'zxwtry'}
-	            echo $r
+        语法：  ${待测变量:-默认值}
+        判断条件：  如果变量不存在或其值为空，则符合判断，传回默认值作为判断
+        用例：  myname=
+                r=${myname:-'zxwtry'}
+                echo $r
     4,  -和:-的区别：
         *   如果变量扩展的条件式中只有-这个符号，则只做变量"存在性"的判断
         *   如果变量扩展的条件式中有:-这个符号，除了判断变量"存在性"之外，多加一个变量是否存在。
@@ -611,15 +611,36 @@ note22: 算术运算---简介
         用例：
                 echo $((k+4))
                 执行结果：输出：4
-	3,	如果数字以0开头，则视为八进制数字。
-		用例：
-				016等于十进制数14
-	4,	以0x或0X开头，视为16进制数字。
-		用例：
-				0x2a等于十进制的42
-	5,	不同进制的数字，可使用"基底#数字"的表示法，其中基底范围为2~64。
-		如果数字超过9，则以a代表10，以b代表11，依次类推。
-		用例：
-				十五进制数15#1b，其值为：1*15+11=26。
-				二进制数2#1010，其值为：1*8+0*4+1*2+0*1=10。
+    3,  如果数字以0开头，则视为八进制数字。
+        用例：
+                016等于十进制数14
+    4,  以0x或0X开头，视为16进制数字。
+        用例：
+                0x2a等于十进制的42
+    5,  不同进制的数字，可使用"基底#数字"的表示法，其中基底范围为2~64。
+        如果数字超过9，则以a代表10，以b代表11，依次类推。
+        用例：
+                十五进制数15#1b，其值为：1*15+11=26。
+                二进制数2#1010，其值为：1*8+0*4+1*2+0*1=10。
+    6,  Bash运算符的优先级表：
+        优先级      运算符
+        1           i++　   i--
+        2           ++i     --i
+        3           -负号   +正号
+        4           !逻辑'非'   ~位取反
+        5           **乘方
+        6           *乘  /除  %取余
+        7           +加  -减
+        8           <<位向左移   >>
+        9           <=  >=  >  < 
+        10          ==   !=
+        11          & 位的AND
+        12          ^ 位的互斥？？？？？？？
+        13          | 位的OR
+        14          && 逻辑的AND
+        15          || 逻辑的OR
+        16          '?:'三目运算符
+        17          = *= /= %= += -= <<= >>= &= ^= |=
+        18          '式子1，式子2'逗号运算
+        (小括号可改变运算的优先级)
 
