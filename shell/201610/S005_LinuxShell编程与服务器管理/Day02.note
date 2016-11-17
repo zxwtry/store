@@ -785,5 +785,9 @@ note28: 流程控制---if
         else
             命令区域3
         fi
+    4,  (())是Bash的复合命令，内置算式
+        可以使用let ""代替
+        见code21_if_let.sh和code21_if_双括号.sh
 
+note28: 
 
