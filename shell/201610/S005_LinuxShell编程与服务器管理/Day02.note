@@ -864,4 +864,23 @@ note28: 条件测试的写法
             [ -f /proc/net/if_inet6 ] && echo "这部主机支持IPv6"
             判断/proc/net/if_inet6是否存在，如果存在，就显示主机的核心有支持IPv6协议。
             凡是"[ 判断式 ]　&& 指令"的形式，就视为一种隐形的if-then语法。
-    
+    9,  命令1 || 命令2
+        ||称为逻辑的OR，其运作方式是：如果"命令1"执行结果为假，才会执行"命令2";
+        如果两个之中有一个为真，则传回真值0，否则传回真值1。
+        同样，||的特性，也可以当做是一种隐形的if语法。例如：
+            prefix="/home"
+            defpath="/usr/local/bin"
+            [ -z ${prefix:-} ] || prefix=${defpath%/*}
+            解释：
+                1,  行1，设定$prefix的值为/home
+                2,  行2，设定$defpath的值为/usr/local/bin
+                3,  行3，因$prefix非空，所以，${prefix:-} 变量扩展的传回值为prefix的变量值(非空)，
+                    [ -z ${prefix:-} ]对空值的条件测试失败，其结果为假，根据||的
+                    特性，接着执行prefix=${defpath%/*}，它会由$defpath后方删去
+                    符合/*的最短字符串，即删去/bin，因此，$prefix的值为/usr/local
+            本例可改写成if语法如下：
+                prefix="/home"
+                defpath="/usr/local/bin"
+                if [ ! -z ${prefix:-} ]; then
+                    prefix=${defpath%/*}
+                fi
