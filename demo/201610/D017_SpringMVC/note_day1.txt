@@ -469,4 +469,48 @@ note19: 整合DAO---配置文件
          -->
     </configuration>
 
-note20: 
+note20: SpringMVC和Mybatis的系统架构：
+        表现层
+        SpringMVC
+
+        业务层
+        service接口
+
+        持久层
+        Mybatis
+        
+        MySQL
+    (Spring将各层进行整合)
+    1， 通过Spring管理持久层的mapper(相当于dao接口)
+    2， 通过Spring管理业务层service，service可以调用mapper接口
+        (Spring进行事务控制)
+    3， 通过Spring管理表现层Handler，Handler中可以调用service接口
+    
+    (mapper、service、Handler都是JavaBean)
+
+    第一步：整合DAO层
+        Mybatis和Spring整合，通过Spring管理mapper接口。
+        使用mapper的扫描器自动扫描mapper接口在Spring中进行注册。
+    第二步：整合service层
+        通过Spring管理service接口。
+        使用配置文件将service接口配置在Spring配置文件中。
+        实现事务控制
+    第三步：整合SPringMVC
+        由于SpringMVC是Spring的模块，不需要整合。
+
+note21: SringMVC和Mybatis整合需要的jar包
+    Java环境：          Jdk7 和 eclipse
+    SpringMVC：         Spring 3.2所有jar包
+    数据库驱动：        mysql-connector-java-5.1.7-bin.jar
+    Mybatis:            mybatis-3.2.7.jar
+    Mybatis和Spring：   mybatis-spring-1.2.2.jar
+    日志：              log4j-1.2.17.jar
+                        log4j-api-2.0-rc1.jar
+                        log4j-core-2.0-rc1.jar
+                        slf4j-api-1.7.5.jar
+                        slf4j-log4j12-1.7.5.jar
+                        commons-logging-1.1.1.jar
+    dbcp数据库连接池：  commons-dbcp-1.2.2.jar
+                        commons-pool-1.3.jar
+    
+
