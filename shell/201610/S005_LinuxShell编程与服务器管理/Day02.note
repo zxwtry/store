@@ -804,4 +804,52 @@ note28: 条件测试的写法
         判断式会传回真假值，传回0为真，传回非0为假
         (注意：[[后面和]]前面都必须要有至少一个空格1)
         代码见：code024_if_Bash关键字.sh
-
+    4,  使用复合命令：((算式))
+        这里和常见的不一样：
+            如果算式的运算结果不为0，则传回真值(0)
+            如果算式的运算结果为0，则传回假值(1)
+        ((算式))                运算结果                               判断真假
+        ((0))                   0                                      假 
+        ((1))                   1                                      真
+        ((8))                   8                                      真
+        ((-1))                  -1                                     真
+        ((2-2))                 0                                      假
+        ((5*6))                 30                                     真
+    5,  使用内置命令：test判断式
+        test是Bash的内置命令，可传回"判断式"的结果，真值传回0，假值传回1
+        (注意，test中，>对Bash而言是特殊字符，需要\进行转义)
+        代码见：code025_if_test判断式.sh
+    6,  使用内置命令；[]
+        其形式为：[ 判断式 ]
+        []和test的用法是相同的，两者可改写互换
+        代码见：code026_if_内置命令[].sh
+    7,  使用-a、-o进行逻辑组合：
+        用例：
+                [ -r filename1 -a -x filename ]
+                如果filename1可读且可执行，则为真。-a即"且"之意。
+                [ -r filename1 -o -x filename ]
+                如果filename1可读且可执行，则为真。-o即"或"之意。
+        执行过程如下：
+				ubuntu@zxw:temp$ cat test3.sh 
+				#!/bin/bash
+				if [ -r test1.sh -a -x test2.sh ]; then
+				    echo "且True"
+				else
+				    echo "且False"
+				fi
+				
+				if [ -r test1.sh -o -x test2.sh ]; then
+				    echo "或True"
+				else
+				    echo "或False"
+				fi
+				
+				ubuntu@zxw:temp$ ls
+				test1.sh  test2.sh  test3.sh
+				ubuntu@zxw:temp$ ./test3.sh 
+				且False
+				或True
+    8,  命令1 && 命令2
+        &&称为逻辑的AND，其运作方式是：如果"命令1"执行结果为真，才会执行"命令2";
+        如果两个皆为真，则传回真值0，否则传回假值1
+        
