@@ -457,7 +457,7 @@ note19: 整合DAO---配置文件
         <!-- 配置别名 -->
         <typeAliases>
             <!-- 批量扫描别名的方式 -->
-            <typeAlias type="edu.zxw.goods.pojo"/>
+            <package name="edu.zxw.goods.pojo"/>
         </typeAliases>
     
         <!-- 配置mapper -->
@@ -468,3 +468,5 @@ note19: 整合DAO---配置文件
             <mappers></mappers>
          -->
     </configuration>
+
+note20: 
