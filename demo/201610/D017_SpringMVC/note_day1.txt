@@ -513,4 +513,18 @@ note21: SringMVC和Mybatis整合需要的jar包
     dbcp数据库连接池：  commons-dbcp-1.2.2.jar
                         commons-pool-1.3.jar
     
+note22: 在工程/config(Source Folder)/下面有两个文件：db.properties和log4j.properties
+    db.properties内容如下：
+        jdbc.driver=com.mysql.jdbc.Driver
+        jdbc.url=jdbc:mysql://localhost:3306/m1611
+        jdbc.username=name
+        jdbc.password=passwd
+    log4j.properties内容如下：
+        # Global logging configuration debug (adv)
+        log4j.rootLogger=DEBUG, stdout
+        # Console output...
+        log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+        log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+        log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
+
 
