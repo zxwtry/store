@@ -527,4 +527,12 @@ note22: 在工程/config(Source Folder)/下面有两个文件：db.properties和
         log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
         log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
 
+note23: 建立查询的简单数据：
+    insert into items values(default, '商品名称item001', 1.11, '详情detail001', '图片pic001', '2000-1-1 1:1:1');
+    insert into items values(default, '商品名称item002', 2.22, '详情detail002', '图片pic002', '2000-2-2 2:2:2');
+    insert into user values(default, '用户user101', '2001-1-1 1:1:1', 'm', '地址addr101');
+    insert into orders values(default, 1, '订单号order201', '2002-1-1 1:1:1', '订单状态order201');
+    insert into orderdetail values(default, 1, 1, 123);
+    insert into orderdetail values(default, 1, 2, 456);
+    (这里注意，之前的SQL语句，将AUTO_INCREMENT设成AUTO_INCREMENT=1)
 
