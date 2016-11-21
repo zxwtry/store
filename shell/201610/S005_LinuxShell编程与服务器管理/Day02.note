@@ -1020,4 +1020,32 @@ note36: for的语法
             (IFS=':')
             (PL="root:x:0:ubuntu")
             (for f in $PL)
+    3,  类C
+                for ((初始条件;终止条件;异动项))
+                do
+                    命令区域
+                done
+    4,  无穷循环
+                for ((;1;))
+                do
+                    命令区域
+                done
 
+note37: while循环
+    1,  语法：
+                while 条件测试
+                do
+                    命令区域
+                done
+    2,  while循环的经典用法是搭配转向输入，读取文件
+        用例；
+                #!/bin/bash
+                while read line
+                do
+                    echo $line
+                done < ~/temp/cvsfile.txt
+    3,  while无穷循环
+        while ((1))
+        while [1]
+        while true
+        while :
