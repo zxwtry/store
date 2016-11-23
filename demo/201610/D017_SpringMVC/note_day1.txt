@@ -536,3 +536,7 @@ note23: 建立查询的简单数据：
     insert into orderdetail values(default, 1, 2, 456);
     (这里注意，之前的SQL语句，将AUTO_INCREMENT设成AUTO_INCREMENT=1)
 
+note24: 到此，执行queryItems.action能够查询到items信息。
+    代码见：src_day1_SpringMVC和Mybatis　和　config_day1_SpringMVC和Mybatis
+
+
