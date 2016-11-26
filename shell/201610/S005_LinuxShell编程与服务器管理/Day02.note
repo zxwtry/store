@@ -1279,7 +1279,7 @@ note53: 转向的用法：
 
                 用例：
                         >左方省略fd；fd默认为1，指的就是标准输入转向。
-                        常见运用有以下两种：
+                        常见运用有以下：
                         A， 制造空文件：
                              > test.txt
                              开启空文件test.txt
@@ -1291,7 +1291,36 @@ note53: 转向的用法：
                              ls > dirs.txt
                              将ls的输出转向存储在文件dirs.txt。这个方法在
                              写脚本时，经常使用。
-                            
-                            
-                            
-                            
+                       
+                        C， >左方文件代码不空
+                             exec 6> out.txt
+                             echo "hello world" 1>&6
+                             行1，开启文件out.txt作为输出，文件代码6
+                             行2，将echo原本会显示在标准输出的信息，存储在代码6
+
+        3,  转向输出
+                语法：
+                        fd>|文件
+                用途：
+                        和>相同，但是>|不会理会noclobber选项，只要"文件存在"，
+                        就会强制覆盖，清空该文件内容。
+                用例：
+                        ls >| dirs.txt
+                        不管noclobber选项是否开启，只要dirs.txt存在，该文件内容一定会被清空。
+                >和>|的比较如下：
+					ubuntu@zxw:~$ ls > dirs.txt
+					ubuntu@zxw:~$ cat dirs.txt
+					dirs.txt
+					github
+					temp
+					ubuntu@zxw:~$ set -o noclobber
+					ubuntu@zxw:~$ ls > dirs.txt
+					-bash: dirs.txt: cannot overwrite existing file
+					ubuntu@zxw:~$ ls >| dirs.txt
+
+        4,  转向附加
+                语法：
+                        fd>>文件
+                用例：
+                        ls >> dirs.txt
+                        写在文件后面
