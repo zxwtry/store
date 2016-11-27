@@ -1346,3 +1346,38 @@ note53: 转向的用法：
             上面这条的意思是：转向输出至"文件"，标准错误代码2链接至标准输出1，
             其效用和 &>相同。因此，上述范例可改写成：
                 ntpdate time.stdtime.gov.cn >/dev/null 2>&1
+       
+note54: Here Document转向
+    之前介绍的是：可以把标记之间的内容利用转向输出的方式交给指定的命令去处理之外。
+    现在有：可以供应给开启的文件读取，语法如下：
+
+        fd<<标记
+        资料
+        ......  
+        ......  
+        ......  
+        标记
+
+    范例：
+        
+        #!/bin/bash
+
+        exec 6<<EOF
+        line1
+        line2
+        line3
+        EOF
+
+        while read <<&6
+        do
+            echo $REPLY
+        done
+
+    执行过程如下：
+
+			./code069_HereDocument.sh 
+			line1
+			line2
+			line3
+
+
