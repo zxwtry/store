@@ -1404,4 +1404,38 @@ note56: trap---信号(singal)---进程编号PID
     7,  如果主机中没有sshd进程可用，可开启一个终端窗口，执行top命令。
         再开启一个窗口执行code070_trap_getpid1.sh top，这时的进程关键词是top
 
+note57: trap---信号(singal)---信号列表
+    1,  系统定义的信号，可用以下指令列出：
+        kill -l    (这个是l，不是数字1)
+        trap -l    (这个是l，不是数字1)
+        输出结果，示例如下：
+			trap -l
+			 1) SIGHUP   2) SIGINT   3) SIGQUIT  4) SIGILL   5) SIGTRAP
+			 6) SIGABRT  7) SIGBUS   8) SIGFPE   9) SIGKILL 10) SIGUSR1
+			11) SIGSEGV 12) SIGUSR2 13) SIGPIPE 14) SIGALRM 15) SIGTERM
+			16) SIGSTKFLT   17) SIGCHLD 18) SIGCONT 19) SIGSTOP 20) SIGTSTP
+			21) SIGTTIN 22) SIGTTOU 23) SIGURG  24) SIGXCPU 25) SIGXFSZ
+			26) SIGVTALRM   27) SIGPROF 28) SIGWINCH    29) SIGIO   30) SIGPWR
+			31) SIGSYS  34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3
+			38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8
+			43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13
+			48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12
+			53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7
+			58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
+			63) SIGRTMAX-1  64) SIGRTMAX
+
+    2,  每个信号都有一定特定的数字代码，如 SIGINT定义的代码是2。
+        信号名称都是以SIG开头，也可以忽略不写，也就是说SIGINT和INT是相同的。
+        信号名称不分大小写皆可。
+        在传递信号时，可使用数字代码，也可以使用信号名称。
+
+    3,  要让前述DNS的daemon程序named重新启动，可执行：
+            kill -l 11198
+        或使用信号名称：
+            kill -HUP 11198
+            kill -SIGHUP 11198
+
+    4,  信号的定义有几个标准，如POSIX.1。如果要查看各个信号的定义，可执行：
+        man 7 signal
+
 
