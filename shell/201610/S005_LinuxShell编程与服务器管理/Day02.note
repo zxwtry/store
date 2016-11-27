@@ -1380,4 +1380,28 @@ note54: Here Document转向
 			line2
 			line3
 
+note55: trap---陷阱
+    1,  在Script的执行过程中，有时候希望能够实时处理系统传来的信号，
+        如用户按下了Ctrl+c。
+    2， 处理的方式可分为两种：接受信号或忽略信号。
+        接受信号：通常会对信号安排执行特定的命令。
+        忽略信号：主要是向避免意外的状况干扰Script的运行。
+    3， 像这种能捕捉特定信息，并做出反应的机制，称为trap(陷阱触发)
+
+note56: trap---信号(singal)---进程编号PID
+    1,  为了方便通信，每个进程都有一个独一无二的代码
+    2,  代码叫进程编号(Process IDentification)简称PID
+    3,  在命令语法中传递信号的对象，就是进程代码。
+    4,  使用如下命令可以列出内存中所有的进程：
+        ps auxw
+        或
+        ps -ef
+    5,  使用如下指令可以找出特定的进程，如要找sshd
+        ps auxw | grep named | grep -v grep
+    6,  为了更加方便使用，可以编写Shell来显示进程的PID
+        见代码：
+            code070_trap_getpid1.sh sshd
+    7,  如果主机中没有sshd进程可用，可开启一个终端窗口，执行top命令。
+        再开启一个窗口执行code070_trap_getpid1.sh top，这时的进程关键词是top
+
 
