@@ -1430,7 +1430,7 @@ note57: trap---信号(singal)---信号列表
         在传递信号时，可使用数字代码，也可以使用信号名称。
 
     3,  要让前述DNS的daemon程序named重新启动，可执行：
-            kill -l 11198
+            kill -1 11198   (注意，这里是数字1，不是小写字母l)
         或使用信号名称：
             kill -HUP 11198
             kill -SIGHUP 11198
@@ -1438,4 +1438,37 @@ note57: trap---信号(singal)---信号列表
     4,  信号的定义有几个标准，如POSIX.1。如果要查看各个信号的定义，可执行：
         man 7 signal
 
+note57: trap---信号(singal)---传送信号的方法
+    1,  使用内置命令kill，可传送信号给进程。
+        传送的语法如下：
+            kill -信号 进程编号
+        或
+            kill -s 信号 进程编号
+        或
+            kill -n 信号 进程编号
 
+        解释：  "-信号"可使用信号代码或信号名称。kill可后接多个进程编号，
+                kill会把指定的信号都传送给这些进程。
+                如果省略"-信号"，则默认传送SIGTERM(代码15)信号给进程。
+
+    2,  用例：
+                kill 2359
+            等同于
+                kill -TERM 2359，意思是要终止进程2359
+
+    3,  如果要强制终止，应改用：
+                kill -9 2359
+                或
+                kill -KILL 2359
+
+    4,  除了使用kill可传送信号给进程，killall这个命令也可以。
+        killall使用的选项和kill相同；
+        和kill不同的是，killall传送信号的对象是进程的名称。
+        用例：
+                当Firefox浏览器因故挂了，可使用以下指令终止firefox：
+                killall firefox-bin
+                killall -9 firefox-bin
+
+
+
+note58: 
