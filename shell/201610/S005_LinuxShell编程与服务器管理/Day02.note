@@ -1517,4 +1517,41 @@ note59: trap的运用
             通常在Script中，如果曾使用trap对某些信号做过其他安排，那么
             在Script结束前都会再用trap命令来恢复这些信号原本的作用。
 
+    3,  trap的语法三
+            trap '' 信号串行
+        用途：
+            忽略系统发出的"信号串行"
+            如果"触发信号"的部分是空字符串''，那么，Shell会忽略这些"信号串行"，
+            不做任何反应。
+            例如，想忽略使用者按下的ctrl-c组合键，可写成
+                trap '' INT
+            这样无论按下多少次ctrl-c，都无法终端sleep.sh的执行。
+        执行过程如下：
+				./sleep.sh 
+				我还在睡觉
+				我还在睡觉
+				^C^C我还在睡觉
+				^C^C^C^C我还在睡觉
+				^C^C^C^C我还在睡觉
+				^C^C^C^C^C我还在睡觉
+				我还在睡觉
+				Killed
+    4,  trap的语法四
+        语法：
+                trap -p
+        用途：
+                列出目前trap向shell注册的信号列表
+        示例如下：
+				trap -- '' SIGINT
+				trap -- 'echo '\''收到ABRT信号'\''' SIGABRT
+				trap -- '' SIGTSTP
+				trap -- '' SIGTTIN
+				trap -- '' SIGTTOU
+				
+        执行：trap '-' INT
+        再trap -p如下：
+				trap -- 'echo '\''收到ABRT信号'\''' SIGABRT
+				trap -- '' SIGTSTP
+				trap -- '' SIGTTIN
+				trap -- '' SIGTTOU
 
