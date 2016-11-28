@@ -1484,3 +1484,37 @@ note58: 常用的信号：
 
     TIP:    最好使用信号名称，而非信号代码，这样可移植性更高。
 
+note59: trap的运用
+    1,  trap的语法一：
+            trap "触发指令" 信号串行
+        用途：
+            向Shell注册信号，只要系统产生此特定的信号(就是掉到我们安排的陷阱中)，
+            trap指令就会触发，并执行trap命令中的"触发指令"。
+        用例：
+            trap ‘echo "收到ABRT信号..."’　ABRT
+            本例，向Shell注册了一个ABRT的信号，只要系统出现ABRT信号，就会执行echo
+            指令。
+            向目前的Shell发出ABRT信号的方法：
+                kill -ABRT $$
+            其中，$$代表目前Shell的进程编号。使用$$，就不必用ps指令去找Shell的PID
+            执行结果如下：
+				ubuntu@zxw:~$ trap "echo '收到ABRT信号'" ABRT
+				ubuntu@zxw:~$ kill -ABRT $$
+				收到ABRT信号
+				
+            注意：Bash会对trap指令读取两次，
+                    一次是读取trap指令内容时，
+                    一次是执行触发指令时。
+            因此最好使用单引号含括"触发指令"，以免Bash先对它进行变量替换等动作。
+            
+    2,  trap的语法二
+            trap - 信号串行
+        用途：
+            如果trap的语法中没有触发指令，而是-或者空白，则可恢复信号串行原本的作用。
+        用例：
+            trap '-' ABRT
+        TIP：
+            通常在Script中，如果曾使用trap对某些信号做过其他安排，那么
+            在Script结束前都会再用trap命令来恢复这些信号原本的作用。
+
+
