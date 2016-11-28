@@ -1469,6 +1469,18 @@ note57: trap---信号(singal)---传送信号的方法
                 killall firefox-bin
                 killall -9 firefox-bin
 
+note58: 常用的信号：
+    信号名称        信号代码   说明
+    HUP             1           重新启动进程
+    INT             2           按Ctrl-c键，终端程序
+    QUIT            3           按Ctrl-\键，以内核转储的方式离开程序
+    TERM            15          终止进程
+    KILL            9           强制删除进程
+    STOP            19          暂停进程
+    CONT            18          继续执行
+    TSTP            20          按Ctrl-z键，在终端中暂停进程
+    ABRT            6           放弃进程，并转存内核(core dump)信息
+    SEGV            11          内存区段错误，并转存核心信息
 
+    TIP:    最好使用信号名称，而非信号代码，这样可移植性更高。
 
-note58: 
