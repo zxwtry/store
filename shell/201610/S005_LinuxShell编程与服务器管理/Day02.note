@@ -1622,3 +1622,33 @@ note61: sed和awk入门---sed的用法
                     将含有AAA到含有DDD的那几行，皆将其中的B换成567。
             用例3： sed -n '2,4s/B/567/p' dataf5
                     由第2行到第行，皆将其中的B换成567。
+
+note61: sed和awk入门---awk的用法
+    1,  简介：
+            awk是一种可以处理数据、产生格式化报表的语言，功能相当强大。
+    2,  工作方式：
+            读取数据文件，将每一行数据视为一条纪录(record)，每笔纪录以字段分隔符
+            分成若干字段，然后输出各个字段的值。
+    3,  执行ps auxw的第一条是：
+        USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+        root         1  0.0  0.1  33456  1952 ?        Ss   Jun28   0:22 /sbin/init
+        像这种固定结构的数据，用awk来处理，特别有威力。
+        仅用以下单一指令，可以取得所有行程的PID：
+            ps auxw | awk '{print $2}'
+    4,  awk常用的作用格式：
+        a,  awk "样式" 文件：把符合样式的数据行显示出来
+        b,  awk '{操作}' 文件：对每一行都执行{}中的操作
+        c,  awk '样式{操作}' 文件：对符合样式的数据行，执行{}中的操作。
+    5,  awk的用法一：   awk '/La/' dataf1
+                        显示含La的数据行
+    6,  awk的用法二：   awk '{ print $1, $2 }' dataf2
+                        显示dataf2的每一行的第1和第2个字段
+    7,  awk的用法三：   awk '/La/{ print $1, $2 }' dataf3
+                        将含有La关键字的数据行的第1及第2个字段显示出来
+    8,  awk的用法四：   awk -F: '/^ols3/{ print $3, $4 }' /etc/passwd
+                        使用选项-F，指定:为分隔字符，账号ols3的uid(第3字段)
+                        及gid(第4字段)显示出来
+    9,  awk的用法五：   awk -F: 'BEGIN{OPS="+++"}/^ols3/{ print $1, $2, $3, $4, $5 }' /etc/passwd
+                        以:为分隔字符，+++为输出字段分隔符，将账号ols3的第1~5栏显示出来。
+                        执行结果：ols3+++x+++1002+++1002+++
+
