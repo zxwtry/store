@@ -1633,7 +1633,7 @@ note62: sed和awk入门---awk的用法
         USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
         root         1  0.0  0.1  33456  1952 ?        Ss   Jun28   0:22 /sbin/init
         像这种固定结构的数据，用awk来处理，特别有威力。
-        仅用以下单一指令，可以取得所有行程的PID：
+        仅用以下单一指令，可以取得所有进程的PID：
             ps auxw | awk '{print $2}'
     4,  awk常用的作用格式：
         a,  awk "样式" 文件：把符合样式的数据行显示出来
@@ -1667,3 +1667,30 @@ note63: sed和awk入门---awk的实际应用
     4,  修改CSV文件的各字段的顺序：
             cat dataf0.csv | awk -F, 'BEGIN{OFS=","}{print S2, S1}' > save.txt
             
+
+note64: 进程管理和工作控制---ps
+    1,  UNIX  ps -ax 或 ps -a -x
+        BSD   ps  ax 或 ps  a  x
+    2,  显示目前所有的进程：
+        UNIX :
+            ps -e
+            ps -ef
+            ps -eF
+            ps -ely
+            *** -e表示要选出所有的进程，和-A同义
+            *** -f是控制显示格式的选项，表示要列出完整的进程信息
+            *** -F也是控制显示格式的选项，表示要比-f列出更多额外的信息
+            *** -l和-y均为控制显示格式的选项；-l表示使用长格式，-y表示不要显示旗标。
+                这两个选项京城放在一起使用，且-y只能和-l合用。
+        BSD :
+            ps ax
+            ps aux
+            ps auxw
+            ps auxww
+            *** a表示要列出和终端有关的进程，如果和x合用，表示要列出所有的进程。
+            *** u是控制显示格式的选项，表示以用户导向的角度来列出进程。
+            *** w是控制格式的修饰选项，表示要用较宽的行数来显示进程信息，超过
+                宽度的信息会被截掉。如果使用两个w，则不限制显示宽度，信息会全部
+                显示出来，不会被截断。
+    
+
