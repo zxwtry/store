@@ -1754,4 +1754,15 @@ note66: top命令
     7,  行7为进程信息的各个字段：
             代号        意义
             PID         进程编号
-            USER        
+            USER        拥有进程的使用者
+            PR          进程的优先级
+            NI          进程的nice值
+            VIRT        进程占用的虚拟内存大小
+            RES         进程常驻时占用的内存大小
+            SHR         可分享给其它进程的内存大小
+            S           进程的状态
+            %CPU        进程占用CPU的百分比
+            %MEM        进程占用的真实内存大小
+            TIME+       进程已经占用的CPU时间
+            COMMAND     程序名称和参数tomcat7的是java；ubuntu的是root
+    8,  
