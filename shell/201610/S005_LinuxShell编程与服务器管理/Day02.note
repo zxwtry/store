@@ -1819,3 +1819,23 @@ note69: nice命令
     3,  用例2：     nice htop
                     制定htop执行的优先级为10。
 
+note70: renice命令
+    1,  语法:       renice nice值 -p PID -g 群组 -u 使用者名称
+                    -p,-g,-u3个选项，可单独使用，或组合使用。
+        用途：      调整某一个已执行进程的优先级。
+    2,  用例1:
+                    renice -5 -p 11912
+                    假设11912是htop的PID。
+    3,  用例2:      
+                    renice -5 11912
+                    同用例1，但是省略-p
+    4,  用例3:      
+                    renice +5 -u daemon
+                    将所有进程拥有者是daemon的进程的nice值调整为5。
+                    若nice值为正，+可以省略不写。
+                    执行nice或renice之后，可试用以下指令观察其nice值：
+                    ps -p 进程编号 -o ni,args
+                    观察的用例：
+                        ps -p 11912 -o ni,args
+
+
