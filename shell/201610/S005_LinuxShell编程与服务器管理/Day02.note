@@ -1845,4 +1845,30 @@ note71: PRI和NI
 note72: 工作控制：
     Bash在互动模式下，允许用户暂停某一进程，稍后再回复执行该进程。
     像这种赋予使用者操控进程的机制，称为工作控制(工作控制)
-
+    操作过程：程序是一个无限循环的程序
+        1,  ./code073_jobs_control_sleep2.sh
+        2,  ctrl+z暂停进程
+        3,  bg将该进程放到后台执行
+        (1~3等同于./code073_jobs_control_sleep2.sh &)
+        4,  jobs会列出目前的工作
+        5,  fg将进程拉回前台
+        6,  ctrl+c结束code073_jobs_control_sleep2.sh的执行
+    执行过程如下：
+		./code073_jobs_control_sleep2.sh 
+		程序正在执行中...
+		^Z
+		[1]+  Stopped                 ./code073_jobs_control_sleep2.sh
+		bg
+		[1]+ ./code073_jobs_control_sleep2.sh &
+		程序正在执行中...
+		jo程序正在执行中...
+		程序正在执行中...
+		bs
+		[1]+  Running                 ./code073_jobs_control_sleep2.sh &
+		程序正在执行中...
+		程序正在执行中...
+		fg程序正在执行中...
+		
+		./code073_jobs_control_sleep2.sh
+		程序正在执行中...
+    
