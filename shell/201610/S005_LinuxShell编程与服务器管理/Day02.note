@@ -1921,4 +1921,22 @@ note73: 工作控制：%控制
         再次exit会退出。
 
 note74: 常用的工作控制命令:
-    
+    1,  &
+        (find / -name "*.txt" > check.log; find / -name "*.conf" >> check.log) &
+        这里使用()开启一个子Shell执行find等复合指令，然后用&全放到后台执行
+    2,  bg 将暂停的工作放到后台执行
+        bg 将现在的工作放到后台
+        bg n 或 bg %n 将工作编号n的工作放到后台
+        bg %?xxx 将程序名称含有xxx的工作放到后台
+    3,  fg将暂停的工作，拉回前台工作
+    4,  jobs列出工作
+    5,  disown移除工作 
+    6,  kill 传送信号给进程或工作
+        这里后接的不再是PID，而是工作编号
+    7,  wait 等待子进程结束，传回最后一个命令的执行状态
+    8,  suspend 暂停目前的Shell
+        用法一：暂停一个非login的Shell：suspend
+        用法二：暂停目前的Shell：suspend -f
+        (当暂停的Shell收到CONT的信号时，才会继续执行)
+
+
