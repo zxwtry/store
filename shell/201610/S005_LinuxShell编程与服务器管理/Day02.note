@@ -1872,3 +1872,40 @@ note72: 工作控制：
 		./code073_jobs_control_sleep2.sh
 		程序正在执行中...
     
+note73: 工作控制：%控制
+    1,  %%和%+可调用现在的工作，使用%-可调用前一个工作：
+        流程：
+            a,  先用jobs -l显示任务栏表
+            b,  使用%-调出前一个工作
+            c,  ctrl+c中断
+            d,  用jobs -l发现只剩一个工作[2]+一个工作
+            e,  %%调用现在的工作
+            f,  ctrl+c中断
+        执行过程如下：
+			ubuntu@zxw:temp$ ./A.sh &
+			[1] 2801
+			ubuntu@zxw:temp$ ./B.sh &
+			[2] 2803
+			ubuntu@zxw:temp$ AAAA
+			BBBB
+			AAAA
+			joBBBB
+			bs AAAA
+			-l
+			[1]-  2801 Running                 ./A.sh &
+			[2]+  2803 Running                 ./B.sh &
+			ubuntu@zxw:temp$ BBBB
+			AAAA
+			%-
+			./A.sh
+			BBBB
+			^C
+			ubuntu@zxw:temp$ BBBB
+			jobs -l
+			[2]+  2803 Running                 ./B.sh &
+			ubuntu@zxw:temp$ BBBB
+			%%
+			./B.sh
+			BBBB
+			^C
+
