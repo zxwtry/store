@@ -2003,6 +2003,21 @@ note77: history命令
     6,  history -w
             将目前的历史记录写入$HISTFILE
 
-
+note78: fc命令
+    1,  fc命令可列出登录主机后，最近执行过的指令
+        我在这里使用fc gi
+        直接进入了nano界面，内容是:
+            git commit -m "添加 shell/201610/S005_LinuxShell编程与服务器管理/Day02.note 到 history指令"
+    2,  fc也有搜寻的功能：
+        fc -s ls
+        这里会搜寻最近一个以ls开头的指令，并执行该命令。
         
-            
+note79: 历史指令扩展
+    1,  历史指令扩展有3个功能：
+            一：调用历史指令
+            二：在当前的命令行中，调用先前的指令，并安插参数
+            三：快速修正之前错误的指令
+    2,  histverify为off:
+            历史指令扩展完成之后，立即执行
+        histverify为on:
+                    
