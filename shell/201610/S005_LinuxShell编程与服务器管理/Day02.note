@@ -1969,3 +1969,23 @@ note75: 进程替换
             3,  ()中的进程由/dev/fd中读取数据，然后交给gzip做压缩
                 并转向输出存成test.tgz
             效果和tar cvzf test.tgz /root/tmp一样
+
+note76: 历史指令
+    1,  echo $HISTFILE 输出的是 /home/zxwtry/.bash_history
+    2,  set +o history 关闭历史功能
+        set -o history 开启历史功能
+    3,  HISTSIZE 每一个Shell互动环境结束之后，多少个指令会被记录到历史脚本文件中。
+        HISTFILESIZE 历史脚本文件最多能存入的指令数量。
+        HISTIGNORE=ls:ps:cd:t*:\&
+            代表ls ps cd t开头的指令，都不存入历史脚本文件。
+            &代表最后一个历史指令，如果一直输入重复的指令，只存入一个。
+        HISTCONTROL 可以有3个设定值
+            ignorespace: 凡是指令开头有空格，不存入
+            ignoredups: 连续重复的指令，只存一个
+            ignoreboth: 结合前两者的功能
+    4,  在Bash 3.1开始，新增一个内置变量HISTTIMEFORMAT，
+        如果设定这个变量为某一个时间格式，则执行history命令时，
+        会在每个命令前显示日期时间
+            HISTTIMEFORMAT="%c : "
+            表示HISTTIMEFORMAT使用的时间格式和date相同。
+            
