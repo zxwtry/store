@@ -2028,5 +2028,14 @@ note79: 历史指令扩展
     6,  !字符串 调用最近一个以"字符串"开头的历史指令
     7,  !?字符串? 调用最近一个包含"字符串"的历史指令
     8,  ^字符串1^字符串2^ 将前一个历史指令的"字符串1"替换成"字符串2"
+        只替换最前面一个
     9,  !# 代表在命令行中，到目前为止所输入的字符串
         data; !# 会替换成 data; data;
+    10, !!:$  取得前一个命令的最后一个参数
+			ubuntu@zxw:store$ ls /home/ubuntu/github
+			ACMICPCTemplate  document  store
+			ubuntu@zxw:store$ !!:$
+			/home/ubuntu/github
+            -bash: /home/ubuntu/github: Is a directory
+    11, !ls:1  找出最近一个以ls开头的指令的第1个参数
+    12, !ls:*  找出最近一个以ls开头的指令的所有参数 
