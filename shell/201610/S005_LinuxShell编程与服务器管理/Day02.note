@@ -1988,4 +1988,21 @@ note76: 历史指令
         会在每个命令前显示日期时间
             HISTTIMEFORMAT="%c : "
             表示HISTTIMEFORMAT使用的时间格式和date相同。
+
+note77: history命令
+    1,  history
+            history会列出全部的历史指令。列出时，在每个指令前会有编号。
+    2,  history
+            列出最后n个指令
+    3,  history -d n
+            删除编号为n的历史指令
+    4,  history -c
+            清空$HISTFILE文件
+    5,  history -r 文件
+            读取文件的内容，并将内容附件到$HISTFILE之后
+    6,  history -w
+            将目前的历史记录写入$HISTFILE
+
+
+        
             
