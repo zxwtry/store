@@ -2098,4 +2098,21 @@ note82: 判断文件是否存在
         x       可执行权
         s       文件大小不为0
 
+note03: 建立文件
+    1,  > test.txt
+    2,  :> test.txt
+        (增加可移植性)
+    3,  建立隐藏文件
+        :> .test
+    4,  touch
+        touch test.txt
+    5,  echo
+        echo "aaa" > test.txt
+    6,  利用ln命令，建立另一个文件的复本
+        ln test.txt test2.txt
+        test.txt和test2.txt的连接计数均为2
+        ln不加任何选项建立的文件，称为"硬链接"文件(hard link)，也是一个一般文件f
+        当修改其中一个文件的内容时，另一个文件的内容也跟着做相同的改变。
+        如果把其中的一个文件删除，另一个文件仍然会存在，只是把文件的计数值减1
+
 
