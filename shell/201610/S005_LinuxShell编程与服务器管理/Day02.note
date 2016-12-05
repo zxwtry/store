@@ -2098,7 +2098,7 @@ note82: 判断文件是否存在
         x       可执行权
         s       文件大小不为0
 
-note03: 建立文件
+note83: 建立文件
     1,  > test.txt
     2,  :> test.txt
         (增加可移植性)
@@ -2115,4 +2115,29 @@ note03: 建立文件
         当修改其中一个文件的内容时，另一个文件的内容也跟着做相同的改变。
         如果把其中的一个文件删除，另一个文件仍然会存在，只是把文件的计数值减1
 
+note84: 建立目录
+    1,  mkdir testit
+    2,  mkdir -m 711 testit
+        -m指令testit目录建立时的权限值为0711
+    3,  mkdir -p testit/t1/t2/t3
+        建立多层目录
+    4,  rmdir testit
+        删除空目录
+    5,  rmdir -p testit/t1/t2/t3
+        删除多层空目录
+    6,  rm -Rf testit
+        R递归式往下层删除文件
+        f强制删除，不必询问
 
+note85: 建立区块设备文件
+    1,  区块设备文件：用来存储数据的媒体，或可供读取的接口设备。
+        前者：硬盘的分区/dev/hda1
+        后者：CDROM等外界设备/dev/cdrom或/dev/scd0
+    2,  建立一个和/dev/hda1相同属性的区块设备文件
+        mknod myhda1 b 3 1
+        mknod 文件名 文件形态 主要设备代码(MAJOR) 次要设备代码(MINOR)
+    3,  文件形态由以下代码组成：
+            b       区块设备文件
+            c       字符设备文件
+            p       FIFO文件
+    
