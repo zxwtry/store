@@ -2064,3 +2064,38 @@ note80: 历史指令扩展总结：
     h           删除最后面的文件名部分
     t           删除目录部分
     p           只显示命令，不执行
+
+note81: Argument list too long
+    见代码：
+		code074_文件操作_创建20个txt文件.sh
+		code075_文件操作_listtoolong.sh
+		code076_文件操作_Argument_list_too_long.sh
+		code077_文件操作_listtoolong2_xargs.sh
+
+note82: 判断文件是否存在
+    1,  if [ -f /etc/rc.d/rc.firewall ]; then
+            . /etc/rc.d/rc.firewall
+        fi
+    2,  if [ -d /etc/rc.d ]; then
+            echo '这是RedHat base'
+        elif [ -d /etc/init.d ]; then
+            echo '这是Debian base'
+        else
+            echo '未知的base'
+        fi
+
+    3,  符号    文件类型
+        f       一般文件
+        d       目录
+        b       区块设备文件
+        c       字符设备文件
+        S       Socket文件
+        p       FIFO文件
+        L       符号链接文件(symbolic link)
+        e       只判断文件是否存在，不管文件的类型
+        r       可读取文件
+        w       可写入文件
+        x       可执行权
+        s       文件大小不为0
+
+
