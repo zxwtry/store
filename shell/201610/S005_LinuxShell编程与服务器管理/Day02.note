@@ -2228,4 +2228,17 @@ note87: 建立FIFO文件
             echo才执行完 
 
 note88: 建立Socket文件 
-    
+    1,  在Red Hat Linux可以使用mksock来建立socket文件
+        在Ubuntu中，这个命令是没有的。
+    2,  范例：mksock mysocket
+    3,  mksock属于MAKEDEV套件的一部分。
+        MAKEDEV的原始代码程序包中，含有mksock.c。
+        这个程序可单独编译，方法如下：
+            make mksock
+        接着将mksock复制放入/usr/local/sbin中，方便以后调用
+        (没有实践) 
+    4,  /dev/log文件如果遗失，可利用mksock重建：
+         mksock /dev/log
+            chmod 666 /dev/log
+
+
