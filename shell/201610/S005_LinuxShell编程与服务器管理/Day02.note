@@ -2209,6 +2209,23 @@ note87: 建立FIFO文件
 	    在另外一个Shell中：
             ubuntu@zxw:temp$ cat myfifo 
             hello shell I am zxwtry		
-        回到之前的Shell中：
+        之前的Shell中：
             echo才执行完
-   
+    7,  在Script中，可让两个不同的进程通过FIFO文件，进行数据传递，
+        从而达到内部进程通信的目的。
+    8,  在Linux中，使用mkfifo程序，一样可以建立FIFO文件。
+        mkfifo myfifo2
+        这个效果和使用mknod建立的FIFO文件是完全一样的。
+    9,  用例：
+        在一个Shell中：
+            ubuntu@zxw:temp$ mkfifo myfifo2
+            ubuntu@zxw:temp$ echo "I am big sb" > myfifo2
+            echo一直在等待
+        在另外一个Shell中：
+            ubuntu@zxw:temp$ cat myfifo2
+            I am big sb
+        之前的Shell中：
+            echo才执行完 
+
+note88: 建立Socket文件 
+    
