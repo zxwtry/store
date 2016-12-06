@@ -2187,5 +2187,28 @@ note86: 建立字符设备文件
         可以重建nullfile：
             mknod -m 666 /dev/null c 1 3
 
-
-    
+note87: 建立FIFO文件
+    1,  FIFO文件是一种命令管道，具有先进先出的特性。
+    2,  建立文件的方式：
+        mknod myfifo p
+        执行如下：
+			ubuntu@zxw:temp$ ls -la myfifo
+			prw-rw-r-- 1 ubuntu ubuntu 0 Dec  6 21:36 myfifo
+    3,  建立FIFO文件时，不必(也不可)指定MAJOR和MINJOR。
+    4,  在一个Shell环境中使用echo命令，把一个字符串输出到myfifo,
+        称为First In，而echo会暂停下来，等待其他进程读取数据。
+    5,  在另一个Shel环境中，使用cat命令读取来自myfifo的输出，
+        称为Frist Out，而之前的echo则因数据已经输出完毕终止运行。
+    6,  4和5的执行过程如下：
+        在一个Shell中：
+			ubuntu@zxw:temp$ mknod myfifo p
+			ubuntu@zxw:temp$ ls -la myfifo
+			prw-rw-r-- 1 ubuntu ubuntu 0 Dec  6 21:36 myfifo
+			ubuntu@zxw:temp$ echo "hello shell I am zxwtry" > myfifo
+            echo一直在等待
+	    在另外一个Shell中：
+            ubuntu@zxw:temp$ cat myfifo 
+            hello shell I am zxwtry		
+        回到之前的Shell中：
+            echo才执行完
+   
