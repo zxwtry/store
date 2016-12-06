@@ -2150,4 +2150,25 @@ note85: 建立区块设备文件
     7,  IDE硬盘分属MAJOR为3的类别。
         而，第一个IDE分区/dev/hda1则使用MINOR1来和其他分区做区别，记为(3,1)
         其他的，依此类推，/dev/hda2记为(3,3)
-    8,  
+    8,  对于mknod myhda1 b 3 1的意思：建立一个区块设备文件，名为myhda1
+        文件形态是区块设备文件(b)，主要设备代码MAJOR为3，次要设备代码MINJOR为1。
+        myhda1和/dev/hda1就视为具有相同属性的设备文件了。
+        这样，在/dev/hda1操作挂在分区的操作，也可以在myhda1上操作。
+    9,  -m 可以设置文件权限
+    10, Linux核心原始代码中Documentation/devices/txt有十分清楚的定义。
+        在/usr/include/linux/major.h文件中，有MAJOR的定义：
+        文件的开头内容如下：
+			#ifndef _LINUX_MAJOR_H
+			#define _LINUX_MAJOR_H
+			
+			/*
+			 * This file has definitions for major device numbers.
+			 * For the device number assignments, see Documentation/devices.txt.
+			 */
+			
+			#define UNNAMED_MAJOR       0
+			#define MEM_MAJOR       1
+			#define RAMDISK_MAJOR       1
+			#define FLOPPY_MAJOR        2
+			#define PTY_MASTER_MAJOR    2
+
