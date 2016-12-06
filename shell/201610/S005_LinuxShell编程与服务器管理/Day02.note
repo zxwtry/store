@@ -2257,7 +2257,7 @@ note89: 建立符号链接文件
         ls -s /root/tmp mytmp
         一旦和目录建立链接之后，使用cd mytmp和cd /root/tmp是一样的。
 
-note90: 取得文件的属性：在Linux中，每一个文件都有13个属性，分别是
+note90: 文件的属性：在Linux中，每一个文件都有13个属性，分别是
     1,  设备编号
     2,  inode编号
     3,  文件模式
@@ -2272,5 +2272,39 @@ note90: 取得文件的属性：在Linux中，每一个文件都有13个属性�
     12, 区块大小
     13, 配置区块数
 
-
-         
+note91: 取得文件的属性
+    1,  stat可用来取得两种信息：一种是文件系统，一种是文件
+    2,  stat的基本用法：取得文件系统的信息
+        stat -f /dev/sda1
+        其中-f标识要取用的是文件系统(分区)，而不是文件
+        执行过程如下：
+			ubuntu@zxw:temp$ stat -f /dev/null
+			  File: "/dev/null"
+			    ID: 0        Namelen: 255     Type: tmpfs
+			Block size: 4096       Fundamental block size: 4096
+			Blocks: Total: 126153     Free: 126152     Available: 126152
+			Inodes: Total: 126153     Free: 125765
+			         
+    3,  stat的基本用法：取得文件属性
+        stat a.cpp
+			ubuntu@zxw:temp$ stat a.cpp 
+			  File: ‘a.cpp’
+			  Size: 978         Blocks: 8          IO Block: 4096   regular file
+			Device: fd01h/64769d    Inode: 313097      Links: 1
+			Access: (0664/-rw-rw-r--)  Uid: (  500/  ubuntu)   Gid: (  500/  ubuntu)
+			Access: 2016-11-29 16:08:22.248340031 +0800
+			Modify: 2016-11-29 16:08:22.248340031 +0800
+			Change: 2016-11-29 16:08:22.248340031 +0800
+			 Birth: -
+		Size表示文件大小为:978 bytes
+        Blocks表示占用8个区块（每个区块大小是512 bytes）
+        IO Block表示每个扇区大小4096 bytes
+        regular file表示是普通文件
+        Device表示设备编号：16进制是fd01 10进制是64769
+        使用的Inode编号是：313097
+        Links表示硬链接的数目：1
+        Uid表示文件拥有者代码500  拥有者身份名称ubuntu
+        Gid表示文件群组代码500　　群组身份名称ubuntu
+    
+        	
+        
