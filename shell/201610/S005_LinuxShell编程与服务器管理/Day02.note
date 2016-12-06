@@ -2241,4 +2241,22 @@ note88: 建立Socket文件
          mksock /dev/log
             chmod 666 /dev/log
 
+note89: 建立符号链接文件
+    1,  符号链接文件是一种快捷方式，可指向其他文件建立链接。
+        而且，可以跨越不同的系统分区，是管理目录、备份系统、
+        建立工作环境时十分重要的技巧。
+    2,  建立符号链接文件的方法：
+        ln 选项 来源文件 目的文件　
+    3,  用例：建立新的符号链接文件
+        ln -s test.txt ffile
+        建立一个新的符号链接文件tfile，指向test.txt。
+    4,  用例：删除原符号链接文件，重建新的符号链接文件
+        ln -sf test.txt tfile
+        如果tfile原已经存在，则予以删除，再建立一个新文件指向test.txt
+    5,  用例：建立执行目录的链接文件
+        ls -s /root/tmp mytmp
+        一旦和目录建立链接之后，使用cd mytmp和cd /root/tmp是一样的。
 
+note90: 取得文件的属性
+    1,  
+         
