@@ -2415,4 +2415,12 @@ note94: diff的其他用法：
 			 bbcc
 			 ccdd
 			+eeff
-    
+
+note95: patch的使用
+    语法：  patch -p0 < 12patch.diff
+            -p表示要移去的目录层数
+            0表示不移去任何文件名前的目录
+    语法：  diff -uNr A B > 12patch2.diff
+            -u表示使用前述的unified context格式
+            -r表示递归地对比两个目录中所有的子目录和文件
+            -N表示如果有不存在的文件则视为空文件 
