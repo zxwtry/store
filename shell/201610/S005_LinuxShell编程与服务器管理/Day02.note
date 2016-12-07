@@ -2305,6 +2305,17 @@ note91: 取得文件的属性
         Links表示硬链接的数目：1
         Uid表示文件拥有者代码500  拥有者身份名称ubuntu
         Gid表示文件群组代码500　　群组身份名称ubuntu
+        Access最近一次取用文件的时间(cat,cp,grep,sed,more,less,tail,head)
+        Modify最近一次修改文件的时间(ls -l查看到的时间)
+        Change最近一次改变文件属性的时间(chmod,chown,mv,ln)
+
+    4,  注意：
+        a,  如果修改文件，(使用编辑器存盘或>,>>转向操作)
+            Modify time和Change time会同步更新成写入的时间。
+            但是，Access time不变。
+        b,  如果执行"touch 文件"，则3种时间都会变成一样。
+        c,  使用ln -s做文件的软链接，会改变文件的Access time
+        d,  执行ls -la查看一般文件，不会改变这3种时间，
+            但如果文件是符号链接文件，则会更改Access time
+
     
-        	
-        
