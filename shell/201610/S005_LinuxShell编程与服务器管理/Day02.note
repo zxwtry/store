@@ -2384,3 +2384,35 @@ note91: 取得文件的属性
 note92: 对比文件的差异：diff 
     语法：  diff 选项 文件1 文件2
     
+note93: 在一个sh中调用另外一个sh中的函数
+    . chkfile_fun.sh
+    在另外一个sh中
+    if test_filequal 1.txt 2.txt; then
+    
+note94: diff的其他用法：
+    类似CVS,SVN,Git都经常使用文件对比的方式
+    程序代码改动部分，称为patch文件，或"补丁"
+    diff 选项 原文件 新文件 > pathch文件
+    甲使用：
+			zxwtry@zxwtry:temp$ diff -u 1.txt 2.txt > 12patch.diff
+			zxwtry@zxwtry:temp$ ls
+			12patch.diff  1.txt  2.txt
+			zxwtry@zxwtry:temp$ vim 12patch.diff 
+			zxwtry@zxwtry:temp$ cat 1.txt 
+			aabb
+			bbcc
+			ccdd
+			zxwtry@zxwtry:temp$ cat 2.txt 
+			aabb
+			bbcc
+			ccdd
+			eeff
+			zxwtry@zxwtry:temp$ cat 12patch.diff 
+			--- 1.txt   2016-12-07 22:20:05.567988681 +0800
+			+++ 2.txt   2016-12-07 22:20:19.135988372 +0800
+			@@ -1,3 +1,4 @@
+			 aabb
+			 bbcc
+			 ccdd
+			+eeff
+    
