@@ -2382,3 +2382,5 @@ note91: 取得文件的属性
             MFL=$(stat -f -c %l /dev/sda1)
 
 note92: 对比文件的差异：diff 
+    语法：  diff 选项 文件1 文件2
+    
