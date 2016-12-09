@@ -2449,4 +2449,38 @@ note96: 搜寻文件内容 grep
                 else
                     echo "vsftp可匿名登录"
                 fi
-        
+
+    4,  grep也可使用扩展的样式来对比
+        范例：
+                if grep -eE "usb|uhci|ohci" /proc/modules;then
+                    echo "已加载USB模块" 
+                fi
+    
+    5,  除了grep之外，awk也具有搜寻文件的能力。
+        范例：
+                假设某个应用程序有个配置文件叫sapp.conf，设定项目如下：
+                Name: zxwtry
+                Version: 4.0
+                Release: 1
+                Group: zxwtry.com
+                License: GPL
+                Source: zxwtry-1-4.tar.gz
+                Summary: Just For Fun
+                目标是写Script，读取这个配置文件的所有选项和其对应的值。
+               
+				#!/bin/bash
+				
+				shopt -s -o nounset
+				declare -a KEY
+				declare -a VALUE
+				declare -i k=1
+				
+				while read N V
+				do
+				    KEY[$k]=$N
+				    VALUE[$k]=$V
+				    echo "${KEY[$k]} = ${VALUE[$k]}"
+				    ((k++))
+				done < <(awk 'BEGIN{FS=":"} /\w:\w/ {print $1, $2}' ./code083_conf.conf)
+
+
