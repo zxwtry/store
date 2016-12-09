@@ -2424,3 +2424,29 @@ note95: patch的使用
             -u表示使用前述的unified context格式
             -r表示递归地对比两个目录中所有的子目录和文件
             -N表示如果有不存在的文件则视为空文件 
+
+note96: 搜寻文件内容 grep
+    1,  搜寻文件的内容  grep -q 关键字 文件
+        如果文件中含有该关键字，则$?传回0，否则传回非0值
+        -q表示搜寻时不产生任何信息。
+        范例：
+                if grep -q zxwtry /etc/passwd; then
+                    echo "账号存在"
+                else
+                    echo "账号不存在"
+                fi
+                执行结果：账号存在
+
+    2,  故意让grep显示搜寻到的信息 省去-q
+            df -B 1024K | grep hda1 | awk '{print $3}'
+        在这，df -B 1024K | grep sda1 | awk '{print $3}' 
+        执行结果： 显示sda1目前剩余可用的空间大小
+
+    3,  grep可以使用样式来搜寻文件内容
+        范例：
+                if grep -qe '^anonymous_enable=NO' /etc/vsftpd.conf; then
+                    echo "vsftp不可匿名登录"
+                else
+                    echo "vsftp可匿名登录"
+                fi
+        
