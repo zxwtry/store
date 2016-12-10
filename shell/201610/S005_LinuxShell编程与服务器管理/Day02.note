@@ -2507,4 +2507,32 @@ note97: 建立临时文件
         mktemp的语法：
             mktemp 选项 临时文件模版
             如果建立临时文件成功，$?传回0；如果失败，则传回1
-        
+        用例1；
+            直接执行mktemp，不加选项和模版
+            会在/tmp目录下产生tmp.XXXXXX的临时文件，其文件名末6个字符，
+            由现在的进程编号和随机的英数字组成。
+            使用命令替换的技巧即可取得临时文件名：
+                TMP_file=$(mktemp) 
+                这样TMP_file是类似：/tmp/tmp.ALSD9D的字符串。
+        用例2：
+            制定临时文件的模版
+            mktemp /tmp/tfile.XXXXXX
+            临时文件的模版一定要是"文件名.XXXXXX"的格式(少一个X都不行)
+            否则，会发生错误。模版文件的路径不一定得在/tmp目录下，
+            指定其他任何位置均，例如：
+                TMP_file=$(mktemp /root/tmp/sss.XXXXXX)
+            如果不想mktemp在发生错误时，产生任何信息，可加上-q选项：
+                mktemp -q /tmp/tfile.XXXXXX
+        用例3：
+            使用选项-p可指定mktemp建立临时文件的前置路径的目录名称
+                mktemp -p /root/.temp123 mytfile.XXXXXX
+            那么建立的临时文件格式，范例为/root/.temp123/mytfile.0df1de
+            注意，选项-p指定的前置目录，一定要事先存在才行。
+        用例4；
+            使用选项-t，按mktemp预先设置的方式，决定临时文件的路径
+            步骤如下：
+                a,  看TMPDIR是否有定义，如果有，则以该变量的内容为临时文件的路径。
+                b,  看是否有-p选项指定前置路径，如果有，则以-p指定的路径为临时文件的路径。
+                c,  在/tmp目录下建立临时文件
+
+
