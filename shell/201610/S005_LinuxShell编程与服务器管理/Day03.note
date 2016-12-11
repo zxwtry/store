@@ -1,0 +1,31 @@
+note01: 账号管理---新建账号
+    1,  新建账号的方法，可分为互动模式和Script模式(批量模式/batch模式)。
+        在建立少量账号时，互动模式非常方便。
+        在建立大量账号时，一般使用Script模式。
+    2,  账号管理程序：adduser(Perl开发的版本)
+        内含adduser, deluser, addgroup, delgroup
+    3,  账号管理程序：passwd(C开发的版本)
+        内含useradd, userdel, passwd, chpasswd, chsh, vipw等
+    4,  建立单一账号：在互动模式下，比较方便的是adduser
+        语法：  adduser
+        语法：  adduser 账号
+        示例：
+            zxwtry@zxwtry:temp$ sudo adduser tempuser
+			Adding user `tempuser' ...
+			Adding new group `tempuser' (1001) ...
+			Adding new user `tempuser' (1001) with group `tempuser' ...
+			Creating home directory `/home/tempuser' ...
+			Copying files from `/etc/skel' ...
+			Enter new UNIX password: 
+			Retype new UNIX password: 
+			passwd: password updated successfully
+			Changing the user information for tempuser
+			Enter the new value, or press ENTER for the default
+			    Full Name []: 
+			    Room Number []: 
+			    Work Phone []: 
+			    Home Phone []: 
+			    Other []: 
+			Is the information correct? [Y/n] Y
+        在Ubuntu 14.04中，adduser后不接账号，是会报错的。
+    
