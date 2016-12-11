@@ -2546,3 +2546,17 @@ note98:  复制文件
                 cp -a /root/file1 /home/soft/file2
                 也把复制过去的文件改成file2的名字
     
+note99: 转换编码
+    1,  主机中，关于本地自然语言的相关信息，称为locale。
+        locale决定系统如何显示文字、数字、货币、日期及资料的排序方式。
+    2,  locale的命名格式是：
+        语系_地区.文字编码
+        中国流行的locale是zh_CN.GBK和zh_CN.UTF-8
+    3,  环境变量
+            declare -x LANG="zh_CN.GBK"
+            declare -x LC_ALL="zh_CN.GBK"
+    4,  转换编码的工具  iconv
+        基本语法：  iconv -f 来源文件的编码 -t 目的文件的编码 来源文件
+        基本语法：  iconv -f 来源文件的编码 -t 目的文件的编码 来源文件 -o 目的文件
+    
+
