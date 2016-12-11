@@ -28,4 +28,23 @@ note01: 账号管理---新建账号
 			    Other []: 
 			Is the information correct? [Y/n] Y
         在Ubuntu 14.04中，adduser后不接账号，是会报错的。
-    
+   5,   建立单一账号：使用useradd
+        必须自行指定账号在密码文件中各个字段的值。
+        Note:
+            /etc/passwd密码文件共有7个字段，每一个字段彼此用:(冒号)分隔 
+            账号:x:UID:GID:用户的信息:家目录位置:登录时使用的shell
+            第二个字段原为密码栏，由于安全考虑，密码移入/etc/shadow文件中，
+            一律改用x表示。一旦账号建立之后，在/etc/group中也会建立同名的群组。
+        useradd的行为可事先规范，默认值的配置文件在/etc/default/useradd，
+        其内容可用一下方法显示出来：
+            useradd -D
+        示例：
+                zxwtry@zxwtry:temp$ useradd -D
+				GROUP=100
+				HOME=/home
+				INACTIVE=-1
+				EXPIRE=
+				SHELL=/bin/sh
+				SKEL=/etc/skel
+				CREATE_MAIL_SPOOL=no
+        useradd -D 如果
