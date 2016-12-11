@@ -2558,5 +2558,20 @@ note99: 转换编码
     4,  转换编码的工具  iconv
         基本语法：  iconv -f 来源文件的编码 -t 目的文件的编码 来源文件
         基本语法：  iconv -f 来源文件的编码 -t 目的文件的编码 来源文件 -o 目的文件
-    
-
+    5,  大量转换编码
+        取得该目录结构的方法：
+        cd ~/temp
+        find $(pwd) -type -f < dir-struc.txt
+        执行范例：
+            zxwtry@zxwtry:temp$ find $(pwd) -type f > dir-struc.txt
+			zxwtry@zxwtry:temp$ cat dir-struc.txt 
+			/home/zxwtry/temp/1.txt
+			/home/zxwtry/temp/b.txt
+			/home/zxwtry/temp/code086_low2upperd.sh
+			/home/zxwtry/temp/dir1/2.txt
+			/home/zxwtry/temp/dir1/222.txt
+			/home/zxwtry/temp/dir1/22.txt
+			/home/zxwtry/temp/dir-struc.txt
+			/home/zxwtry/temp/2.txt
+			/home/zxwtry/temp/a.txt
+			/home/zxwtry/temp/12patch.diff
