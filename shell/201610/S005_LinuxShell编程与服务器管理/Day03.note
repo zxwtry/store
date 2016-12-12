@@ -47,4 +47,30 @@ note01: 账号管理---新建账号
 				SHELL=/bin/sh
 				SKEL=/etc/skel
 				CREATE_MAIL_SPOOL=no
-        useradd -D 如果
+        useradd -D 如果再加上其他选项，可修改建立账号时的默认值。可用的选项有：
+                -b      家目录前置路径
+                -e      账号过期日
+                -f      账号过几天后实效
+                -g      默认的群组代码或名称
+                -s      登录时使用的Shell 
+
+note02: 大量建立账号
+    1,  分为两种，其一是：有规则地建立。一般是用于练习。
+    2,  分为两种，其一是：无规则地建立。在实际开发中，这么用。
+    3,  建立大量规则账号，见代码：code088_create_account_by_rule.sh
+        示例如下：
+            $ sudo ./code088_create_account_by_rule.sh 3
+            账号 stu1建立完成...
+            账号 stu2建立完成...
+            账号 stu3建立完成...
+            共建立 3个账号
+            请查看 accounts.txt这个文件
+            $ cat accounts.txt 
+            -----------------------
+            账号：stu1 | 密码：FFMHGCPLC
+            ---------------------
+            账号：stu2 | 密码：KOOFOBDHG
+            ---------------------
+            账号：stu3 | 密码：FCKCDHLKB
+            ---------------------
+    4,  
