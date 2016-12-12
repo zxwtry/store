@@ -73,4 +73,22 @@ note02: 大量建立账号
             ---------------------
             账号：stu3 | 密码：FCKCDHLKB
             ---------------------
-    4,  
+        使用adduser，code089_create_account_by_rule_useradd.sh
+        示例如下：
+			$ sudo ./code089_create_account_by_rule_useradd.sh 2
+			useradd: warning: the home directory already exists.
+			Not copying any file from skel directory into it.
+			账号 stu1建立完成...
+			groupadd: GID '173' already exists
+			useradd: warning: the home directory already exists.
+			Not copying any file from skel directory into it.
+			账号 stu2建立完成...
+			共建立 2个账号
+			请查看 accounts.txt这个文件
+			$ cat accounts.txt 
+			-----------------------
+			账号：stu1 | 密码：RQKFCGGMQ
+			---------------------
+			账号：stu2 | 密码：RQLKOKGRF
+			---------------------
+    4,  建立大量无规则账号，见代码： 
