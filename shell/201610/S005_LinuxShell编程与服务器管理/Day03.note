@@ -73,7 +73,7 @@ note02: 大量建立账号
             ---------------------
             账号：stu3 | 密码：FCKCDHLKB
             ---------------------
-        使用adduser，code089_create_account_by_rule_useradd.sh
+        使用useradd，code089_create_account_by_rule_useradd.sh
         示例如下：
 			$ sudo ./code089_create_account_by_rule_useradd.sh 2
 			useradd: warning: the home directory already exists.
@@ -91,4 +91,17 @@ note02: 大量建立账号
 			---------------------
 			账号：stu2 | 密码：RQLKOKGRF
 			---------------------
-    4,  建立大量无规则账号，见代码： 
+
+note03: Bash网络转向
+    1,  在Bash中，可以把TCP和UDP的套接字接口当做文件一样来说使用。
+    2,  可以使用Bash类设计网络通信程序(socket programming)
+    3,  代码见code090_网络转向_get.sh 基本实现wget功能
+    
+note04: Echo服务器
+    1,  不管传送什么数据给服务器，它都会原原本本再把数据再传送回来。
+        也就是，"传入"等于"传出"
+    2,  可作为socket程序设计的测试用途。
+    3,  Echo Server支持TCP和UDP两种协议
+ 
+note05: 自动登录ftp
+    1,  
