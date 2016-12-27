@@ -73,3 +73,45 @@
             c,  对Registry的操作也是Dokcer完美融合的，用户甚至不知道Registry的存在，
                 只需要通过简单的Docker命令就可以实现上面的操作。
 
+04, Docker的安装
+    1,  sudo apt-get install docker.io
+    2,  官方入门：https://www.docker.com/tryit/
+    3,  docker + 命令 + --help
+    4,  man + docker + 命令
+
+05, Docker在LXC基础上做了什么工作
+    1,  LXC的概念：
+        a,  LXC用户态工具(https//github.com/lxc/lxc)
+        b,  Linux Container，即内核容器技术的简称
+    2,  Docker在内核容器技术(Cgroup和Namespace)的基础上，
+        提供一个更高层的控制工具，该工具包含以下特性：
+        a,  跨主机部署。LXC实现了"进程沙盒"和配置。
+            程序的执行依赖机器的特定配置，包括网络、存储和发行版等。
+            Docker则将上述相关配置进行抽象并与应用程序一同打包。
+            保证在不同硬件、不同配置的机器上Docker容器中运行的程序
+            和所依赖的环境及配置是一样的。
+        b,  以应用为中心。优化简化规范化程序的部署过程。
+        c,  自动构建。Docker提供了一套能够从源码自动构建镜像的工具。
+            该工具可以灵活地使用make、maven、chef、puppet、salt、debian包、
+            RPM和源码包等形式。将应用程序的依赖、构建工具和安装包都进行打包处理。
+            并且，当前机器的配置不会影响镜像的构建过程。
+        d,  版本管理。
+            Docker提供了类似Git的版本管理功能，支持追踪镜像版本、检查版本更新、
+            提交新的版本改动和回退版本等功能。镜像的版本信息中包括制作方式和
+            制作者信息，因此可以从生产环境中回溯到上游开发人员。Docker同样实现
+            镜像的增量上传下载功能，类似Git中的pull命令。
+        e,  组件复用。
+            任何容器都可以用作生成另一个组件的基础镜像。这个过程可以手动执行，
+            也可以写入自动化构建的脚本。例如，可以创建一个包含Python开发环境的
+            镜像，并将其作为基础镜像部署到其它使用Python环境进行开发的应用程序。
+        f,  共享。
+            Docker用户可以访问公共的镜像Registry，并向其中上传有用的镜像。
+            Registry中包含由Docker公司维护的一些官方标准镜像。Docker Registry
+            本身也是开源的，所以任何人都可以部署自己的Registry来存储并共享私有镜像。
+        g,  工具生态链。
+            Docker定义一些列API来定制容器的创建和部署过程并实现自动化。
+            很多工具能够与Docker集成并扩展Docker的能力，包括类PaaS部署工具
+            (Dokku, Deis和Flynn)、多节点编排工具(Maestro, Salt, Mesos, OpenStacknova)
+            管理面板(Docker-ui, OpenStack Horizon, Shipyard)、配置管理工具
+            (Chef, Puppet)、持续集成工具(Jenkins, Strider, Travis)等。
+            Docker正在建立以容器为基础的工具集标准。
