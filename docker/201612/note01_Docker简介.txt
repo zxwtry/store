@@ -151,6 +151,31 @@
     Namespace和Cgroup并不是强相关的两种技术。
         用户可以根据需要单独使用它们。
 
+09, 容器的组成：
+    容器= cgroup + namespace + rootfs + 容器引擎(用户态工具)
+    ***Cgroup：资源控制
+    ***Namespace：访问隔离
+    ***rootfs：文件系统隔离
+    ***容器引擎：生命周期控制
+
+10, 容器的创建原理：
+    1,  通过clone系统调用，并传入各个Namespace对应的clone flag，
+        创建了一个新的子进程，该进程拥有自己的Namespace。
+        该进程拥有自己的pid, mount, user, net, ipc, uts namespce。
+        代码如下：
+            pid = clone(fun, stack, flags, clone_arg);
+            (flags: CLONE_NEWPID | CLONE_NEWNS |
+                    CLONE_NEWUSER | CLONE_NEWNET |
+                    CLONE_NEWIPC | CLONE_NEWUTS | ...)
+    2,  将1中产生的进程pid写入各个Cgroup子系统中，
+        这样该进程可以受到相应Cgroup子系统的控制。
+            echo $pid > /sys/fs/cgroup/cpu/tasks
+            echo $pid > /sys/fs/cgroup/cpuset/tasks
+            echo $pid > /sys/fs/cgroup/blkio/tasks
+            echo $pid > /sys/fs/cgroup/memory/tasks
+            echo $pid > /sys/fs/cgroup/devices/tasks
+            echo $pid > /sys/fs/cgroup/freezer/tasks
+
 09, 
     
 
