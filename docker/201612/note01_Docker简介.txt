@@ -227,4 +227,10 @@
         首先需要将cgroupfs挂载起来，这个动作一般已经在启动时
         由Linux发行版做好了。可以把cgroupfs挂载到任意一个目录上，
         不过标准的挂载点是/sys/fs/cgroup
-
+        (实际上sysfs里面只有/sys/fs/cgroup目录，
+        并且sysfs是不允许用户创建目录的，这里可以将tmpfs挂载上去，
+        然后在tmpfs上创建目录)
+    2,  查看cgroupfs
+        #ls /sys/fs/cgroup/cpuset
+        其中以cpuset开头的控制文件都是cpuset子系统产生的，
+            其它文件则由Cgroup产生
