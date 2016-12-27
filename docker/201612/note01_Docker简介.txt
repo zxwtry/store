@@ -32,3 +32,44 @@
         新增的镜像层和下层的镜像一起又可以作为基础镜像。
         极大地提高磁盘利用率，减少内存占用。
 
+03, Docker的功能和组件
+    1,  Docker客户端
+            a,  C/S架构
+            b,  Linux中客户端和服务端统一在一个二进制文件中。
+            c,  Docker客户端一般通过Docker command来发起请求，
+                也可以通过Docker提供的一整套RESTful API来发起请求。
+    2,  Docker daemon
+            a,  Docker daemon可以理解成Docker Server。
+                常常被称为Docker Engine
+                驱动整个Docker功能的核心引擎。
+            b,  Docker daemon实现的功能是接收客户端发来的请求，
+                实现请求所需求的功能，针对请求返回相应的请求。
+    3,  Docker容器
+            a,  容器是核心内容。
+            b,  功能上，Docker通过Libcontainer实现对容器生命周期的管理、
+                信息的设置和查询、监控和通信等功能。
+            c,  功能上，容器以镜像为基础，为镜像提供一个标准和隔离的执行环境。
+            d,  概念上，容器很好实现Docker集装箱的理念。
+            e,  容器可以安装任意的软件和库文件，做任意的环境配置。
+            f,  开发及运维人员在转移和部署应用的时候，
+                不用关心容器里面装了什么软件，也不同了解它们如何配置的。
+            g,  管理容器的Docker引擎同样不关心容器里的内容，
+                它只要像码头工人一样让这个容器运行起来就行，
+                就像所有其它容器那样。
+    4,  Docker镜像　
+            a,  镜像是运行环境的静态体现，没有运行起来的"运行环境"。
+            b,  相对于传统虚拟化中的ISO镜像，Docker镜像要轻量很多。
+                Docker只是一个可定制的rootfs。
+            c,  Docker镜像是层级的并且是可复用的。
+                利用Unionfs的特性，Docker减少磁盘和内存的开销。
+            d,  Docker镜像通常是通过Dockerfile来创建的，
+                Dockerfile提供了镜像内容的定制，同时也体现了层级关系的建立。
+            e,  Docker镜像可以通过使用docker commit这样的命令来手动
+                将修改后的内容生成镜像。
+    5,  Registry
+            a,  Registry是一个存放镜像的仓库，通常部署在互联网服务器或云端。
+            b,  Registry是中转站，将一个软件的运行环境制作成镜像并上传到Registry中；
+                在异地可以从Registry下载并运行。
+            c,  对Registry的操作也是Dokcer完美融合的，用户甚至不知道Registry的存在，
+                只需要通过简单的Docker命令就可以实现上面的操作。
+
