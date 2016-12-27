@@ -175,7 +175,35 @@
             echo $pid > /sys/fs/cgroup/memory/tasks
             echo $pid > /sys/fs/cgroup/devices/tasks
             echo $pid > /sys/fs/cgroup/freezer/tasks
+    3,  fun函数由上面生成的新进程执行，该fun函数中，
+        通过pivot_root系统调用，使进程进入一个新的rootfs，
+        之后通过exec系统调用。在新的Namespace, Cgroup, rootfs
+        中执行"/bin/bash"程序。
+            fun() {
+                ...
+                pivot_root("path_of_rootfs/", path);
+                ...
+                exec("/bin/bash");
+                ...
+            }
+    通过1,2,3操作，成功地在一个"容器"中运行了一个bash程序。 
 
-09, 
+09, Cgroup介绍---Cgroup是什么。
+    1,  control group的简称，属于Linux内核提供的一个特性。
+    2,  用于限制和隔离一组进程对系统资源的使用，就是做资源QoS。
+        这些资源主要包括CPU，内存，block I/O和网络带宽。
+    3,  Cgroup实现了一个通用的进程分组的框架。
+        不同资源的具体管理则是由各个Cgroup子系统实现。
+    4,  Cgroup中实现的子系统及其作用如下：
+        devices：   设备权限控制。
+        cpuset：    分配指定的CPU和内存节点。
+        cpu：       控制CPU占用率。
+        cpuacct：   统计CPU使用情况。
+        memory：    限制内存的使用上限。
+        freezer：   冻结(暂停)Cgroup中的进程。
+        net_cls：   配合tc(traffic controller)限制网络带宽。
+        net_prio：  设置进程的网络流量优先级。
+        huge_tlb：  限制HugeTLB的使用。
+        perf_event：允许Perf工具基于Cgroup分组做性能检测。
     
 
