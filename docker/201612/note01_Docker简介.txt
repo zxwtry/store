@@ -205,5 +205,26 @@
         net_prio：  设置进程的网络流量优先级。
         huge_tlb：  限制HugeTLB的使用。
         perf_event：允许Perf工具基于Cgroup分组做性能检测。
-    
+    5,  Cgroup出现之前，只能对一个线程做一些资源控制，
+        例如通过sched_setaffinity系统调用限定一个进程的CPU亲和性。
+        例如用ulimit限制一个进程的打开文件上限、栈大小等。
+        例如用ulimit可以对少数资源基于用户做资源控制，
+            例如限制一个用户所能创建的线程数。
+    6,  Cgroup可以对进程进行任意的分组，如何分组是用户自定义的。
+        例如Android的应用分为前台应用和后台应用。
+        因为前台应用是直接和用户交互的，需要相应速度快，
+        因此前台应用对资源的申请需要得到更多的保证。
+        Android将前台应用和后台应用划分到不同的Cgroup中，
+        并且对放置前台应用的Cgroup配置了较高的系统资源限制。
+    (从1.6版本开始，Docker也支持ulimit)
+
+10, Cgroup的接口和使用
+    Cgroup的原生接口通过cgroupfs提供，类似于procfs和sysfs，
+    是一种虚拟文件系统。
+    1,  挂载cgroupfs
+        命令如下：
+        #mount -t cgroup -o cpuset cupset /sys/fs/cgroup/cpuset
+        首先需要将cgroupfs挂载起来，这个动作一般已经在启动时
+        由Linux发行版做好了。可以把cgroupfs挂载到任意一个目录上，
+        不过标准的挂载点是/sys/fs/cgroup
 
