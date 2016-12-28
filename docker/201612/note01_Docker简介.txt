@@ -253,4 +253,21 @@
 			release_agent
 			tasks
 			user 
+        其中以cpuset开头的控制文件都是cpuset子系统产生的，
+            其它文件则由Cgroup产生
+        tasks文件记录这个Cgroup的所有进程(包括线程)，
+            在系统启动后，默认没有对Cgroup做任何配置的情况下，
+            cgroupfs只有一个根目录，并且系统所有的进程都在这个
+            根目录中，即进程pid都在根目录的tasks文件中。
+    3,  创建Cgroup
+        #mkdir /sys/fs/cgroup/cpuset/child
+        通过mkdir创建一个新的目录，也就创建了一个新的Cgroup
+    4,  配置Cgroup
+        #echo 0 > /sys/fs/cgroup/cpuset/child/cpuset.cpus
+        #echo 0 > /sys/fs/cgroup/cpuset/child/cpuset.mems
+        限制这个Cgroup只能在0号cpu上执行，只能在0号内存节点上分配内存。
+    5,  使能Cgroup
+        #echo $$ > /sys/fs/cgroup/cpuset/child/tasks
+        将当前进程及子线程移动到新的Cgroup中。($$是当前进程PID)
+        也可以将PID写入cgroup.procs文件，除了将当前进程及子线程移动到新的Cgroup中，
         而且会将当前进程所属的线程组也加入到新的Cgroup中。
