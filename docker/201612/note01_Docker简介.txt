@@ -318,3 +318,29 @@
             还会给出提示，要求增加内存限额。
         d,  memory.stat
             记录memory使用情况。
+    5,  blkio子系统
+        限制这个Cgroup的block io使用
+        a,  blkio.weight    范围 [100, 1000]
+            和cpu.shares类似，在发生争抢时候，按照比例分配。
+        b,  blkio.weight_device
+            会覆盖blkio.weight
+            #echo "8:0 100" > blkio.weight_device
+            标识将该Cgroup设定block io的最低优先级
+        c,  blkio.throttle.read_bps_device
+            设定1MB/s的带宽
+            #echo "8:0 1048576" > blkio.throttle.read_bps_device
+        d,  blkio.throttle.write_bps_device
+        e,  blkio.throttle.read_iops_device
+        f,  blkio.throttle.write_iops_device
+        (blkio有两个确定，一只支持CFQ调度器，二不管是比重分配还是上限限制，
+         都只支持Direct-IO，不支持Buffered-IO)
+    6,  devices子系统
+        限制线程对设备的访问权限
+        a,  devices.list    列出所有的设备
+            a/c/b   所有设备/字符设备/块设备
+            major:minor 设备号
+            r/m/w   读取设备/mknod创建设备/写入设备
+            "a *:* rmw" ---所有设备都可以被访问
+            "c 1:3 r" --- 对1:3这个字符设备(/dev/null)只有读权限
+        b,  devices.allow   允许访问
+        c,  devices.deny    禁止访问
