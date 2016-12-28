@@ -271,3 +271,26 @@
         将当前进程及子线程移动到新的Cgroup中。($$是当前进程PID)
         也可以将PID写入cgroup.procs文件，除了将当前进程及子线程移动到新的Cgroup中，
         而且会将当前进程所属的线程组也加入到新的Cgroup中。
+
+11, Cgroup子系统介绍
+    1,  cpuset子系统
+        将进程和CPU核心节点内存进行绑定，避免跨核心跨节点内存的时间损失。
+        cpuset.cpus，可使用的CPU(0-4,9)
+        cpuset.mems，可使用的节点内存(0~1)
+    2,  cpu子系统
+        限制cpu访问
+        a,  cpu比重分配
+            cpu.shares
+            假设现在两个Cgroup(c1和c2)，c1:512，c2:1024
+            那么当出现cpu争抢时，c1将只有c2一半的cpu占用率。
+        b,  cpu带宽限制
+            cpu.cfs_peroid_us
+            cpu.cfs_quota_us
+            单位是微秒。
+            假设cpu.cfs_peroid_us是1秒，cpu.cfs_quota_us是0.3秒
+            那么在1秒之内，该Cgroup只能运行0.3秒，其余时间休眠。
+        c,  cpu运行时带宽限制
+            以上a和b只能限制普通进程，不能限制实时进程。
+            cpu.rt_peroid_us
+            cpu.rt_runtime_us
+            使用方法和b相同。
