@@ -294,3 +294,27 @@
             cpu.rt_peroid_us
             cpu.rt_runtime_us
             使用方法和b相同。
+    3,  cpuacct子系统
+        统计各个Cgroup的cpu使用
+        a,  cpuacct.stat    单位USER_HZ 1USER_HZ=0.01s
+            统计这个Cgroup在用户态和内核态的使用时间
+        b,  cpuacct.usage   单位纳秒
+            统计这个Cgroup消耗的CPU时间
+        c,  cpuacct.usage_percpu    单位纳秒
+            统计这个Cgroup在各个CPU上消耗的时间，总和是cpuacct.usage
+    4,  memory子系统
+        限制这个Cgroup的memory使用
+        a,  memory.limit_in_bytes   单位字节
+            可以使用k/K m/M g/G设定。
+            #echo 1G > memory.limit_in_bytes
+            如果内存超出限制，内核先回收内存，如何还是超出，抛出OOM。
+            并杀死Cgroup中的某个线程。
+        b,  memory.memsw.limit_in_bytes 单位字节
+            设定swap交换区的大小，防治Cgroup将交换区用完
+            可以使用k/K m/M g/G设定。
+            #echo 1G > memory.memsw.limit_in_bytes
+        c,  memory.oom_control  
+            如果为0，如果OOM，会将当前线程阻塞直到内存足够；
+            还会给出提示，要求增加内存限额。
+        d,  memory.stat
+            记录memory使用情况。
