@@ -232,5 +232,25 @@
         然后在tmpfs上创建目录)
     2,  查看cgroupfs
         #ls /sys/fs/cgroup/cpuset
-        其中以cpuset开头的控制文件都是cpuset子系统产生的，
-            其它文件则由Cgroup产生
+			cgroup.clone_children
+			cgroup.procs
+			cgroup.sane_behavior
+			cpuset.cpu_exclusive
+			cpuset.cpus
+			cpuset.effective_cpus
+			cpuset.effective_mems
+			cpuset.mem_exclusive
+			cpuset.mem_hardwall
+			cpuset.memory_migrate
+			cpuset.memory_pressure
+			cpuset.memory_pressure_enabled
+			cpuset.memory_spread_page
+			cpuset.memory_spread_slab
+			cpuset.mems
+			cpuset.sched_load_balance
+			cpuset.sched_relax_domain_level
+			notify_on_release
+			release_agent
+			tasks
+			user 
+        而且会将当前进程所属的线程组也加入到新的Cgroup中。
