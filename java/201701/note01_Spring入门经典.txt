@@ -71,6 +71,17 @@
         现在，组件类A的依赖组件由容器注入，管理权在容器。
         这种模式叫控制反转(Inversion of Control)(简称IoC)
     2,  IoC是任何容器都需要提供的功能之一。
-    3,  IoC有两种形式：依赖查找 (dependency lookup)
-                    和 依赖注入 (dependency injection)
-    
+    3,  IoC有两种形式：依赖查找(DL) (dependency lookup)
+                       依赖注入(DI) (dependency injection)
+    4,  依赖查找：
+        a,  容器向器所管理组件提供回调方法
+        b,  组件通过回调方法与容器进行交互，并显式获取所需依赖组件
+        c,  通常使用查找上下文来访问依赖组件，及容器管理的其他资源
+    5,  依赖注入：
+        a,  组件提供合适的构造函数或Setter方法，以便容器注入依赖组件
+        b,  随着 Spring Apolication Framework以及其他轻量级IoC框架的
+            流行，DI逐渐和IoC同义
+        c,  容器的任务是处理相关的配置信息，以便在运行时实例化所需的
+            组件，并装配依赖组件
+        d,  使用JNDI进行的显式依赖查找逐渐转变为隐式依赖注入方法。
+
