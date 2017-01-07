@@ -8,12 +8,32 @@
     6,  依赖注入方法，Setter和构造函数注入
     7,  不同注入方法的优缺点
 
-001 EJB的缺点(Enterprise JavaBean)
+001 EJB的缺点 (Enterprise JavaBean)
     1,  紧耦合
-        EJB规范要求组件接口和业务逻辑实现类都必须从EJB框架中扩展接口。
+        EJB规范要求组件接口和业务逻辑实现类都必须从EJB框架中扩展接口
         开发人员编写的代码和EJB框架的接口类之间产生紧耦合。
+        JNDI: (Java Naming and Directory Interface)
+        访问JNDI上下文，执行对象查找，满足对其他EJB和DataSource实例的依赖。
     2,  难测试
         EJB容器之外测试Session和EntityBeans几乎是不可能的。
+        JNDI是依赖注入的早期形式，拉式性质(pull-based nature)
+        使得单元测试期间，进行组件隔离变得非常困难。
     3,  部署EJB，耗时且易出错
         很多XML配置文件都需要手动维护。
+
+002 POJO的优点 (Plain Old Java Objects)
+    1,  编写业务简单，快速
+        面向对象写业务代码。
+    2,  POJO不依赖特定API或特定框架。
+    3,  网络传输，不同层间传输。
+    4,  集成单元测试
+        无需在容器内测试框架。
+
+003 容器(Container)
+    1,  容器是一个环境。
+        在这个环境中，所有的组件都被创建和装配，并且提供所需的中间件服务。
+    2,  每一个专门容器为应用程序的一个特定层提供所需的服务。
+    3,  Servlet容器负责创建和管理应用程序Web层的组件，比如Servlet, JSP, Filter。
+    4,  Spring Container容器中，应用程序被创建彼此装配，
+        并以一种轻量级方式提供中间件服务。
 
