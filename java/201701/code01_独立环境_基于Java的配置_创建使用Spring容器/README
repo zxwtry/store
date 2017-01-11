@@ -1,0 +1,16 @@
+在独立的环境中通过使用基于Java的配置创建和使用Spring容器
+
+
+使用注解的类有：BeanConfiguration.java
+
+BeanConfiguration.java使用的注解是：
+
+    1,  org.springframework.context.annotation.Configuration
+    2,  org.springframework.context.annotation.Bean
+
+
+使用的ApplicationContext和创建Spring Container：
+
+    org.springframework.context.annotation.AnnotationConfigApplicationContext
+    AnnotationConfigApplicationContext applicationContext =
+                    new AnnotationConfigApplicationContext(BeanConfiguration.class);
