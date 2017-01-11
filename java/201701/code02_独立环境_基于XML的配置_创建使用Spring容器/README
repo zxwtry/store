@@ -1,0 +1,27 @@
+在实际代码中：位于step02XMLBean包
+
+在独立的环境中通过使用基于XML的配置创建和使用Spring容器
+
+
+使用注解的类有：BeanConfiguration.java
+
+BeanConfiguration.java使用的注解是：
+
+    1,  org.springframework.context.annotation.Configuration
+    2,  org.springframework.context.annotation.Bean
+
+
+使用的ApplicationContext和创建Spring Container：
+
+    org.springframework.context.annotation.AnnotationConfigApplicationContext
+    AnnotationConfigApplicationContext applicationContext =
+                    new AnnotationConfigApplicationContext(BeanConfiguration.class);
+
+
+遇到一个问题：
+    在重用step01BeanConfigure的AccountServiceImpl的时候，
+    出现如下错误：
+        Exception in thread "main" org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'accountService' defined in class path resource [step02XMLBean/beanconfig.xml]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Could not instantiate bean class [step01BeanConfigure.AccountServiceImpl]: No default constructor found; nested exception is java.lang.NoSuchMethodException: step01BeanConfigure.AccountServiceImpl.<init>()
+    错误的原因是：  step01BeanConfigure的默认构造方法被修改了。
+    修补的方法是：  在step02XMLBean中重写AccountServiceImpl的时候，
+                     不修改构造方法。 
