@@ -1,3 +1,5 @@
+package step01BeanConfigure;
+
 import java.util.List;
 
 public interface AccountDao {

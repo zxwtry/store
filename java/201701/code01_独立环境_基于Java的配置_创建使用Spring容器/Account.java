@@ -1,3 +1,5 @@
+package step01BeanConfigure;
+
 public class Account {
 	private long accountId;
 	private double balance;

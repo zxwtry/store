@@ -1,3 +1,5 @@
+package step01BeanConfigure;
+
 public class AccountServiceImpl implements AccountService {
 	public AccountDao accountDao;
 	public AccountServiceImpl(AccountDao accountDao) {

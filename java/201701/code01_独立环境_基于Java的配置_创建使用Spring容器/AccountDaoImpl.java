@@ -1,3 +1,5 @@
+package step01BeanConfigure;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
