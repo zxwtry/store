@@ -162,10 +162,6 @@
         b,  在Web应用程序中，使用声明方法。
             (需借助web.xml文件中一些配置来完成)
     3,  通常Spring容器和ApplicationContext同义
-    4， @Service和@Repository都扩展自注解
-        org.springframework.stereotype.Component (@Component)
-        @Service除了将一个类定义为一个Bean之外，无其他特殊含义。
-        @Repository能够启用与Spring数据访问相关联的其他功能。
 
 014 getBean单例
     1,  通过ApplicationContext的实现类实例化applicationContext
@@ -177,4 +173,27 @@
             return accountService;
         记住，仍然是单例。)
     
-
+015 基于注解的配置中注解的使用：
+    1， @Service和@Repository都扩展自注解
+        org.springframework.stereotype.Component (@Component)
+        @Service除了将一个类定义为一个Bean之外，无其他特殊含义。
+        @Repository能够启用与Spring数据访问相关联的其他功能。
+        默认情况下，Bean的名称就是Bean的简单类名，将首字母小写
+            AccountDaoImpl 默认Bean名称 accountDaoImpl
+            AccountServiceImpl 默认Bean名称 accountServiceImpl
+    2,  通过@Service注解AccountServiceImpl类，该类将会通过
+            <context:compent-scan base-package="....."/>
+            自动扫描。
+    3,  通过@Autowired注解(被自动扫描类的)setter方法
+            该setter方法对应的对象也需要被下一个注解@Repository注解。
+    4,  通过@Repository注解AccountDaoImpl类
+    5,  被@Service和@Repository注解的是接口实现类
+        被@Autowired注解的是(被自动扫描类的)setter方法
+    
+016 基于Java的配置中注解的使用：
+    1,  使用@Configuration注解一个类，这个类是Bean配置类。
+        用于创建AnnotationConfigApplicationContext
+    2,  使用@Bean注解一个(Bean配置类的方法)
+        public AccountService accountService() {}
+        applicationContext.getBean("accountService", AccountService.class);
+        
