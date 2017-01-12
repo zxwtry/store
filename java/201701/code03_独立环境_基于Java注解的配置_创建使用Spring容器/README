@@ -1,0 +1,24 @@
+在实际代码中：位于step03ComponentScan包
+
+在独立的环境中通过使用基于Java注解的配置创建和使用Spring容器
+
+
+重用step01BeanConfigure包下面的Account, AccountDao, AccountService类
+
+
+使用注解的类有：AccountDaoImpl.java 和 AccountServiceImpl.java
+
+AccountDaoImpl.java使用的注解是：
+
+    1,  org.springframework.stereotype.Repository
+
+AccountServiceImpl.java使用的注解是：
+
+    1,  org.springframework.stereotype.Service
+    2,  org.springframework.beans.factory.annotation.Autowired
+
+
+使用的ApplicationContext和创建Spring Container：
+
+    ClassPathXmlApplicationContext applicationContext = 
+                new ClassPathXmlApplicationContext("/step03ComponentScan/component_scan.xml");
