@@ -153,4 +153,28 @@
     3,  beans-dao.xml或ConfigurationForDao，定义应用程序的数据访问层中所操作的Bean。
     4,  beans-config.xml或ConfigurationForConfig，定义激活几个容器特定功能所需的Bean。
     5,  beans-security.xml或ConfigurationForSecurity，定义应用程序的安全需求的Bean。
+
+013 配置和使用容器
+    1,  容器也是一个Java对象。
+        在某些特定的时间点被创建允许管理应用程序的其他部分。
+    2,  实例化Spring容器的方法：
+        a,  在独立应用程序中，可以使用编程方法。
+        b,  在Web应用程序中，使用声明方法。
+            (需借助web.xml文件中一些配置来完成)
+    3,  通常Spring容器和ApplicationContext同义
+    4， @Service和@Repository都扩展自注解
+        org.springframework.stereotype.Component (@Component)
+        @Service除了将一个类定义为一个Bean之外，无其他特殊含义。
+        @Repository能够启用与Spring数据访问相关联的其他功能。
+
+014 getBean单例
+    1,  通过ApplicationContext的实现类实例化applicationContext
+        相同的传参，返回的是不同的对象。
+    2,  同一个applicationContext多次调用相同参数的getBean，
+        返回的是同一个Bean。
+        (虽然在基于Java的配置中，Bean内部是这样写的：
+            AccountServcie accountService = new AccountService();
+            return accountService;
+        记住，仍然是单例。)
     
+
