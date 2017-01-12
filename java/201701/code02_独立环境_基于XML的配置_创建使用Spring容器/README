@@ -2,21 +2,13 @@
 
 在独立的环境中通过使用基于XML的配置创建和使用Spring容器
 
+重用step01BeanConfigure包下面的Account, AccountDao, AccountService类
 
-使用注解的类有：BeanConfiguration.java
-
-BeanConfiguration.java使用的注解是：
-
-    1,  org.springframework.context.annotation.Configuration
-    2,  org.springframework.context.annotation.Bean
-
+没有使用注解的类
 
 使用的ApplicationContext和创建Spring Container：
-
-    org.springframework.context.annotation.AnnotationConfigApplicationContext
-    AnnotationConfigApplicationContext applicationContext =
-                    new AnnotationConfigApplicationContext(BeanConfiguration.class);
-
+        ClassPathXmlApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("/step02XMLBean/beanconfig.xml");
 
 遇到一个问题：
     在重用step01BeanConfigure的AccountServiceImpl的时候，
