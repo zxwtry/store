@@ -137,3 +137,20 @@
     8,  延迟Bean创建的工作原理
     9,  理解声明周期回调
     10, 使用Bean定义配置文件来创建有条件的Bean配置
+
+010 配置元数据
+    1,  configuration metadata
+    2,  指导实例化Bean和如何对Bean进行装配
+
+011 Spring容器创建的三种方式(配置元数据)：
+    1,  基于XML的配置
+    2,  基于注解的配置(Spring 2.5)
+    3,  基于Java的配置(Spring 3.0)
+
+012 配置元数据划分到多个不同的文件：
+    1,  beans-web.xml或ConfigurationForWeb，定义应用程序的Web层/表现层中所操作的Bean。
+    2,  beans-service.xml或ConfigurationForService，定义应用程序的服务层/业务层中所操作的Bean。
+    3,  beans-dao.xml或ConfigurationForDao，定义应用程序的数据访问层中所操作的Bean。
+    4,  beans-config.xml或ConfigurationForConfig，定义激活几个容器特定功能所需的Bean。
+    5,  beans-security.xml或ConfigurationForSecurity，定义应用程序的安全需求的Bean。
+    
