@@ -1,0 +1,24 @@
+在实际代码中：位于step04XMLConstructor包
+
+在独立的环境中使用基于XML的配置，构造函数注入，创建使用Spring容器
+
+
+重用step01BeanConfigure包下面的 Account, AccountDao, AccountService类
+                                AccountDaoImpl, AccountServiceImpl类
+
+
+没有使用注解的类
+
+
+Bean的XML配置如下
+
+    <bean id="accountService" class="step01BeanConfigure.AccountServiceImpl">
+        <constructor-arg ref="accountDao"/>
+    </bean>
+    <bean id="accountDao" class="step01BeanConfigure.AccountDaoImpl"/>
+
+
+使用的ApplicationContext和创建Spring Container：
+
+    ClassPathXmlApplicationContext applicationContext = 
+            new ClassPathXmlApplicationContext("/step04XMLConstructor/beanconfig.xml");
