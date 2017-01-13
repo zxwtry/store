@@ -1,0 +1,39 @@
+在实际代码中：位于step05OverrideBeanDefinition包
+
+在独立的环境中通过使用基于Java的配置，重写Bean定义，创建和使用Spring容器 
+
+
+使用注解的类有：Configuration1.java 和 Configuration2.java
+
+使用的注解是：
+
+    1,  org.springframework.context.annotation.Configuration
+    2,  org.springframework.context.annotation.Bean
+
+
+使用的ApplicationContext和创建Spring Container：
+
+    org.springframework.context.annotation.AnnotationConfigApplicationContext
+    AnnotationConfigApplicationContext applicationContext = new 
+            AnnotationConfigApplicationContext(Configuration2.class, Configuration1.class);
+
+
+运行中出现重写Bean的定义的提示信息：
+
+    Overriding bean definition for bean 'object': replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=configuration2; factoryMethodName=object; initMethodName=null; destroyMethodName=(inferred); defined in class step05OverrideBeanDefinition.Configuration2] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=configuration1; factoryMethodName=object; initMethodName=null; destroyMethodName=(inferred); defined in class step05OverrideBeanDefinition.Configuration1]
+
+
+在Main.main方法中，出现报错1的信息
+
+    Exception in thread "main" org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'environment' is defined
+
+
+在Main.main方法中，出现报错2的信息
+
+    Exception in thread "main" org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [step05OverrideBeanDefinition.Fun] is defined: expected single matching bean but found 2: fun,funSon
+
+
+在Main.main方法中，出现报错3的信息
+
+    Exception in thread "main" org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [step05OverrideBeanDefinition.Fun] is defined: expected single matching bean but found 2: fun,funSon
+
