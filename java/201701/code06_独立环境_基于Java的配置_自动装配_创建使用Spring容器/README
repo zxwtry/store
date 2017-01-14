@@ -1,0 +1,29 @@
+在实际代码中：位于step06JavaAutowiring包
+
+在独立的环境中通过使用基于Java的配置，自动装配，创建和使用Spring容器 
+
+
+使用注解的类有：AccountServiceImpl.java 和 BeanConfiguration.java
+
+AccountServiceImpl.java使用的注解是：
+
+    1,  org.springframework.beans.factory.annotation.Autowired
+    2,  org.springframework.beans.factory.annotation.Qualifier
+    (都加载在AccountServiceImpl.setAccountDao方法上)
+
+BeanConfiguration.java使用的注解是：
+
+    1,  org.springframework.beans.factory.annotation.Qualifier
+    2,  org.springframework.context.annotation.Bean
+    3,  org.springframework.context.annotation.Configuration
+    (@Configuration 加载在BeanConfiguration)
+    (@Qualifier @Bean在加载在方法上，其中@Qualifier只加载在accountDao上)
+
+
+
+使用的ApplicationContext和创建Spring Container：
+
+    AnnotationConfigApplicationContext applicationContext = 
+        new AnnotationConfigApplicationContext(BeanConfiguration.class);
+
+
