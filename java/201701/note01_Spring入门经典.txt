@@ -228,7 +228,7 @@
     Map类型 -> map标签
     Collection类型(包括数据) -> set, list, array标签 
     1,  map标签的使用
-	    <bean id="accountDao" class="step01.AccountDaoImpl">
+	    <bean id="accountDaoMap" class="step01.AccountDaoImpl">
 	        <property name="accountMap">
 	            <map>
 	                <entry key="1" value-ref="account1"/>
@@ -237,7 +237,7 @@
 	        </property>
 	    </bean>
     2,  set标签的使用(set不允许有相同的值)
-	    <bean id="accountDao" class="step01.AccountDaoImpl">
+	    <bean id="accountDaoSet" class="step01.AccountDaoImpl">
 	        <property name="accountSet">
                 <set>
                     <ref bean="account1"/>
@@ -247,4 +247,35 @@
                 </set>
 	        </property>
 	    </bean>
-    
+    3,  list标签的使用 
+	    <bean id="accountDaoList" class="step01.AccountDaoImpl">
+	        <property name="accountList">
+                <list>
+                    <ref bean="account1"/>
+                    <ref bean="account1"/>
+                    <ref bean="account2"/>
+                    <ref bean="account2"/>
+                </list>
+	        </property>
+	    </bean>
+    4,  array标签的使用
+	    <bean id="accountDaoArray" class="step01.AccountDaoImpl">
+	        <property name="accountArray">
+                <array>
+                    <value>中国</value>
+                    <value>英国</value>
+                    <value>美国</value>
+                    <value>法国</value>
+                    <value>俄国</value>
+                </array>
+	        </property>
+	    </bean>
+    5,  给属性集合配置
+	    <bean id="accountDaoProperty" class="step01.AccountDaoImpl">
+	        <property name="accountProperty">
+                <props>
+                    <prop key="pp1">pp1prop</prop>
+                    <prop key="pp2">pp2prop</prop>
+                </props>
+	        </property>
+	    </bean>
