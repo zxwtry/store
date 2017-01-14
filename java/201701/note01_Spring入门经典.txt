@@ -223,3 +223,28 @@
             (将Spring值"false"转换为boolean类型，并将其注入一个已锁定的属性)
             (将Spring值"10.0"转换为double类型，并将其注入一个已锁定的属性)
         (还可以添加自定义编辑器)
+
+018  Spring还允许注入Collection或Map的值，它们的元素可能是纯粹的值(Integer, Boolean, String等)，也可能是对容器中其它Bean的引用。
+    Map类型 -> map标签
+    Collection类型(包括数据) -> set, list, array标签 
+    1,  map标签的使用
+	    <bean id="accountDao" class="step01.AccountDaoImpl">
+	        <property name="accountMap">
+	            <map>
+	                <entry key="1" value-ref="account1"/>
+	                <entry key="2" value-ref="account2"/>
+	            </map>
+	        </property>
+	    </bean>
+    2,  set标签的使用(set不允许有相同的值)
+	    <bean id="accountDao" class="step01.AccountDaoImpl">
+	        <property name="accountSet">
+                <set>
+                    <ref bean="account1"/>
+                    <ref bean="account2"/>
+                    <ref bean="account3"/>
+                    <ref bean="account4"/>
+                </set>
+	        </property>
+	    </bean>
+    
