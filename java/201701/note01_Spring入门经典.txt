@@ -197,3 +197,29 @@
         public AccountService accountService() {}
         applicationContext.getBean("accountService", AccountService.class);
         
+017 依赖注入---Setter注入
+    1,  在Bean实例创建完毕后执行。
+    2,  可以注入Bean依赖项和简单值(比如：字符串，类，枚举等)
+    3,  在基于XML配置中通过使用<property>元素的ref特性指定对象Bean的引用。
+        <bean id="accountService" class="step01.AccountServiceImpl"
+            <property name="accountDao" ref="accountDao"/>
+        </bean>
+        等同于
+        <bean id="accountService" class="step01.AccountServiceImpl"
+            <property name="accountDao">
+                <ref bean="accountDao"/>
+            </property>
+        </bean>
+    4,  在基于XML配置中，除Bean引用之外，还可以使用元素<property>
+        的value特性注入其它依赖值，比如int,boolean,String,Enum等，如下：
+        <bean id="account1" class="step01.Account">
+            <property name="id" value="1"/>
+            <property name="ownerName" value="zxwtry"/>
+                .
+                .
+                .
+        </bean>
+        (Spring尽可能多地处理必要的类型转换)
+            (将Spring值"false"转换为boolean类型，并将其注入一个已锁定的属性)
+            (将Spring值"10.0"转换为double类型，并将其注入一个已锁定的属性)
+        (还可以添加自定义编辑器)
