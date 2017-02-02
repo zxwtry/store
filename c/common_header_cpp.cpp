@@ -93,7 +93,3 @@ typedef vector<PII> VII;
 typedef vector<VI> VVI;
 typedef vector<VII> VVII;
 
-int main() {
-    VL vl;
-    printf("%d\r\n", SZ(vl));
-}
