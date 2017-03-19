@@ -17,3 +17,4 @@ J016	201607	Stop-The-World<br/>
 J017	201607	最长递增子序列O(N*logN)<br/>
 J018	201608	生成窗口最大值数组<br/>
 J019	201607	数据结构insert(val) delete(val) getRandom()都是O(1)<br/>
+J
