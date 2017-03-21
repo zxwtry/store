@@ -1,0 +1,11 @@
+配置环境
+
+Main.java，Foo.java，Ch2Configuration.java  完成配置环境
+
+TestConfigureEnvironment.java   和上功能一样
+
+TestIncludeFilter.java
+TestIncudeFilterObject.java
+TestIncludeFilter.xml           完成第二章练习题1
+                                使用<context:component-scan>和<context:include-filter/>
+                                实现@Component那样的Bean扫描功能
