@@ -16,3 +16,5 @@ TestInitialize.xml              完成第二章练习题2
                                 首先@PostConstruct
                                 其次InitializeingBean的afterPropertiesSet
                                 最后default-init-method
+
+TestBaseJavaSetter循环依赖.java 完成第三章练习题3
