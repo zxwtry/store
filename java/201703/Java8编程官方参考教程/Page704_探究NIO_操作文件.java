@@ -149,4 +149,36 @@ public class Page704_探究NIO_操作文件 {
             
         }
     }
+    //列出目录的内容
+    static class Solution9 {
+        public void solve() {
+            String dirName = "E:/";
+            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(dirName))) {
+                System.out.printf("dirName is %s\r\n", dirName);
+                for (Path path : directoryStream) {
+                    BasicFileAttributes basicFileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+                    System.out.printf("%s is dir ? %b!\r\n", path.getFileName(), basicFileAttributes.isDirectory());
+                }
+            } catch (IOException e) {}
+        }
+    }
+    //只列出可目录文件
+    static class Solution10 {
+        public void solve() {
+            String dirName = "E:/";
+            DirectoryStream.Filter<Path> how = new DirectoryStream.Filter<Path>() {
+                @Override
+                public boolean accept(Path entry) throws IOException {
+                    return Files.isDirectory(entry);
+                }
+            };
+            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(dirName), how)) {
+                System.out.printf("dirName is %s\r\n", dirName);
+                for (Path path : directoryStream) {
+                    BasicFileAttributes basicFileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+                    System.out.printf("%s is dir ? %b!\r\n", path.getFileName(), basicFileAttributes.isDirectory());
+                }
+            } catch (IOException e) {}
+        }
+    }
 }
