@@ -107,6 +107,7 @@ public class Page704_探究NIO_操作文件 {
             } catch (IOException e) {} 
         }
     }
+    //复制文件
     static class Solution7 {
         public void solve() {
             try {
@@ -114,6 +115,38 @@ public class Page704_探究NIO_操作文件 {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    //获取与路径和文件相关的信息
+    static class Solution8 {
+        public void solve() {
+            Path path = Paths.get("E:/a.txt");
+            System.out.printf("path.getFileName() is \"%s\"\r\n", path.getFileName());
+            System.out.printf("path.getFileSystem().toString() is \"%s\"\r\n", path.getFileSystem().toString());
+            System.out.printf("path.isAbsolute() is \"%b\"\r\n", path.isAbsolute());
+            System.out.printf("path.getNameCount() is \"%d\"\r\n", path.getNameCount());
+            System.out.printf("path.getParent().toString() is \"%s\"\r\n", path.getParent().toString());
+            System.out.printf("path.getRoot().toString() is \"%s\"\r\n", path.getRoot().toString());
+            System.out.printf("Files.exists(path) is \"%b\"\r\n", Files.exists(path));
+            System.out.printf("Files.isWritable(path) is \"%b\"\r\n", Files.isWritable(path));
+            System.out.printf("Files.isReadable(path) is \"%b\"\r\n", Files.isReadable(path));
+            try {
+                System.out.printf("Files.isHidden(path) is \"%b\"\r\n", Files.isHidden(path));
+                BasicFileAttributes basicFileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+                System.out.printf("basicFileAttributes.isDirectory() is \"%b\"\r\n", basicFileAttributes.isDirectory());
+                System.out.printf("basicFileAttributes.isRegularFile() is \"%b\"\r\n", basicFileAttributes.isRegularFile());
+                System.out.printf("basicFileAttributes.isSymbolicLink() is \"%b\"\r\n", basicFileAttributes.isSymbolicLink());
+                System.out.printf("basicFileAttributes.lastModifiedTime() is \"%s\"\r\n", basicFileAttributes.lastModifiedTime().toString());
+                System.out.printf("basicFileAttributes.size() is \"%d\"\r\n", basicFileAttributes.size());
+                DosFileAttributes dosFileAttributes = Files.readAttributes(path, DosFileAttributes.class);
+                //UNIX like OS use PosixFileAttributes
+                System.out.printf("dosFileAttributes.isDirectory() is \"%b\"\r\n", dosFileAttributes.isDirectory());
+                System.out.printf("dosFileAttributes.isRegularFile() is \"%b\"\r\n", dosFileAttributes.isRegularFile());
+                System.out.printf("dosFileAttributes.isSymbolicLink() is \"%b\"\r\n", dosFileAttributes.isSymbolicLink());
+                System.out.printf("dosFileAttributes.lastModifiedTime() is \"%s\"\r\n", dosFileAttributes.lastModifiedTime().toString());
+                System.out.printf("dosFileAttributes.size() is \"%d\"\r\n", dosFileAttributes.size());
+            } catch (IOException e) {}
+            
         }
     }
 }
