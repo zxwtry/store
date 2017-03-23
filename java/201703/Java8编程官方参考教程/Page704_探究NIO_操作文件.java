@@ -104,8 +104,16 @@ public class Page704_探究NIO_操作文件 {
                 MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 26);
                 for (int i = 0; i < 26; i ++)
                     mappedByteBuffer.put((byte)('a' + i));
-            } catch (IOException e) {}
-                    
+            } catch (IOException e) {} 
+        }
+    }
+    static class Solution7 {
+        public void solve() {
+            try {
+                Files.copy(Paths.get("E:/a.txt"), Paths.get("E:/b.txt"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
