@@ -1,1 +1,17 @@
 完成注解和方法的初始化
+
+TestFactoryBean.java
+    使用基于Java的配置
+    构建Bean工厂
+    默认情况，  Bean工厂生成的Bean不是单例
+                Bean工厂该对象是单例
+                (isSingleton无论true还是false都单例)
+                (isSingleton是干什么的呢？)
+
+Foo.java
+FooFactory.java
+FooFactoryBean.java
+Main.java
+applicationContext.xml
+    同时使用基于XML的配置和基于Java的配置
+    
