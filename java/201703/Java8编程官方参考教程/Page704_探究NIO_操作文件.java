@@ -181,4 +181,27 @@ public class Page704_探究NIO_操作文件 {
             } catch (IOException e) {}
         }
     }
+    //从文件获取输入流
+    static class Solution11 {
+        public void solve() {
+            try (InputStream inputStream = Files.newInputStream(Paths.get("E:/a.txt"), StandardOpenOption.READ)) {
+                while (true) {
+                    int val = inputStream.read();
+                    if (val == -1) break;
+                    System.out.print((char)val);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //将输出流写入文件
+    static class Solution12 {
+        public void solve() {
+            try (OutputStream outputStream = Files.newOutputStream(Paths.get("E:/c.txt"), StandardOpenOption.TRUNCATE_EXISTING)) {
+                for (int i = 0; i < 20; i ++)
+                    outputStream.write('A' + i);
+            } catch (IOException e) {}
+        }
+    }
 }
