@@ -1,13 +1,17 @@
 package step24RunningQueryUsingPreparedStatements;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -21,70 +25,82 @@ public class AccountDaoImpl implements AccountDao {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
     }
     
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    @Override
+    public List<Account> find(boolean locked) {
+        PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory
+                ("select * from account where locked = ?", new int[] {Types.BOOLEAN});
+        PreparedStatementCreator psc = pscf.newPreparedStatementCreator(new Object[]{locked});
+        RowMapper<Account> rowMapper = new RowMapper<Account>() {
+            @Override
+            public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Account account = new Account();
+                try {
+                    account.setAccessTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                            .parse(rs.getString("access_time")));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                account.setBalance(rs.getDouble("balance"));
+                account.setId(rs.getLong("id"));
+                account.setLocked(rs.getBoolean("locked"));
+                account.setOwnerName(rs.getString("owner_name"));
+                return account;
+            }
+        };
+        return jdbcTemplate.query(psc, rowMapper);
     }
 
     @Override
-    public Account find(long accountId) {
-        return jdbcTemplate.queryForObject("select * from account where id = ?;", 
-                new RowMapper<Account>(){
-                    @Override
-                    public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Account account = new Account();
-                        account.setAccessTime(rs.getTimestamp("access_time"));
-                        account.setBalance(rs.getDouble("balance"));
-                        account.setId(rs.getLong("id"));
-                        account.setLocked(rs.getBoolean("locked"));
-                        account.setOwnerName(rs.getString("owner_name"));
-                        return account;
-                    }
-                   }, accountId);
+    public List<Account> findNoPre(boolean locked) {
+        RowMapper<Account> rowMapper = new RowMapper<Account>() {
+            @Override
+            public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Account account = new Account();
+                try {
+                    account.setAccessTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                            .parse(rs.getString("access_time")));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                account.setBalance(rs.getDouble("balance"));
+                account.setId(rs.getLong("id"));
+                account.setLocked(rs.getBoolean("locked"));
+                account.setOwnerName(rs.getString("owner_name"));
+                return account;
+            }
+        };
+        List<Account> answer = jdbcTemplate.query("select * from account where locked = ?", rowMapper, new int[] {Types.BOOLEAN});
+        return answer;
     }
 
     @Override
-    public List<Account> find(String ownerNamePrefix) {
-        return namedParameterJdbcTemplate.query(
-                "select * from account where owner_name like :ownerNamePrefix", 
-                Collections.singletonMap("ownerNamePrefix", ownerNamePrefix),
-                new RowMapper<Account>() {
-                    @Override
-                    public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Account account = new Account();
-                        try {
-                            account.setAccessTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("access_time")));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        account.setBalance(rs.getDouble("balance"));
-                        account.setId(rs.getLong("id"));
-                        account.setLocked(rs.getBoolean("locked"));
-                        account.setOwnerName(rs.getString("owner_name"));
-                        return account;
-                    }
-                });
-    }
-
-    @Override
-    public List<Account> find(List<Long> accountIds) {
-        return namedParameterJdbcTemplate.query(
-                "select * from account where id in (:accountIds)", 
-                Collections.singletonMap("accountIds", accountIds),
-                new RowMapper<Account>() {
-                    @Override
-                    public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Account account = new Account();
-                        try {
-                            account.setAccessTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("access_time")));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        account.setBalance(rs.getDouble("balance"));
-                        account.setId(rs.getLong("id"));
-                        account.setLocked(rs.getBoolean("locked"));
-                        account.setOwnerName(rs.getString("owner_name"));
-                        return account;
-                    }
-                });
+    public List<Account> findBook(boolean locked) {
+        RowMapper<Account> rowMapper = new RowMapper<Account>() {
+            @Override
+            public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Account account = new Account();
+                try {
+                    account.setAccessTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                            .parse(rs.getString("access_time")));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                account.setBalance(rs.getDouble("balance"));
+                account.setId(rs.getLong("id"));
+                account.setLocked(rs.getBoolean("locked"));
+                account.setOwnerName(rs.getString("owner_name"));
+                return account;
+            }
+        };
+        String sql = "select * from account where locked = ?";
+        final boolean locked_copy = locked;
+        PreparedStatementSetter pss = new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setBoolean(1, locked_copy);
+            }
+        };
+        List<Account> answer = jdbcTemplate.query(sql, pss, rowMapper);
+        return answer;
     }
 }
