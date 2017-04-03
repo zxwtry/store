@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.management.Query;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
@@ -16,7 +14,16 @@ public class Main {
     public static void main(String[] args) throws ParseException {
 //        insert();
 //        queryByIds();
-        update();
+//        update();
+//        delete();
+    }
+    
+    static void delete() {
+        AnnotationConfigApplicationContext applicationContext = new 
+                AnnotationConfigApplicationContext(ConfigurationCRUD.class);
+        AccountDao accountDao = applicationContext.getBean(AccountDao.class);
+        accountDao.delete(1l);
+        applicationContext.close();
     }
     
     static void update() throws ParseException {
