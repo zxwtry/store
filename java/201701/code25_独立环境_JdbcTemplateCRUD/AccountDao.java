@@ -10,4 +10,6 @@ public interface AccountDao {
     public List<Account> query(List<Long> ids);
     //update
     public void update(Account account);
+    //delete
+    public void delete(long id);
 }
