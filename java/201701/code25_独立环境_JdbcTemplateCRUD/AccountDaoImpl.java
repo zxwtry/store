@@ -1,24 +1,18 @@
 package step25JdbcTemplateCRUD;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
-import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -94,13 +88,20 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public void update(Account account) {
-        String sql = "update account set (owner_name, balance, access_time,"
-                + "locked) = (?, ?, ?, ?) where id = ?";
+        String sql = "update account set owner_name=?, balance=?"
+                + ", access_time=?, locked=? where id = ?";
         Object[] params = new Object[] {account.getOwnerName(), 
                 account.getBalance(), account.getAccessTime(),
                 account.isLocked(), account.getId()};
         int count = jdbcTemplate.update(sql, params);
         if (count != 1) throw new UpdateFailedException("Cannot update account");
+    }
+
+    @Override
+    public void delete(long id) {
+        String sql = "delete from account where id= ?";
+        int count = jdbcTemplate.update(sql, id);
+        if (count != 1) throw new DeleteFailedException("Cannot delete account");
     }
     
 }
