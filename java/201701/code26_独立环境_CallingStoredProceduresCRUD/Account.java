@@ -5,7 +5,7 @@ import java.util.Date;
 public class Account {
     private long id;
     private String ownerName;
-    private double balance;
+    private float balance;
     private Date accessTime;
     private boolean locked;
     public long getId() {
@@ -20,10 +20,10 @@ public class Account {
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
-    public double getBalance() {
+    public float getBalance() {
         return balance;
     }
-    public void setBalance(double balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
     public Date getAccessTime() {
