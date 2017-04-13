@@ -25,7 +25,7 @@ public class ORMConfiguration {
     }
 	private Map<String,?> jpaProperties() {
         Map<String,String> jpaPropertiesMap = new HashMap<String,String>();
-        jpaPropertiesMap.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        jpaPropertiesMap.put("hibernate.dialect", "org.hibernate.dialect.MySQLialect");
         jpaPropertiesMap.put("hibernate.hbm2ddl.auto", "update");
         return jpaPropertiesMap;
     }
@@ -35,10 +35,9 @@ public class ORMConfiguration {
             new LocalContainerEntityManagerFactoryBean();
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         factoryBean.setDataSource(dataSource());
-        factoryBean.setPackagesToScan("com.wiley.beginningspring.ch5");
+        factoryBean.setPackagesToScan("step31ORMOneToOne");
         factoryBean.setJpaPropertyMap(jpaProperties());
         return factoryBean;
     }
-
 
 }
