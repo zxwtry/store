@@ -1,0 +1,23 @@
+功能：
+    创建SqlSession实例
+    实现mapper
+    完成insert和delete测试
+
+
+jar包依赖:   pom.xml
+
+code01_ConfiguringMabatis.main:
+        Main.java
+
+code01_ConfiguringMabatis.mapper
+        RoleMapper.java
+        roleMapper.xml
+
+code01_ConfiguringMabatis.po
+        Role.java
+
+code01_ConfiguringMabatis.util
+        SqlSessionFactoryUtil.java
+
+mybatis-config.xml
+
