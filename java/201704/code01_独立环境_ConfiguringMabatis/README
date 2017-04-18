@@ -6,18 +6,25 @@
 
 jar包依赖:   pom.xml
 
-code01_ConfiguringMabatis.main:
+code01_ConfiguringMybatis.main:
         Main.java
 
-code01_ConfiguringMabatis.mapper
+code01_ConfiguringMybatis.mapper
         RoleMapper.java
         roleMapper.xml
 
-code01_ConfiguringMabatis.po
+code01_ConfiguringMybatis.po
         Role.java
 
-code01_ConfiguringMabatis.util
+code01_ConfiguringMybatis.util
         SqlSessionFactoryUtil.java
 
 mybatis-config.xml
+
+
+
+使用Java配置方式：
+    (一般只有在数据源需要加密的时候使用)
+code01_ConfiguringMyBatisJavaBase
+        JavaBaseMain.java
 
