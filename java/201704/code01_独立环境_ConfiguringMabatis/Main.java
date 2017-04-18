@@ -1,10 +1,10 @@
-package code01_ConfiguringMabatis.main;
+package code01_ConfiguringMybatis.main;
 
 import org.apache.ibatis.session.SqlSession;
 
-import code01_ConfiguringMabatis.mapper.RoleMapper;
-import code01_ConfiguringMabatis.po.Role;
-import code01_ConfiguringMabatis.util.SqlSessionFactoryUtil;
+import code01_ConfiguringMybatis.mapper.RoleMapper;
+import code01_ConfiguringMybatis.po.Role;
+import code01_ConfiguringMybatis.util.SqlSessionFactoryUtil;
 
 public class Main {
     public static void main(String[] args) {
