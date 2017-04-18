@@ -1,4 +1,4 @@
-package code01_ConfiguringMabatis.util;
+package code01_ConfiguringMybatis.util;
 
 import java.io.IOException;
 import java.io.InputStream;
