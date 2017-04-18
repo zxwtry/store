@@ -3,7 +3,7 @@
 
 <configuration>
     <typeAliases>
-        <typeAlias alias="role" type="code01_ConfiguringMabatis.po.Role"/>
+        <typeAlias alias="role" type="code01_ConfiguringMybatis.po.Role"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -19,6 +19,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="code01_ConfiguringMabatis/mapper/roleMapper.xml" />
+        <mapper resource="code01_ConfiguringMybatis/mapper/roleMapper.xml" />
     </mappers>
 </configuration>
