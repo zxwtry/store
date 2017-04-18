@@ -1,4 +1,4 @@
-package code01_ConfiguringMabatis.po;
+package code01_ConfiguringMybatis.po;
 
 public class Role {
     private int id;
