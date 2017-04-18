@@ -1,6 +1,6 @@
-package code01_ConfiguringMabatis.mapper;
+package code01_ConfiguringMybatis.mapper;
 
-import code01_ConfiguringMabatis.po.Role;
+import code01_ConfiguringMybatis.po.Role;
 
 public interface RoleMapper {
     public Role getRole(int id);
