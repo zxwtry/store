@@ -1,0 +1,23 @@
+文件结构如下：
+
+src
+    mybatis-config.xml
+    code02_UserDefinedTypeHandler
+        main
+            Main.java
+        mapper
+            RoleMapper.java
+            roleMapper.xml
+        po
+            Employee.java
+            FilePO.java
+            Role.java
+            Sex.java
+            Student.java
+        typeHandler
+            MyDateTypeHandler.java
+            MyStringTypeHandler.java
+        util
+            SingletonUtil.java
+    
+实现自己的TypeHandler
