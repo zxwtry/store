@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<mapper namespace="code02_UserDefinedTypeHandler.mapper.RoleMapper">
+    <resultMap id="roleMap" type="code02_UserDefinedTypeHandler.po.Role">
+        <id property="id" column="id" javaType="java.lang.Integer"/>
+        <result typeHandler="code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler"
+            property="roleName" column="role_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result typeHandler="code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler"
+            property="note" column="note" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="filePOMap" type="code02_UserDefinedTypeHandler.po.FilePO">
+        <id property="id" column="id" javaType="java.lang.Integer"/>
+        <result typeHandler="code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler"
+            property="name" column="file_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result typeHandler="code02_UserDefinedTypeHandler.typeHandler.MyDateTypeHandler"
+            property="createTime" column="create_time" javaType="java.util.Date" jdbcType="BIGINT"/>
+    </resultMap>
+    <resultMap id="studentMap" type="Student">
+        <id property="id" column="id" javaType="java.lang.Integer"/>
+        <result typeHandler="code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler"
+            property="name" column="student_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
+            property="sex" column="student_sex" javaType="code02_UserDefinedTypeHandler.po.Sex"
+            jdbcType="BIGINT"/>
+    </resultMap>
+    <resultMap id="employeeMap" type="Employee">
+        <id property="id" column="id" javaType="java.lang.Integer"/>
+        <result typeHandler="code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler"
+            property="name" column="employee_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result typeHandler="org.apache.ibatis.type.EnumTypeHandler"
+            property="sex" column="employee_sex" javaType="code02_UserDefinedTypeHandler.po.Sex"
+            jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="insertRole" useGeneratedKeys="true" keyProperty="id">
+        insert into t_role (role_name, note) values(#{roleName}, #{note})
+    </insert>
+    <select id="findById" parameterType="int" resultMap="roleMap">
+        select * from t_role where id=#{id}
+    </select>
+    <select id="findAllRoles" resultMap="roleMap">
+        select * from t_role
+    </select>
+    <delete id="deleteRole" parameterType="int">
+        delete from t_role where id=#{id}
+    </delete>
+    <update id="updateRole">
+        update t_role 
+            set role_name=#{roleName, 
+                typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler}, 
+                note=#{note, 
+                typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler}
+        where id=#{id}
+    </update>
+    <insert id="insertFilePO" useGeneratedKeys="true" keyProperty="id" 
+        parameterType="code02_UserDefinedTypeHandler.po.FilePO">
+        insert into t_file_po (file_name, create_time) values(
+            #{name, typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler}, 
+            #{createTime, typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyDateTypeHandler})
+    </insert>
+    <select id="findFilePO" parameterType="int" resultMap="filePOMap">
+        select * from t_file_po where id=#{id}
+    </select>
+    <select id="findAllFilePOs" resultMap="filePOMap">
+        select * from t_file_po
+    </select>
+    <delete id="deleteFilePO" parameterType="int">
+        delete from t_file_po where id=#{id}
+    </delete>
+    <update id="updateFilePO" parameterType="code02_UserDefinedTypeHandler.po.FilePO">
+        update t_file_po
+            set file_name=#{name, 
+                typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler}, 
+                create_time=#{createTime, 
+                typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyDateTypeHandler}
+        where id=#{id}
+    </update>
+    <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id"
+        parameterType="code02_UserDefinedTypeHandler.po.Student">
+        insert into t_student (student_name, student_sex) values(
+            #{name, typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler},    
+            #{sex, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})   
+    </insert>
+    <select id="findStudent" parameterType="int" resultMap="studentMap">
+        select * from t_student where id=#{id}
+    </select>
+    <select id="findAllStudents" resultMap="studentMap">
+        select * from t_student
+    </select>
+    <delete id="deleteStudent" parameterType="int">
+        delete from t_student where id=#{id}
+    </delete>
+    <update id="updateStudent" parameterType="Student">
+        update t_student
+            set student_name=#{name, 
+                typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler}, 
+                student_sex=#{sex, 
+                typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}
+        where id=#{id}
+    </update>
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id"
+        parameterType="Employee">
+        insert into t_employee (employee_name, employee_sex) values(
+            #{name, typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler}, 
+            #{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler})
+   	</insert>
+    <select id="findEmployee" parameterType="int" resultMap="employeeMap">
+        select * from t_employee where id=#{id}
+    </select>
+    <select id="findAllEmployees" resultMap="employeeMap">
+        select * from t_employee
+    </select>
+    <delete id="deleteEmployee" parameterType="int">
+        delete from t_employee where id=#{id}
+    </delete>
+    <update id="updateEmployee" parameterType="Employee">
+        update t_employee
+            set employee_name=#{name, typeHandler=code02_UserDefinedTypeHandler.typeHandler.MyStringTypeHandler},
+                employee_sex=#{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler}
+        where id=#{id}
+    </update>
+</mapper>
