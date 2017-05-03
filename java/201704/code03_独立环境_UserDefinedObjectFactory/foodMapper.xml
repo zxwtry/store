@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<mapper namespace="code03_UserDefinedObjectFactory.mapper.FoodMapper">
+    <resultMap id="foodMap" type="Food" >
+        <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="price" column="food_price" javaType="java.lang.Float" jdbcType="FLOAT"/>
+        <result property="name" column="food_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="insertFood" useGeneratedKeys="true" keyProperty="id" parameterType="Food">
+        insert into t_food (food_price, food_name) values(
+            #{price}, #{name}
+        )
+    </insert>
+    <select id="findFood" parameterType="int" resultMap="foodMap">
+        select * from t_food where id=#{id}
+    </select>
+    <select id="findAllFoods" resultMap="foodMap">
+        select * from t_food
+    </select>
+    <delete id="deleteFood" parameterType="int">
+        delete from t_food where id=#{id}
+    </delete>
+    <update id="updateFood" parameterType="Food">
+        update t_food set 
+            food_price=#{price}, food_name=#{name}
+        where id=#{id}
+    </update>
+</mapper>
+
+    
