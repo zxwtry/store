@@ -1,0 +1,18 @@
+文档结构如下：
+
+src
+    mybatis-config.xml
+    code03_UserDefinedObjectFactory
+        main
+            Main.java
+        mapper
+            FoodMapper.java
+            foodMapper.xml
+        of
+            MyObjectFactory.java
+        po
+            Food.java
+        util
+            SingletonUtil.java
+
+实现自定义的ObjectFactory
