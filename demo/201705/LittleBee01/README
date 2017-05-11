@@ -1,0 +1,14 @@
+
+LittleBee
+
+小蜜蜂项目
+
+目标；跨OS信息搬运工
+
+现状：LittleBee01
+
+描述：
+    1， 实现从GET方式获取Linux文件
+    2， 采用Java Process和Linux Shell完成工作
+    3， localhost:8080/LittleBee/T?file=xxx&date=xxx 获取文件
+    4， localhost:8080/LittleBee/C?file=xxx 将文件备份，然后删除
