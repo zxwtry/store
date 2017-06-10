@@ -1,0 +1,16 @@
+001 系统管理    syslog          系统安全
+    a,  Linux系统默认的日志守护进程
+    b,  默认配置文件/etc/syslog.conf
+    c,  所有网络设备都可以通过syslog协议，将日志发给远端服务器。
+    d,  远端服务器通过syslogd监听UDP 514端口，将日志写入指定文件。
+    e,  syslog协议：在/var/log中创建并写入日志信息
+        syslogd：守护进程负责执行
+    f,  terminal (ubuntu 14.04 desktop)
+        $ logger this is a test log line
+        $ tail -n 1 /var/log/syslog
+        Jun 10 11:43:12 zxw zxw: this is a test log line
+    g,  terminal (ubuntu 14.04 desktop)
+        $ logger -t ZXWMSG this is a test log line
+        $ tail -n 1 /var/log/syslog
+        Jun 10 11:50:25 zxw ZXWMSG: this is a test log line
+
