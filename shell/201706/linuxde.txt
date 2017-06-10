@@ -14,3 +14,14 @@
         $ tail -n 1 /var/log/syslog
         Jun 10 11:50:25 zxw ZXWMSG: this is a test log line
 
+002 系统管理    ipcrm           进程和作业管理
+    a,  删除一个或多个消息队列，信号量集或共享内存标识
+    b,  remove a message queue, semaphore set or shared memory id
+    c,  -Q  删除消息队列key
+        -q  删除消息队列id
+    d,  -E  删除信号量key
+        -e  删除信号量id
+    e,  -M  删除共享内存key
+        -m  删除共享内存id
+    f,  删除和SharedMemoryID 18602相关的共享内存段
+        ipcrm -m 18602 
