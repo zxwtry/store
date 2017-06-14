@@ -1,0 +1,4 @@
+不需要错误信息：
+    nohup ./eclipse >/dev/null 2>&1 &
+需要错误信息：
+    nohup ./eclipse >/dev/null 2>eclipse.log &
