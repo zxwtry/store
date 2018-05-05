@@ -1,0 +1,4 @@
+1,  pip install 下载的文件一般位于  Lib/site-packages里面
+    通过创建链接，将这个文件移到E盘去
+    mklink /d "D:\install\py3\sdk\Lib\site-packages" "E:\file\py3\lib-site-packages"
+

@@ -1,0 +1,13 @@
+1,  docker修改目录
+    两个方法：环境变量和文件链接
+    环境变量：添加MACHINE_STORAGE_PATH变量
+    文件链接：mklink /d "C:\Users\Administrator\.docker\machine" "E:\file\docker\machine" （参考chrome安装到d盘的方法）
+
+2,  使用阿里云的镜像加速：
+    docker-machine create --engine-registry-mirror=https://xxxxx.mirror.aliyuncs.com -d virtualbox default
+
+3,  阿里云镜像的URL:
+    cr.console.aliyun.com
+
+4,  
+
